@@ -1,0 +1,73 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03.Common\\Misa_TruongWeb03.Common.csproj": {}
+  },
+  "projects": {
+    "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03.Common\\Misa_TruongWeb03.Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03.Common\\Misa_TruongWeb03.Common.csproj",
+        "projectName": "Misa_TruongWeb03.Common",
+        "projectPath": "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03.Common\\Misa_TruongWeb03.Common.csproj",
+        "packagesPath": "C:\\Users\\Tngo\\.nuget\\packages\\",
+        "outputPath": "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03.Common\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Tngo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
