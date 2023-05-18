@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Misa_TruongWeb03.Common", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Misa_TruongWeb03.DL", "..\Misa_TruongWeb03.DL\Misa_TruongWeb03.DL.csproj", "{48E3BC7E-D835-44CA-893A-538E5A2C6228}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Misa_TruongWeb03.BL", "..\Misa_TruongWeb03.BL\Misa_TruongWeb03.BL.csproj", "{57237D46-F0DC-4780-8A32-4C8D9636D852}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Misa_TruongWeb03.BL", "..\Misa_TruongWeb03.BL\Misa_TruongWeb03.BL.csproj", "{57237D46-F0DC-4780-8A32-4C8D9636D852}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Misa_TruongWeb03.UnitTests", "..\Misa_TruongWeb03.UnitTests\Misa_TruongWeb03.UnitTests.csproj", "{8C6332B5-88E3-435B-9524-920B89AA42D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{57237D46-F0DC-4780-8A32-4C8D9636D852}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57237D46-F0DC-4780-8A32-4C8D9636D852}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57237D46-F0DC-4780-8A32-4C8D9636D852}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C6332B5-88E3-435B-9524-920B89AA42D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C6332B5-88E3-435B-9524-920B89AA42D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C6332B5-88E3-435B-9524-920B89AA42D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C6332B5-88E3-435B-9524-920B89AA42D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
