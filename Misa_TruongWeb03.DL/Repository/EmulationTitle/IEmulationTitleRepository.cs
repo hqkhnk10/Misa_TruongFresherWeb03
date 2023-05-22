@@ -8,8 +8,9 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitle
         Task<BaseEntity> Get(GetEmulationTitle model);
         Task<BaseEntity> GetDetail(int id);
         Task<BaseEntity> Post(PostEmulationTitle model);
-        Task<BaseEntity> Put(UpdateEmulationTitle model);
+        Task<BaseEntity> Put(int id, PostEmulationTitle model);
         Task<BaseEntity> Delete(int id);
         Task<BaseEntity> DeleteMultiple(DeleteEmulationTitle model);
+        Task<BaseEntity> CheckDuplicate(EmulationTitleModel model);
     }
 }

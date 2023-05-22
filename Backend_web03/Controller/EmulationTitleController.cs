@@ -44,7 +44,7 @@ namespace FresherWeb03.Controller
         /// </summary>
         /// <param name="id">Id</param>
         /// <returns></returns>
-        [HttpGet,Route("Detail")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetDetail(int id)
         {
             try
@@ -85,12 +85,12 @@ namespace FresherWeb03.Controller
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpPut]
-        public async Task<IActionResult> Put([FromBody] UpdateEmulationTitle model)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, [FromBody] PostEmulationTitle model)
         {
             try
             {
-                var result = await _emulationTitleService.Put(model);
+                var result = await _emulationTitleService.Put(id, model);
                 return StatusCode(result.StatusCode, result);
             }
             catch (Exception ex)
@@ -106,7 +106,7 @@ namespace FresherWeb03.Controller
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             try

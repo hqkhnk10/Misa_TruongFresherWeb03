@@ -12,6 +12,10 @@ namespace Misa_TruongWeb03.Common.Entity
         public Inactive? Inactive { get; set; }
         public CommendationLevel? CommendationLevel { get; set; }
         public int Count { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? ModifiedAt { get; set; }
+        public string? CreatedBy { get; set; }
+        public string? ModifiedBy { get; set; }
     }
 
 }
