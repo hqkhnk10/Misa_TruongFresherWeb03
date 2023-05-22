@@ -27,14 +27,28 @@ namespace Misa_TruongWeb03.BL.Service.EmulationTitle
         }
         public async Task<BaseEntity> Post(PostEmulationTitle model)
         {
-            var abc = _mapper.Map<EmulationTitleModel>(model);
-            var result = await _emulationTitleRepository.Post(model);
-            return result;
+            var et = _mapper.Map<EmulationTitleModel>(model);
+            et.EmulationTitleID = 0;
+            var check = await _emulationTitleRepository.CheckDuplicate(et);
+            if(check.StatusCode == 200)
+            {
+                var result = await _emulationTitleRepository.Post(model);
+                return result;
+            }
+            return check;
+
         }
-        public async Task<BaseEntity> Put(UpdateEmulationTitle model)
+        public async Task<BaseEntity> Put(int id, PostEmulationTitle model)
         {
-            var result = await _emulationTitleRepository.Post(model);
-            return result;
+            var et = _mapper.Map<EmulationTitleModel>(model);
+            et.EmulationTitleID = id;
+            var check = await _emulationTitleRepository.CheckDuplicate(et);
+            if (check.StatusCode == 200)
+            {
+                var result = await _emulationTitleRepository.Put(id, model);
+                return result;
+            }
+            return check;
         }
         public async Task<BaseEntity> Delete(int id)
         {

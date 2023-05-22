@@ -152,7 +152,7 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitle
             }
             finally { conn.Close(); }
         }
-        public async Task<BaseEntity> Put(UpdateEmulationTitle model)
+        public async Task<BaseEntity> Put(int id, PostEmulationTitle model)
         {
             using var conn = this.GetConnection();
             try
@@ -162,7 +162,7 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitle
 
                 var result = await conn.ExecuteAsync(query, new
                 {
-                    Id = model.EmulationTitleID,
+                    Id = id,
                     model.ApplyObject,
                     model.CommendationLevel,
                     model.EmulationTitleName,
@@ -218,7 +218,7 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitle
                     var notFound = new BaseEntity
                     {
                         Count = result,
-                        StatusCode = StatusCodes.Status200OK,
+                        StatusCode = StatusCodes.Status404NotFound,
                         Data = null,
                         Message = "Error"
                     };
@@ -285,5 +285,48 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitle
             }
             finally { conn.Close(); }
         }
+        public async Task<BaseEntity> CheckDuplicate(EmulationTitleModel model)
+        {
+            using var conn = this.GetConnection();
+            try
+            {
+                conn.Open();
+                var query = "proc_emulationtitle_checkDuplicate";
+
+                var result = await conn.QueryFirstOrDefaultAsync<int>(query, new
+                {
+                    Id = model.EmulationTitleID,
+                    Code = model.EmulationTitleCode,
+                }, commandType: CommandType.StoredProcedure);
+                if (result > 0)
+                {
+                    var found = new BaseEntity
+                    {
+                        StatusCode = StatusCodes.Status302Found,
+                        Data = null,
+                        Message = "Trùng mã danh hiệu"
+                    };
+                    return found;
+                }
+                var newResult = new BaseEntity
+                {
+                    StatusCode = StatusCodes.Status200OK,
+                    Data = result
+                };
+                return newResult;
+            }
+            catch (Exception ex)
+            {
+                var exception = new BaseEntity
+                {
+                    StatusCode = StatusCodes.Status500InternalServerError,
+                    Data = null,
+                    Message = ex.Message
+                };
+                return exception;
+            }
+            finally { conn.Close(); }
+        }
+
     }
 }
