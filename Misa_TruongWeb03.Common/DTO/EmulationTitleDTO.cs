@@ -13,6 +13,10 @@ namespace Misa_TruongWeb03.Common.DTO
         public CommendationLevel? CommendationLevel { get; set; } = null;
         public MovementType? MovementType { get; set; } = null;
         public Inactive? Inactive { get; set; } = null;
+        public bool? ApplyObjectSort { get; set; } = null;
+        public bool? CommendationLevelSort { get; set; } = null;
+        public bool? MovementTypeSort { get; set; } = null;
+        public bool? InactiveSort { get; set; } = null;
     }
     public class PostEmulationTitle
     {

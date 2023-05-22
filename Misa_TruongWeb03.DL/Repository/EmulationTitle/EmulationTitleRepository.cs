@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Dapper;
+﻿using Dapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Misa_TruongWeb03.Common.DTO;
@@ -44,7 +43,11 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitle
                     model.ApplyObject,
                     model.CommendationLevel,
                     model.MovementType,
-                    model.Inactive
+                    model.Inactive,
+                    model.ApplyObjectSort,
+                    model.CommendationLevelSort,
+                    model.MovementTypeSort,
+                    model.InactiveSort
                 }, commandType: CommandType.StoredProcedure);
                 var listModel = result.AsList();
                 var newResult = new BaseEntity
