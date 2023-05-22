@@ -50,8 +50,8 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitle
                 var newResult = new BaseEntity
                 {
                     Data = listModel,
-                    Count = listModel[0].Count,
-                    Pagination = new Pagination() { PageIndex = model.pageIndex, PageSize = model.pageSize, Count = listModel[0].Count }
+                    Count = listModel.Count > 0 ? listModel[0].Count : 0,
+                    Pagination = new Pagination() { PageIndex = model.pageIndex, PageSize = model.pageSize, Count = listModel.Count > 0 ? listModel[0].Count : 0 }
                 };
                 return newResult;
             }

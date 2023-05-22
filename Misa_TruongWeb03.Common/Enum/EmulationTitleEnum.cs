@@ -9,7 +9,9 @@ namespace Misa_TruongWeb03.Common.Enum
             [Description("Tập thể")]
             Group = 2,
             [Description("Cá nhân")]
-            Personal = 3,
+            Personal = 1,
+            [Description("Cá nhân và tập thể")]
+            PersonalAndGroup = 3,
         }
         public enum MovementType
         {
@@ -17,6 +19,8 @@ namespace Misa_TruongWeb03.Common.Enum
             Regular = 0,
             [Description("Theo đợt")]
             Period = 1,
+            [Description("Thường xuyên;Theo đợt")]
+            RegularAndPeriod = 2,
         }
         public enum Inactive
         {
@@ -28,13 +32,13 @@ namespace Misa_TruongWeb03.Common.Enum
         public enum CommendationLevel
         {
             [Description("Cấp nhà nước")]
-            CountryLevel = 1,
+            CountryLevel = 0,
             [Description("Cấp tỉnh")]
-            ProvinceLevel = 2,
+            ProvinceLevel = 1,
             [Description("Cấp Huyện")]
-            DistrictLevel = 3,
+            DistrictLevel = 2,
             [Description("Cấp Xã")]
-            CommuneLevel = 4,
+            CommuneLevel = 3,
         }
     }
 }
