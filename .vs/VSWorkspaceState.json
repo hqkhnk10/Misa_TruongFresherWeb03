@@ -3,7 +3,8 @@
     "",
     "\\Backend_web03",
     "\\Backend_web03\\Controller",
-    "\\Misa_TruongWeb03.UnitTests"
+    "\\Misa_TruongWeb03.DL",
+    "\\Misa_TruongWeb03.DL\\Repository"
   ],
   "SelectedNode": "\\Backend_web03\\Controller\\EmulationTitleController.cs",
   "PreviewInSolutionExplorer": false

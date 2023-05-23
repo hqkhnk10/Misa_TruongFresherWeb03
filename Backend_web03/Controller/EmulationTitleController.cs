@@ -23,6 +23,7 @@ namespace FresherWeb03.Controller
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
+        /// Created By: QTNgo (23/05/2023)
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] GetEmulationTitle model)
         {
@@ -44,6 +45,7 @@ namespace FresherWeb03.Controller
         /// </summary>
         /// <param name="id">Id</param>
         /// <returns></returns>
+        /// Created By: QTNgo (23/05/2023)
         [HttpGet("{id}")]
         public async Task<IActionResult> GetDetail(int id)
         {
@@ -64,6 +66,7 @@ namespace FresherWeb03.Controller
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
+        /// Created By: QTNgo (23/05/2023)
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] PostEmulationTitle model)
         {
@@ -85,6 +88,7 @@ namespace FresherWeb03.Controller
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
+        /// Created By: QTNgo (23/05/2023)
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] PostEmulationTitle model)
         {
@@ -106,6 +110,7 @@ namespace FresherWeb03.Controller
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        /// Created By: QTNgo (23/05/2023)
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -126,6 +131,7 @@ namespace FresherWeb03.Controller
         /// </summary>
         /// <param name="model">List id cần xóa</param>
         /// <returns></returns>
+        /// Created By: QTNgo (23/05/2023)
         [HttpDelete, Route("Multiple")]
         public async Task<IActionResult> DeleteMultiple([FromBody] DeleteEmulationTitle model)
         {

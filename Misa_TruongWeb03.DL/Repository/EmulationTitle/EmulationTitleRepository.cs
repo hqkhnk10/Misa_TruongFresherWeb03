@@ -19,6 +19,11 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitle
         {
             return new MySqlConnection(_configuration.GetSection("ConnectionString").Value);
         }
+        /// <summary>
+        /// Lấy danh sách danh hiệu thi đua
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<BaseEntity> Get(GetEmulationTitle model)
         {
             using var conn = this.GetConnection();
@@ -70,6 +75,11 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitle
             }
             finally { conn.Close(); }
         }
+        /// <summary>
+        /// Lấy chi tiết danh hiệu thi đua
+        /// </summary>
+        /// <param name="id">Id của danh hiệu thi đua</param>
+        /// <returns></returns>
         public async Task<BaseEntity> GetDetail(int id)
         {
             using var conn = this.GetConnection();
@@ -107,6 +117,11 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitle
             }
             finally { conn.Close(); }
         }
+        /// <summary>
+        /// Thêm danh hiệu thi đua
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<BaseEntity> Post(PostEmulationTitle model)
         {
             using var conn = this.GetConnection();
@@ -155,6 +170,12 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitle
             }
             finally { conn.Close(); }
         }
+        /// <summary>
+        /// Sửa danh hiệu thi đua
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<BaseEntity> Put(int id, PostEmulationTitle model)
         {
             using var conn = this.GetConnection();
@@ -204,6 +225,11 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitle
             }
             finally { conn.Close(); }
         }
+        /// <summary>
+        /// Xóa danh hiệu thi đua
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<BaseEntity> Delete(int id)
         {
             using var conn = this.GetConnection();
@@ -246,6 +272,11 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitle
             }
             finally { conn.Close(); }
         }
+        /// <summary>
+        /// Xóa nhiều danh hiệu thi đua
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<BaseEntity> DeleteMultiple(DeleteEmulationTitle model)
         {
             using var conn = this.GetConnection();
@@ -288,6 +319,11 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitle
             }
             finally { conn.Close(); }
         }
+        /// <summary>
+        /// Kiểm tra trùng mã danh hiệu
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<BaseEntity> CheckDuplicate(EmulationTitleModel model)
         {
             using var conn = this.GetConnection();
