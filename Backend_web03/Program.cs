@@ -1,5 +1,6 @@
-using Misa_TruongWeb03.BL.Service.EmulationTitle;
-using Misa_TruongWeb03.DL.Repository.EmulationTitle;
+using Misa_TruongWeb03.BL.Service.EmulationTitleService;
+using Misa_TruongWeb03.DL.Repository.EmulationTitleRepository;
+using Misa_TruongWeb03.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,8 +26,9 @@ app.UseCors(x => x
                .AllowAnyOrigin()
                .AllowAnyMethod()
                .AllowAnyHeader());
-app.UseHttpsRedirection();
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
+app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();

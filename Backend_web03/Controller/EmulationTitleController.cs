@@ -1,130 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Misa_TruongWeb03.BL.Service.EmulationTitle;
+using Misa_TruongWeb03.BL.Service.EmulationTitleService;
 using Misa_TruongWeb03.Common.DTO;
+using Misa_TruongWeb03.Common.Entity;
+using Misa_TruongWeb03.Controller.Base;
 using System.Reflection;
 using System.Web.Http.Results;
+using static Dapper.SqlMapper;
 
 namespace FresherWeb03.Controller
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class EmulationTitleController : ControllerBase
+    public class EmulationTitleController : BaseController<EmulationTitle, GetEmulationTitle, PostEmulationTitle, UpdateEmulationTitle>
     {
         private readonly IEmulationTitleService _emulationTitleService;
 
-        public EmulationTitleController(IEmulationTitleService emulationTitleService)
+        public EmulationTitleController(IEmulationTitleService emulationTitleService) : base(emulationTitleService)
         {
             _emulationTitleService = emulationTitleService;
         }
-
-        // GET 
-        /// <summary>
-        /// Lấy danh sách danh hiệu thi đua
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        /// Created By: QTNgo (23/05/2023)
-        [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] GetEmulationTitle model)
-        {
-            try
-            {
-                var result = await _emulationTitleService.Get(model);
-                return StatusCode(result.StatusCode, result);
-            }
-            catch(Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-            }
-
-        }
-
-        // GET 
-        /// <summary>
-        /// Lấy chi tiết danh sách danh hiệu thi đua
-        /// </summary>
-        /// <param name="id">Id</param>
-        /// <returns></returns>
-        /// Created By: QTNgo (23/05/2023)
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetDetail(int id)
-        {
-            try
-            {
-                var result = await _emulationTitleService.GetDetail(id);
-                return StatusCode(result.StatusCode, result);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-            }
-        }
-
-        // POST api/<EmulationTitleController>
-        /// <summary>
-        /// Thêm phong trào thi đua
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        /// Created By: QTNgo (23/05/2023)
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] PostEmulationTitle model)
-        {
-            try
-            {
-                var result = await _emulationTitleService.Post(model);
-                return StatusCode(result.StatusCode, result);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-            }
-        }
-
-
-        // PUT api/<EmulationTitleController>/5
-        /// <summary>
-        /// Sửa phong trào thi đua
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        /// Created By: QTNgo (23/05/2023)
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] PostEmulationTitle model)
-        {
-            try
-            {
-                var result = await _emulationTitleService.Put(id, model);
-                return StatusCode(result.StatusCode, result);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-            }
-        }
-
-
-        // DELETE api/<EmulationTitleController>/5
-        /// <summary>
-        /// Xóa 1 phong trào thi đua
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        /// Created By: QTNgo (23/05/2023)
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            try
-            {
-                var result = await _emulationTitleService.Delete(id);
-                return StatusCode(result.StatusCode, result);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-            }
-        }
-
         // DELETE api/<EmulationTitleController>/5
         /// <summary>
         /// Xóa nhiều phong trào thi đua 1 lúc
@@ -135,14 +29,20 @@ namespace FresherWeb03.Controller
         [HttpDelete, Route("Multiple")]
         public async Task<IActionResult> DeleteMultiple([FromBody] DeleteEmulationTitle model)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                var result = await _emulationTitleService.DeleteMultiple(model);
-                return StatusCode(result.StatusCode, result);
+                return HandleValidationErrors();
             }
-            catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                try
+                {
+                    var result = await _emulationTitleService.DeleteMultiple(model);
+                    return StatusCode(result.ErrorCode, result);
+                }
+                catch (Exception ex)
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                }
             }
         }
     }
