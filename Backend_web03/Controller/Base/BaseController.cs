@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Misa_TruongWeb03.BL.Service.Base;
 using Misa_TruongWeb03.Common.DTO;
+using Misa_TruongWeb03.Common.Entity;
 using System.Web.Http.ModelBinding;
 
 namespace Misa_TruongWeb03.Controller.Base
@@ -14,7 +15,11 @@ namespace Misa_TruongWeb03.Controller.Base
         {
             _baseService = baseService;
         }
-        // GET 
+        /// <summary>
+        /// BASE GET
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>IActionResult</returns>
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] TEntityGetDto model)
         {
@@ -33,7 +38,11 @@ namespace Misa_TruongWeb03.Controller.Base
             }
 
         }
-        // GET 
+        /// <summary>
+        /// BASE Get by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>IActionResult</returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetDetail(int id)
         {
@@ -47,6 +56,12 @@ namespace Misa_TruongWeb03.Controller.Base
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+        /// <summary>
+        /// BASE POST
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>IActionResult</returns>
+        /// <exception cref="Exception"></exception>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] TEntityPostDto model)
         {
@@ -61,9 +76,15 @@ namespace Misa_TruongWeb03.Controller.Base
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                return ServerError(ex);
             }
         }
+        /// <summary>
+        /// BASE PUT
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <returns>IActionResult</returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] TEntityPostDto model)
         {
@@ -78,9 +99,14 @@ namespace Misa_TruongWeb03.Controller.Base
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                return ServerError(ex);
             }
         }
+        /// <summary>
+        /// BASE DELETE
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>IActionResult</returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -95,20 +121,40 @@ namespace Misa_TruongWeb03.Controller.Base
             }
         }
         #region Event
+        /// <summary>
+        /// Trả về lỗi validate
+        /// </summary>
+        /// <returns></returns>
         protected IActionResult HandleValidationErrors()
         {
             var errors = ModelState.Values.SelectMany(v => v.Errors)
                 .Select(e => e.ErrorMessage)
                 .ToList();
 
-            var response = new
+            var response = new BaseEntity
             {
-                Message = "Validation failed.",
-                Errors = errors
+                ErrorCode = StatusCodes.Status400BadRequest,
+                UserMsg = "Validation failed.",
+                DevMsg = errors.ToString() ?? ""
             };
 
             return BadRequest(response);
-        } 
+        }
+        /// <summary>
+        /// Trả về lỗi hệ thống
+        /// </summary>
+        /// <param name="ex"></param>
+        /// <returns></returns>
+        protected IActionResult ServerError(Exception ex)
+        {
+            var response = new BaseEntity
+            {
+                ErrorCode = StatusCodes.Status500InternalServerError,
+                DevMsg = ex.Message,
+                UserMsg = "Lỗi hệ thống",
+            };
+            return StatusCode(500, response);
+        }
         #endregion
     }
 }
