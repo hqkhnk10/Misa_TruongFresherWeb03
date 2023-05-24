@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Misa_TruongWeb03.Common.Entity;
 using Misa_TruongWeb03.Common.Helper;
+using Misa_TruongWeb03.Common.Resource;
 using MySqlConnector;
 using System.Data;
 using System.Data.Common;
@@ -70,7 +71,7 @@ namespace Misa_TruongWeb03.DL.Repository.Base
                     ErrorCode = StatusCodes.Status500InternalServerError,
                     Data = null,
                     DevMsg = ex.Message,
-                    UserMsg = "Lỗi hệ thống"
+                    UserMsg = VN.Error500
                 };
                 return exception;
             }
@@ -106,7 +107,7 @@ namespace Misa_TruongWeb03.DL.Repository.Base
                     ErrorCode = StatusCodes.Status500InternalServerError,
                     Data = null,
                     DevMsg = ex.Message,
-                    UserMsg = "Lỗi hệ thống"
+                    UserMsg = VN.Error500
                 };
                 return exception;
             }
@@ -141,7 +142,7 @@ namespace Misa_TruongWeb03.DL.Repository.Base
                     ErrorCode = StatusCodes.Status500InternalServerError,
                     Data = null,
                     DevMsg = ex.Message,
-                    UserMsg = "Lỗi hệ thống"
+                    UserMsg = VN.Error500
                 };
                 return exception;
             }
@@ -177,7 +178,7 @@ namespace Misa_TruongWeb03.DL.Repository.Base
                     ErrorCode = StatusCodes.Status500InternalServerError,
                     Data = null,
                     DevMsg = ex.Message,
-                    UserMsg = "Lỗi hệ thống"
+                    UserMsg = VN.Error500
                 };
                 return exception;
             }
@@ -239,8 +240,8 @@ namespace Misa_TruongWeb03.DL.Repository.Base
                     {
                         ErrorCode = StatusCodes.Status302Found,
                         Data = null,
-                        DevMsg = "Trùng mã danh hiệu",
-                        UserMsg = "Trùng mã danh hiệu"
+                        DevMsg = VN.DuplicateError,
+                        UserMsg = VN.DuplicateError
                     };
                     return found;
                 }
@@ -258,7 +259,7 @@ namespace Misa_TruongWeb03.DL.Repository.Base
                     ErrorCode = StatusCodes.Status500InternalServerError,
                     Data = null,
                     DevMsg = ex.Message,
-                    UserMsg = "Lỗi hệ thống"
+                    UserMsg = VN.Error500
                 };
                 return exception;
             }

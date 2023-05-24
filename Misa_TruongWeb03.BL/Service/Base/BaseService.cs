@@ -23,7 +23,6 @@ namespace Misa_TruongWeb03.BL.Service.Base
         protected readonly IBaseRepository<TEntity, TEntityGetDto, TEntityPostDto, TEntityPutDto> _baseRepository;
         protected readonly IMapper _mapper;
         #endregion
-
         #region Constructor
         public BaseService(IBaseRepository<TEntity, TEntityGetDto, TEntityPostDto, TEntityPutDto> baseRepository, IMapper mapper)
         {
@@ -62,7 +61,8 @@ namespace Misa_TruongWeb03.BL.Service.Base
         /// CreatedBy: QTNgo (24/05/2023)
         public virtual async Task<BaseEntity> Post(TEntityPostDto model)
         {
-            throw new NotImplementedException();
+            var result = await _baseRepository.Post(model);
+            return result;
         }
         /// <summary>
         /// BASE PUT call to BASE Repository
@@ -72,7 +72,9 @@ namespace Misa_TruongWeb03.BL.Service.Base
         /// CreatedBy: QTNgo (24/05/2023)
         public virtual async Task<BaseEntity> Put(int id, TEntityPostDto model)
         {
-            throw new NotImplementedException();
+            var entity = _mapper.Map<TEntityPutDto>(model);
+            var result = await _baseRepository.Put(entity);
+            return result;
         }
         /// <summary>
         /// BASE DELETE call to BASE Repository

@@ -17,7 +17,6 @@ namespace Misa_TruongWeb03.BL.Service.EmulationTitleService
         #region Property
         private readonly IEmulationTitleRepository _emulationTitleRepository;
         #endregion
-
         #region Constructor
         public EmulationTitleService(IEmulationTitleRepository emulationTitleRepository, IMapper mapper) : base(emulationTitleRepository, mapper)
         {

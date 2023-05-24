@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Misa_TruongWeb03.Common.DTO;
 using Misa_TruongWeb03.Common.Entity;
+using Misa_TruongWeb03.Common.Resource;
 using Misa_TruongWeb03.DL.Repository.Base;
 using System.Data;
 
@@ -48,8 +49,8 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitleRepository
                         Rows = result,
                         ErrorCode = 400,
                         Data = null,
-                        DevMsg = "Database không thể xóa",
-                        UserMsg = "Lỗi không thể xóa"
+                        DevMsg = VN.DatabaseError,
+                        UserMsg = VN.ErrorDelete
                     };
                     return notFound;
                 }

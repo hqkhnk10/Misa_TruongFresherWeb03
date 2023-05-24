@@ -1,4 +1,6 @@
-﻿namespace Misa_TruongWeb03.Common.Entity
+﻿using Misa_TruongWeb03.Common.Resource;
+
+namespace Misa_TruongWeb03.Common.Entity
 {
     /// <summary>
     /// Return class of every service, repo
@@ -25,7 +27,7 @@
         /// Thông báo cho người dùng
         /// </summary>
         /// CreatedBy: QTNgo (24/05/2023)
-        public string UserMsg { get; set; } = "Thành công";
+        public string UserMsg { get; set; } = VN.Error200;
         /// <summary>
         /// Thông tin cụ thể về lỗi
         /// </summary>
