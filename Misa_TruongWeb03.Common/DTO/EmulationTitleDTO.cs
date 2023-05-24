@@ -5,6 +5,10 @@ using static Misa_TruongWeb03.Common.Enum.EmulationTitleEnum;
 
 namespace Misa_TruongWeb03.Common.DTO
 {
+    /// <summary>
+    /// Model cho GET của danh hiệu thi đua
+    /// </summary>
+    /// CreatedBy: QTNgo (24/05/2023)
     public class GetEmulationTitle : GetModel
     {
         public ApplyObject? ApplyObject { get; set; } = null;
@@ -16,6 +20,10 @@ namespace Misa_TruongWeb03.Common.DTO
         public bool? MovementTypeSort { get; set; } = null;
         public bool? InactiveSort { get; set; } = null;
     }
+    /// <summary>
+    /// Model cho POST của danh hiệu thi đua
+    /// </summary>
+    /// CreatedBy: QTNgo (24/05/2023)
     public class PostEmulationTitle
     {
         [Required]
@@ -39,11 +47,19 @@ namespace Misa_TruongWeb03.Common.DTO
         public int? Inactive { get; set; } = null;
         public string CreatedBy { get; set; } = "demo";
     }
+    /// <summary>
+    /// Model cho PUT của danh hiệu thi đua
+    /// </summary>
+    /// CreatedBy: QTNgo (24/05/2023)
     public class UpdateEmulationTitle : PostEmulationTitle
     {
         [Required]
         public int EmulationTitleID { get; set; }
     }
+    /// <summary>
+    /// Model cho xóa nhiều của danh hiệu thi đua
+    /// </summary>
+    /// CreatedBy: QTNgo (24/05/2023)
     public class DeleteEmulationTitle
     {
         [Required]

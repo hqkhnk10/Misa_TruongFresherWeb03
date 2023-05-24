@@ -8,6 +8,7 @@ namespace FresherWeb03.Controller
 {
     /// <summary>
     /// Danh hiệu thi đua Controller
+    /// kế thừa các CRUD từ Base Controller
     /// </summary>
     /// CreatedBy: QTNgo (24/05/2023)
     [Route("api/v1/[controller]")]

@@ -5,6 +5,7 @@ namespace Misa_TruongWeb03.Common.Entity
     /// <summary>
     /// Model danh hiệu thi đua
     /// </summary>
+    /// Created By: QTNgo (23/05/2023)
     public class EmulationTitle : BaseModel
     {
         /// <summary>

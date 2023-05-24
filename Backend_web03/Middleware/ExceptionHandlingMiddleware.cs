@@ -58,7 +58,7 @@ public class ExceptionHandlingMiddleware
             // Write the JSON response to the response body
             await context.Response.WriteAsync(responseJson);
         }
-    } 
+    }
     #endregion
 }
 
