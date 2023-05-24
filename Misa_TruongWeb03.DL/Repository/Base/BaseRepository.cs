@@ -4,31 +4,47 @@ using Microsoft.Extensions.Configuration;
 using Misa_TruongWeb03.Common.Entity;
 using Misa_TruongWeb03.Common.Helper;
 using MySqlConnector;
-using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
-using System.Linq;
-using System.Reflection;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 using static Dapper.SqlMapper;
 
 namespace Misa_TruongWeb03.DL.Repository.Base
 {
+    /// <summary>
+    /// Base Repo kết nối tới database, gọi store procedure
+    /// </summary>
+    /// <typeparam name="T">Generic Entity model</typeparam>
+    /// <typeparam name="TGetDTO">Generic Get DTO model</typeparam>
+    /// <typeparam name="TPostDTO">Generic Post DTO model</typeparam>
+    /// <typeparam name="TPutDTO">Generic Put DTO model</typeparam>
+    /// CreatedBy: QTNgo (24/05/2023)
     public abstract class BaseRepository<T, TGetDTO, TPostDTO, TPutDTO> : IBaseRepository<T, TGetDTO, TPostDTO, TPutDTO>
     {
+        #region Property
         protected readonly IConfiguration _configuration;
+        #endregion
+        #region Constructor
         public BaseRepository(IConfiguration configuration)
         {
             _configuration = configuration;
         }
+        #endregion
+        #region Method
+        /// <summary>
+        /// Tạo connection đến MySQL
+        /// </summary>
+        /// <returns>Base Entity</returns>
+        /// CreatedBy: QTNgo (24/05/2023)
         public DbConnection GetConnection()
         {
             return new MySqlConnection(_configuration.GetSection("ConnectionString").Value);
         }
+        /// <summary>
+        /// Base GET 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>Base Entity</returns>
+        /// CreatedBy: QTNgo (24/05/2023)
         public async Task<BaseEntity> Get(TGetDTO model)
         {
             using var connection = GetConnection();
@@ -60,6 +76,12 @@ namespace Misa_TruongWeb03.DL.Repository.Base
             }
             finally { connection.Close(); }
         }
+        /// <summary>
+        /// Base GET by Id
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>Base Entity</returns>
+        /// CreatedBy: QTNgo (24/05/2023)
         public async Task<BaseEntity> GetById(int id)
         {
             var storedProcedureName = $"proc_{typeof(T).Name.ToLower()}_getdetail";
@@ -90,6 +112,12 @@ namespace Misa_TruongWeb03.DL.Repository.Base
             }
             finally { connection.Close(); }
         }
+        /// <summary>
+        /// Base POST 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>Base Entity</returns>
+        /// CreatedBy: QTNgo (24/05/2023)
         public async Task<BaseEntity> Post(TPostDTO model)
         {
             using var connection = GetConnection();
@@ -119,6 +147,12 @@ namespace Misa_TruongWeb03.DL.Repository.Base
             }
             finally { connection.Close(); }
         }
+        /// <summary>
+        /// Base PUT 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>Base Entity</returns>
+        /// CreatedBy: QTNgo (24/05/2023)
         public async Task<BaseEntity> Put(TPutDTO model)
         {
             using var connection = GetConnection();
@@ -149,6 +183,12 @@ namespace Misa_TruongWeb03.DL.Repository.Base
             }
             finally { connection.Close(); }
         }
+        /// <summary>
+        /// Base DELETE 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>Base Entity</returns>
+        /// CreatedBy: QTNgo (24/05/2023)
         public async Task<BaseEntity> Delete(int id)
         {
             var storedProcedureName = $"proc_{typeof(T).Name.ToLower()}_delete";
@@ -178,6 +218,12 @@ namespace Misa_TruongWeb03.DL.Repository.Base
             }
             finally { connection.Close(); }
         }
+        /// <summary>
+        /// Base Check duplicate 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>Base Entity</returns>
+        /// CreatedBy: QTNgo (24/05/2023)
         public async Task<BaseEntity> CheckDuplicate(T model)
         {
             using var connection = GetConnection();
@@ -217,6 +263,7 @@ namespace Misa_TruongWeb03.DL.Repository.Base
                 return exception;
             }
             finally { connection.Close(); }
-        }
+        } 
+        #endregion
     }
 }

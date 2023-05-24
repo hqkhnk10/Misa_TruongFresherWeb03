@@ -4,11 +4,16 @@ using Microsoft.Extensions.Configuration;
 using Misa_TruongWeb03.Common.DTO;
 using Misa_TruongWeb03.Common.Entity;
 using Misa_TruongWeb03.DL.Repository.Base;
-using MySqlConnector;
 using System.Data;
 
 namespace Misa_TruongWeb03.DL.Repository.EmulationTitleRepository
 {
+    /// <summary>
+    /// Repository của danh hiệu thi đua
+    /// Kế thừa CRUD từ base
+    /// kết nối với database
+    /// </summary>
+    /// CreatedBy: QTNgo (24/05/2023)
     public class EmulationTitleRepository : BaseRepository<EmulationTitle, GetEmulationTitle, PostEmulationTitle, UpdateEmulationTitle>, IEmulationTitleRepository
     {
         #region Constructor
@@ -22,7 +27,8 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitleRepository
         /// Xóa nhiều danh hiệu thi đua
         /// </summary>
         /// <param name="model"></param>
-        /// <returns></returns>
+        /// <returns>BaseEntity</returns>
+        /// CreatedBy: QTNgo (24/05/2023)
         public async Task<BaseEntity> DeleteMultiple(DeleteEmulationTitle model)
         {
             using var conn = this.GetConnection();

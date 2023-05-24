@@ -7,14 +7,24 @@ using System.Reflection;
 
 namespace Misa_TruongWeb03.BL.Service.EmulationTitleService
 {
+    /// <summary>
+    /// Tầng Service của danh hiệu thi đua
+    /// Kế thừa CRUD từ base
+    /// </summary>
+    /// CreatedBy: QTNgo (24/05/2023)
     public class EmulationTitleService : BaseService<EmulationTitle,GetEmulationTitle,PostEmulationTitle,UpdateEmulationTitle>,IEmulationTitleService
     {
+        #region Property
         private readonly IEmulationTitleRepository _emulationTitleRepository;
+        #endregion
 
-        public EmulationTitleService(IEmulationTitleRepository emulationTitleRepository, IMapper mapper) : base(emulationTitleRepository,mapper)
+        #region Constructor
+        public EmulationTitleService(IEmulationTitleRepository emulationTitleRepository, IMapper mapper) : base(emulationTitleRepository, mapper)
         {
             _emulationTitleRepository = emulationTitleRepository;
         }
+        #endregion
+        #region Method
         /// <summary>
         /// Thêm danh hiệu thi đua
         /// </summary>
@@ -55,7 +65,6 @@ namespace Misa_TruongWeb03.BL.Service.EmulationTitleService
             }
             return check;
         }
-
         /// <summary>
         /// Xóa nhiều danh hiệu thi đua
         /// </summary>
@@ -66,6 +75,7 @@ namespace Misa_TruongWeb03.BL.Service.EmulationTitleService
         {
             var result = await _emulationTitleRepository.DeleteMultiple(model);
             return result;
-        }
+        } 
+        #endregion
     }
 }

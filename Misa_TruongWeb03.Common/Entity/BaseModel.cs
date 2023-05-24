@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Misa_TruongWeb03.Common.Entity
 {
+    /// <summary>
+    /// Dữ liệu trả về của mọi bảng
+    /// </summary>
+    /// Created By: QTNgo (24/05/2023)
     public abstract class BaseModel
     {
         /// <summary>

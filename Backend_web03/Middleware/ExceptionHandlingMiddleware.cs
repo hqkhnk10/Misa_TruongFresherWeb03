@@ -1,20 +1,30 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Misa_TruongWeb03.Common.Resource;
 using System;
 using System.Threading.Tasks;
 
 namespace Misa_TruongWeb03.Middleware;
+/// <summary>
+/// Middleware xử lí exception
+/// </summary>
+/// CreatedBy: QTNgo (24/05/2023)
 public class ExceptionHandlingMiddleware
 {
+    #region Property
     private readonly RequestDelegate _next;
     private readonly ILogger<ExceptionHandlingMiddleware> _logger;
+    #endregion
 
+    #region Constructor
     public ExceptionHandlingMiddleware(RequestDelegate next, ILogger<ExceptionHandlingMiddleware> logger)
     {
         _next = next;
         _logger = logger;
     }
+    #endregion
 
+    #region Event
     public async Task InvokeAsync(HttpContext context)
     {
         try
@@ -33,7 +43,7 @@ public class ExceptionHandlingMiddleware
             {
                 ErrorCode = 500,
                 DevMsg = ex.Message,
-                UserMsg = "Có lỗi xảy ra! vui lòng liên hệ với MISA.",
+                UserMsg = VN.SystemError,
                 StatusCode = StatusCodes.Status500InternalServerError,
                 TraceId = traceId,
                 MoreInfo = ex.Source,
@@ -50,5 +60,6 @@ public class ExceptionHandlingMiddleware
             await context.Response.WriteAsync(responseJson);
         }
     }
+    #endregion
 }
 
