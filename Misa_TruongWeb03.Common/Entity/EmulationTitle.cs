@@ -5,13 +5,13 @@ namespace Misa_TruongWeb03.Common.Entity
     /// <summary>
     /// Model danh hiệu thi đua
     /// </summary>
-    public class EmulationTitleModel : BaseModel
+    public class EmulationTitle : BaseModel
     {
         /// <summary>
         /// Id của danh hiệu thi đua
         /// </summary>
         /// Created By: QTNgo (23/05/2023)
-        public int EmulationTitleID { get; set; }
+        public int EmulationTitleID { get; set; } = 0;
         /// <summary>
         /// Mã danh hiệu thi đua
         /// </summary>

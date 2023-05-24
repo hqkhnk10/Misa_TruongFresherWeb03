@@ -1,41 +1,19 @@
 ﻿using AutoMapper;
+using Misa_TruongWeb03.BL.Service.Base;
 using Misa_TruongWeb03.Common.DTO;
 using Misa_TruongWeb03.Common.Entity;
-using Misa_TruongWeb03.DL.Repository.EmulationTitle;
+using Misa_TruongWeb03.DL.Repository.EmulationTitleRepository;
 using System.Reflection;
 
-namespace Misa_TruongWeb03.BL.Service.EmulationTitle
+namespace Misa_TruongWeb03.BL.Service.EmulationTitleService
 {
-    public class EmulationTitleService : IEmulationTitleService
+    public class EmulationTitleService : BaseService<EmulationTitle,GetEmulationTitle,PostEmulationTitle,UpdateEmulationTitle>,IEmulationTitleService
     {
         private readonly IEmulationTitleRepository _emulationTitleRepository;
-        private readonly IMapper _mapper;
-        public EmulationTitleService(IEmulationTitleRepository emulationTitleRepository, IMapper mapper)
+
+        public EmulationTitleService(IEmulationTitleRepository emulationTitleRepository, IMapper mapper) : base(emulationTitleRepository,mapper)
         {
             _emulationTitleRepository = emulationTitleRepository;
-            _mapper = mapper;
-        }
-        /// <summary>
-        /// Lấy danh sách danh hiệu thi đua
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        /// Created By: QTNgo (23/05/2023)
-        public async Task<BaseEntity> Get(GetEmulationTitle model)
-        {
-            var result = await _emulationTitleRepository.Get(model);
-            return result;
-        }
-        /// <summary>
-        /// Lấy chi tiết danh hiệu thi đua
-        /// </summary>
-        /// <param name="id">Id của danh hiệu thi đua</param>
-        /// <returns></returns>
-        /// Created By: QTNgo (23/05/2023)
-        public async Task<BaseEntity> GetDetail(int id)
-        {
-            var result = await _emulationTitleRepository.GetDetail(id);
-            return result;
         }
         /// <summary>
         /// Thêm danh hiệu thi đua
@@ -43,15 +21,14 @@ namespace Misa_TruongWeb03.BL.Service.EmulationTitle
         /// <param name="model"></param>
         /// <returns></returns>
         /// Created By: QTNgo (23/05/2023)
-        public async Task<BaseEntity> Post(PostEmulationTitle model)
+        public override async Task<BaseEntity> Post(PostEmulationTitle model)
         {
             //Check trùng mã danh hiệu
-            var et = _mapper.Map<EmulationTitleModel>(model);
-            et.EmulationTitleID = 0;
-            var check = await _emulationTitleRepository.CheckDuplicate(et);
-            if(check.StatusCode == 200)
+            var updateModel = _mapper.Map<EmulationTitle>(model);
+            var check = await CheckDuplicate(updateModel);
+            if (check.ErrorCode == 200)
             {
-                var result = await _emulationTitleRepository.Post(model);
+                var result = await _baseRepository.Post(model);
                 return result;
             }
             return check;
@@ -64,30 +41,21 @@ namespace Misa_TruongWeb03.BL.Service.EmulationTitle
         /// <param name="model"></param>
         /// <returns></returns>
         /// Created By: QTNgo (23/05/2023)
-        public async Task<BaseEntity> Put(int id, PostEmulationTitle model)
+        public override async Task<BaseEntity> Put(int id, PostEmulationTitle model)
         {
             //Check trùng mã danh hiệu
-            var et = _mapper.Map<EmulationTitleModel>(model);
+            var et = _mapper.Map<EmulationTitle>(model);
             et.EmulationTitleID = id;
-            var check = await _emulationTitleRepository.CheckDuplicate(et);
-            if (check.StatusCode == 200)
+            var check = await CheckDuplicate(et);
+            if (check.ErrorCode == 200)
             {
-                var result = await _emulationTitleRepository.Put(id, model);
+                var updateModel = _mapper.Map<UpdateEmulationTitle>(et);
+                var result = await _baseRepository.Put(updateModel);
                 return result;
             }
             return check;
         }
-        /// <summary>
-        /// Xóa danh hiệu thi đua
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        /// Created By: QTNgo (23/05/2023)
-        public async Task<BaseEntity> Delete(int id)
-        {
-            var result = await _emulationTitleRepository.Delete(id);
-            return result;
-        }
+
         /// <summary>
         /// Xóa nhiều danh hiệu thi đua
         /// </summary>

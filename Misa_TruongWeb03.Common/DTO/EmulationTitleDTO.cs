@@ -1,14 +1,12 @@
-﻿using System.ComponentModel;
+﻿using Misa_TruongWeb03.Common.Entity;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using static Misa_TruongWeb03.Common.Enum.EmulationTitleEnum;
 
 namespace Misa_TruongWeb03.Common.DTO
 {
-    public class GetEmulationTitle
+    public class GetEmulationTitle : GetModel
     {
-        public int pageSize { get; set; } = 10;
-        public int pageIndex { get; set; } = 1;
-        public string? keyword { get; set; } = null;
         public ApplyObject? ApplyObject { get; set; } = null;
         public CommendationLevel? CommendationLevel { get; set; } = null;
         public MovementType? MovementType { get; set; } = null;

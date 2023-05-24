@@ -8,8 +8,9 @@ namespace Misa_TruongWeb03.BL.Automapper
     {
         public EmulationTitleProfile()
         {
-            CreateMap<PostEmulationTitle, EmulationTitleModel>();
-            CreateMap<EmulationTitleModel, PostEmulationTitle>();
+            CreateMap<PostEmulationTitle, EmulationTitle>();
+            CreateMap<PostEmulationTitle, UpdateEmulationTitle>();
+            CreateMap<EmulationTitle, UpdateEmulationTitle>();
         }
     }
 }
