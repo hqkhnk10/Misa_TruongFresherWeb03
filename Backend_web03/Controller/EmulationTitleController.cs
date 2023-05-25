@@ -88,7 +88,7 @@ namespace FresherWeb03.Controller
         /// <param name="model">List id cần xóa</param>
         /// <returns></returns>
         /// Created By: QTNgo (23/05/2023)
-        [HttpPut, Route("Mulitple")]
+        [HttpPut, Route("MulitpleStatus")]
         public async Task<IActionResult> UpdateMultipleStatus(UpdateMultipleEmulationTitleStatusDto model)
         {
             if (!ModelState.IsValid)

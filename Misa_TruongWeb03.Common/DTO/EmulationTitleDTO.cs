@@ -19,6 +19,7 @@ namespace Misa_TruongWeb03.Common.DTO
         public bool? CommendationLevelSort { get; set; } = null;
         public bool? MovementTypeSort { get; set; } = null;
         public bool? InactiveSort { get; set; } = null;
+        public bool? EmulationTitleNameSort { get; set; } = null;
     }
     /// <summary>
     /// Model cho POST của danh hiệu thi đua

@@ -63,6 +63,10 @@ namespace Misa_TruongWeb03.BL.Service.EmulationTitleService
             }
             var updateModel = _mapper.Map<UpdateEmulationTitle>(et);
             var result = await _baseRepository.Put(updateModel);
+            if (result.Data == null || (int)result.Data == 0)
+            {
+                return new DatabaseError();
+            }
             return result;
         }
         /// <summary>
@@ -74,6 +78,10 @@ namespace Misa_TruongWeb03.BL.Service.EmulationTitleService
         public async Task<BaseEntity> DeleteMultiple(DeleteEmulationTitle model)
         {
             var result = await _emulationTitleRepository.DeleteMultiple(model);
+            if (result.Data == null || (int)result.Data == 0)
+            {
+                return new DatabaseError();
+            }
             return result;
         }
         /// <summary>
@@ -85,6 +93,10 @@ namespace Misa_TruongWeb03.BL.Service.EmulationTitleService
         public async Task<BaseEntity> UpdateStatus(UpdateEmulationTitleStatusDto model)
         {
             var result = await _emulationTitleRepository.UpdateStatus(model);
+            if (result.Data == null || (int)result.Data == 0)
+            {
+                return new DatabaseError();
+            }
             return result;
         }
         /// <summary>
@@ -96,7 +108,10 @@ namespace Misa_TruongWeb03.BL.Service.EmulationTitleService
         public async Task<BaseEntity> UpdateMultipleStatus(UpdateMultipleEmulationTitleStatusDto model)
         {
             var result = await _emulationTitleRepository.UpdateMultipleStatus(model);
-
+            if (result.Data == null || (int)result.Data == 0)
+            {
+                return new DatabaseError();
+            }
             return result;
         }
         #endregion
