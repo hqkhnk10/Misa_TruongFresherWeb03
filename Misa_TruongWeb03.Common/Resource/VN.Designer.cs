@@ -124,6 +124,15 @@ namespace Misa_TruongWeb03.Common.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Không bản ghi nào bị thay đổi trong database.
+        /// </summary>
+        public static string NoAffectedRows {
+            get {
+                return ResourceManager.GetString("NoAffectedRows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Có lỗi xảy ra! vui lòng liên hệ với MISA..
         /// </summary>
         public static string SystemError {

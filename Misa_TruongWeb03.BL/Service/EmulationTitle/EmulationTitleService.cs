@@ -75,7 +75,30 @@ namespace Misa_TruongWeb03.BL.Service.EmulationTitleService
         {
             var result = await _emulationTitleRepository.DeleteMultiple(model);
             return result;
-        } 
+        }
+        /// <summary>
+        /// Xóa nhiều danh hiệu thi đua
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        /// Created By: QTNgo (23/05/2023)
+        public async Task<BaseEntity> UpdateStatus(UpdateEmulationTitleStatusDto model)
+        {
+            var result = await _emulationTitleRepository.UpdateStatus(model);
+            return result;
+        }
+        /// <summary>
+        /// Xóa nhiều danh hiệu thi đua
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        /// Created By: QTNgo (23/05/2023)
+        public async Task<BaseEntity> UpdateMultipleStatus(UpdateMultipleEmulationTitleStatusDto model)
+        {
+            var result = await _emulationTitleRepository.UpdateMultipleStatus(model);
+
+            return result;
+        }
         #endregion
     }
 }

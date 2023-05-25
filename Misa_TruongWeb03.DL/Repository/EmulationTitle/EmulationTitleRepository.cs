@@ -73,6 +73,82 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitleRepository
             }
             finally { conn.Close(); }
         }
+
+        /// <summary>
+        /// Thay đổi trạng thái của 1 danh hiệu thi đua
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>BaseEntity</returns>
+        /// CreatedBy: QTNgo (24/05/2023)
+        public async Task<BaseEntity> UpdateStatus(UpdateEmulationTitleStatusDto model)
+        {
+            using var conn = this.GetConnection();
+            try
+            {
+                conn.Open();
+                var query = "proc_emulationtitle_update_status";
+                var result = await conn.QueryFirstAsync<int>(query, new
+                {
+                    model.EmulationTitleID,
+                    model.Inactive
+                }, commandType: CommandType.StoredProcedure);
+                var newResult = new BaseEntity
+                {
+                    ErrorCode = StatusCodes.Status200OK,
+                    Data = result
+                };
+                return newResult;
+            }
+            catch (Exception ex)
+            {
+                var exception = new BaseEntity
+                {
+                    ErrorCode = StatusCodes.Status500InternalServerError,
+                    Data = null,
+                    DevMsg = ex.Message
+                };
+                return exception;
+            }
+            finally { conn.Close(); }
+        }
+        /// <summary>
+        /// Xóa nhiều danh hiệu thi đua
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>BaseEntity</returns>
+        /// CreatedBy: QTNgo (24/05/2023)
+        public async Task<BaseEntity> UpdateMultipleStatus(UpdateMultipleEmulationTitleStatusDto model)
+        {
+            using var conn = this.GetConnection();
+            try
+            {
+                conn.Open();
+                var query = "proc_emulationtitle_update_multiple";
+                var stringInt = String.Join(",", model.Id);
+                var result = await conn.QueryFirstAsync<int>(query, new
+                {
+                    int_array = stringInt,
+                    Inactive = model.Inactive
+                }, commandType: CommandType.StoredProcedure);
+                var newResult = new BaseEntity
+                {
+                    ErrorCode = StatusCodes.Status200OK,
+                    Data = result
+                };
+                return newResult;
+            }
+            catch (Exception ex)
+            {
+                var exception = new BaseEntity
+                {
+                    ErrorCode = StatusCodes.Status500InternalServerError,
+                    Data = null,
+                    DevMsg = ex.Message
+                };
+                return exception;
+            }
+            finally { conn.Close(); }
+        }
         #endregion
 
     }

@@ -45,6 +45,7 @@ namespace Misa_TruongWeb03.Common.DTO
         [EnumDataType(typeof(Inactive))]
         [DefaultValue(1)]
         public int? Inactive { get; set; } = null;
+        public string EmulationTitleNote { get; set; } = string.Empty;
         public string CreatedBy { get; set; } = "demo";
     }
     /// <summary>
@@ -64,5 +65,22 @@ namespace Misa_TruongWeb03.Common.DTO
     {
         [Required]
         public List<int> Id { get; set; } = new List<int>();
+    }
+    public class UpdateEmulationTitleStatusDto
+    {
+        [Required]
+        public int EmulationTitleID { get; set; }
+        [Required]
+        [EnumDataType(typeof(Inactive))]
+        [DefaultValue(0)]
+        public int? Inactive { get; set; }
+    }
+    public class UpdateMultipleEmulationTitleStatusDto
+    {
+        [Required]
+        public List<int> Id { get; set; } = new List<int>();
+        [Required]
+        [EnumDataType(typeof(Inactive))]
+        public int? Inactive { get; set; }
     }
 }

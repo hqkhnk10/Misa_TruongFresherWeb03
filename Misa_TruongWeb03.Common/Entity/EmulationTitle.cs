@@ -48,10 +48,13 @@ namespace Misa_TruongWeb03.Common.Entity
         /// Created By: QTNgo (23/05/2023)
 
         public CommendationLevel? CommendationLevel { get; set; }
+
         /// <summary>
-        /// Tổng bản ghi
+        /// Ghi chú danh hiệu thi đua
         /// </summary>
         /// Created By: QTNgo (23/05/2023)
+        public string? EmulationTitleNote { get; set; }
+
     }
 
 }

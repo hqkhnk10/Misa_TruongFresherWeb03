@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Misa_TruongWeb03.Common.Entity;
+using Misa_TruongWeb03.Common.Resource;
 using Misa_TruongWeb03.DL.Repository.Base;
 using System;
 using System.Collections.Generic;
@@ -71,6 +72,16 @@ namespace Misa_TruongWeb03.BL.Service.Base
         public virtual async Task<BaseEntity> Post(TEntityPostDto model)
         {
             var result = await _baseRepository.Post(model);
+            if (result.Data == null || (int)result.Data == 0)
+            {
+                return new BaseEntity
+                {
+                    Data = null,
+                    ErrorCode = StatusCodes.Status404NotFound,
+                    DevMsg = VN.NoAffectedRows,
+                    UserMsg = VN.Error404
+                };
+            }
             return result;
         }
         /// <summary>
@@ -83,6 +94,16 @@ namespace Misa_TruongWeb03.BL.Service.Base
         {
             var entity = _mapper.Map<TEntityPutDto>(model);
             var result = await _baseRepository.Put(entity);
+            if (result.Data == null || (int)result.Data == 0)
+            {
+                return new BaseEntity
+                {
+                    Data = null,
+                    ErrorCode = StatusCodes.Status404NotFound,
+                    DevMsg = VN.NoAffectedRows,
+                    UserMsg = VN.Error404
+                };
+            }
             return result;
         }
         /// <summary>
@@ -99,10 +120,16 @@ namespace Misa_TruongWeb03.BL.Service.Base
                 return new BaseEntity
                 {
                     Data = null,
-                    ErrorCode = StatusCodes.Status404NotFound
+                    ErrorCode = StatusCodes.Status404NotFound,
+                    DevMsg = VN.Error404,
+                    UserMsg = VN.Error404
                 };
             }
             var result = await _baseRepository.Delete(id);
+            if (result.Data == null || (int)result.Data == 0)
+            {
+                return new DatabaseError();
+            }
             return result;
         }
         /// <summary>

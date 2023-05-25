@@ -145,6 +145,9 @@
     <value>Lỗi không thể xóa</value>
     <comment>Lỗi không thể xóa</comment>
   </data>
+  <data name="NoAffectedRows" xml:space="preserve">
+    <value>Không bản ghi nào bị thay đổi trong database</value>
+  </data>
   <data name="SystemError" xml:space="preserve">
     <value>Có lỗi xảy ra! vui lòng liên hệ với MISA.</value>
     <comment>Có lỗi xảy ra! vui lòng liên hệ với MISA.</comment>

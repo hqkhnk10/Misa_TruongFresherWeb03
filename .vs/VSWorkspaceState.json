@@ -6,8 +6,10 @@
     "\\Misa_TruongWeb03.DL",
     "\\Misa_TruongWeb03.DL\\Repository",
     "\\Misa_TruongWeb03.DL\\Repository\\Base",
-    "\\Misa_TruongWeb03.DL\\Repository\\EmulationTitle"
+    "\\Misa_TruongWeb03.DL\\Repository\\EmulationTitle",
+    "\\Misa_TruongWeb03.UnitTests",
+    "\\Misa_TruongWeb03.UnitTests\\Service"
   ],
-  "SelectedNode": "\\Misa_TruongWeb03.DL\\Repository\\Base\\BaseRepository.cs",
+  "SelectedNode": "\\Misa_TruongWeb03.UnitTests\\Service\\EmulationTitleTests.cs",
   "PreviewInSolutionExplorer": false
 }
