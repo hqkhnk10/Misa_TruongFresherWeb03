@@ -74,13 +74,7 @@ namespace Misa_TruongWeb03.BL.Service.Base
             var result = await _baseRepository.Post(model);
             if (result.Data == null || (int)result.Data == 0)
             {
-                return new BaseEntity
-                {
-                    Data = null,
-                    ErrorCode = StatusCodes.Status404NotFound,
-                    DevMsg = VN.NoAffectedRows,
-                    UserMsg = VN.Error404
-                };
+                return new DatabaseError();
             }
             return result;
         }
@@ -96,13 +90,7 @@ namespace Misa_TruongWeb03.BL.Service.Base
             var result = await _baseRepository.Put(entity);
             if (result.Data == null || (int)result.Data == 0)
             {
-                return new BaseEntity
-                {
-                    Data = null,
-                    ErrorCode = StatusCodes.Status404NotFound,
-                    DevMsg = VN.NoAffectedRows,
-                    UserMsg = VN.Error404
-                };
+                return new DatabaseError();
             }
             return result;
         }
@@ -117,13 +105,7 @@ namespace Misa_TruongWeb03.BL.Service.Base
             var exist = await _baseRepository.GetById(id);
             if(exist.Data == null)
             {
-                return new BaseEntity
-                {
-                    Data = null,
-                    ErrorCode = StatusCodes.Status404NotFound,
-                    DevMsg = VN.Error404,
-                    UserMsg = VN.Error404
-                };
+                return new NotFoundError();
             }
             var result = await _baseRepository.Delete(id);
             if (result.Data == null || (int)result.Data == 0)
