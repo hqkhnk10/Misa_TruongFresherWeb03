@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Misa_TruongWeb03.BL.Service.Base;
 using Misa_TruongWeb03.Common.DTO;
 using Misa_TruongWeb03.Common.Entity;
@@ -35,12 +36,12 @@ namespace Misa_TruongWeb03.BL.Service.EmulationTitleService
             //Check trùng mã danh hiệu
             var updateModel = _mapper.Map<EmulationTitle>(model);
             var check = await CheckDuplicate(updateModel);
-            if (check.ErrorCode == 200)
+            if (check.ErrorCode == StatusCodes.Status302Found)
             {
-                var result = await _baseRepository.Post(model);
-                return result;
+                return check;
             }
-            return check;
+            var result = await _baseRepository.Post(model);
+            return result;
 
         }
         /// <summary>
@@ -56,13 +57,13 @@ namespace Misa_TruongWeb03.BL.Service.EmulationTitleService
             var et = _mapper.Map<EmulationTitle>(model);
             et.EmulationTitleID = id;
             var check = await CheckDuplicate(et);
-            if (check.ErrorCode == 200)
+            if (check.ErrorCode == StatusCodes.Status302Found)
             {
-                var updateModel = _mapper.Map<UpdateEmulationTitle>(et);
-                var result = await _baseRepository.Put(updateModel);
-                return result;
+                return check;
             }
-            return check;
+            var updateModel = _mapper.Map<UpdateEmulationTitle>(et);
+            var result = await _baseRepository.Put(updateModel);
+            return result;
         }
         /// <summary>
         /// Xóa nhiều danh hiệu thi đua

@@ -239,7 +239,7 @@ namespace Misa_TruongWeb03.DL.Repository.Base
                     var found = new BaseEntity
                     {
                         ErrorCode = StatusCodes.Status302Found,
-                        Data = null,
+                        Data = true,
                         DevMsg = VN.DuplicateError,
                         UserMsg = VN.DuplicateError
                     };

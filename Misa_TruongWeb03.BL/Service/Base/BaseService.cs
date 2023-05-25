@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Misa_TruongWeb03.Common.Entity;
 using Misa_TruongWeb03.DL.Repository.Base;
 using System;
@@ -51,6 +52,14 @@ namespace Misa_TruongWeb03.BL.Service.Base
         public async Task<BaseEntity> GetDetail(int id)
         {
             var result = await _baseRepository.GetById(id);
+            if(result.Data == null)
+            {
+                return new BaseEntity
+                {
+                    Data = result.Data,
+                    ErrorCode = StatusCodes.Status404NotFound
+                };
+            }
             return result;
         }
         /// <summary>
@@ -84,6 +93,15 @@ namespace Misa_TruongWeb03.BL.Service.Base
         /// CreatedBy: QTNgo (24/05/2023)
         public async Task<BaseEntity> Delete(int id)
         {
+            var exist = await _baseRepository.GetById(id);
+            if(exist.Data == null)
+            {
+                return new BaseEntity
+                {
+                    Data = null,
+                    ErrorCode = StatusCodes.Status404NotFound
+                };
+            }
             var result = await _baseRepository.Delete(id);
             return result;
         }

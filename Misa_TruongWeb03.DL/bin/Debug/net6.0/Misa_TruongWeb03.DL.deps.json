@@ -144,6 +144,11 @@
         },
         "runtime": {
           "Misa_TruongWeb03.Common.dll": {}
+        },
+        "resources": {
+          "en/Misa_TruongWeb03.Common.resources.dll": {
+            "locale": "en"
+          }
         }
       }
     }

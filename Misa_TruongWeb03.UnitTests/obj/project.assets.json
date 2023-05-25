@@ -31,6 +31,22 @@
           "lib/netstandard2.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
         }
       },
+      "Castle.Core/5.0.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Diagnostics.EventLog": "6.0.0"
+        },
+        "compile": {
+          "lib/net6.0/Castle.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Castle.Core.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "coverlet.collector/3.2.0": {
         "type": "package",
         "build": {
@@ -561,6 +577,25 @@
           }
         }
       },
+      "NSubstitute/5.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Castle.Core": "5.0.0"
+        },
+        "compile": {
+          "lib/net6.0/NSubstitute.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/NSubstitute.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "NSubstitute.Analyzers.CSharp/1.0.16": {
+        "type": "package"
+      },
       "NuGet.Frameworks/5.11.0": {
         "type": "package",
         "compile": {
@@ -664,6 +699,32 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "System.Diagnostics.EventLog/6.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/System.Diagnostics.EventLog.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/System.Diagnostics.EventLog.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/netcoreapp3.1/_._": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net6.0/System.Diagnostics.EventLog.Messages.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          },
+          "runtimes/win/lib/net6.0/System.Diagnostics.EventLog.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          }
+        }
       },
       "System.Reflection.Metadata/1.6.0": {
         "type": "package",
@@ -794,6 +855,30 @@
         "automapper.extensions.microsoft.dependencyinjection.nuspec",
         "icon.png",
         "lib/netstandard2.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll"
+      ]
+    },
+    "Castle.Core/5.0.0": {
+      "sha512": "edc8jjyXqzzy8jFdhs36FZdwmlDDTgqPb2Zy1Q5F/f2uAc88bu/VS/0Tpvgupmpl9zJOvOo5ZizVANb0ltN1NQ==",
+      "type": "package",
+      "path": "castle.core/5.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ASL - Apache Software Foundation License.txt",
+        "CHANGELOG.md",
+        "LICENSE",
+        "castle-logo.png",
+        "castle.core.5.0.0.nupkg.sha512",
+        "castle.core.nuspec",
+        "lib/net462/Castle.Core.dll",
+        "lib/net462/Castle.Core.xml",
+        "lib/net6.0/Castle.Core.dll",
+        "lib/net6.0/Castle.Core.xml",
+        "lib/netstandard2.0/Castle.Core.dll",
+        "lib/netstandard2.0/Castle.Core.xml",
+        "lib/netstandard2.1/Castle.Core.dll",
+        "lib/netstandard2.1/Castle.Core.xml",
+        "readme.txt"
       ]
     },
     "coverlet.collector/3.2.0": {
@@ -1616,6 +1701,41 @@
         "newtonsoft.json.bson.nuspec"
       ]
     },
+    "NSubstitute/5.0.0": {
+      "sha512": "CWGy4oXvcJcZzL7m5Rr/eMSejFXMDq1RRMlsbL6eltS3AuN/d8GH3ZzUcuStQcCSlcx+hpsgTxdnb3lhozWG6w==",
+      "type": "package",
+      "path": "nsubstitute/5.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "lib/net462/NSubstitute.dll",
+        "lib/net462/NSubstitute.xml",
+        "lib/net6.0/NSubstitute.dll",
+        "lib/net6.0/NSubstitute.xml",
+        "lib/netstandard2.0/NSubstitute.dll",
+        "lib/netstandard2.0/NSubstitute.xml",
+        "nsubstitute.5.0.0.nupkg.sha512",
+        "nsubstitute.nuspec"
+      ]
+    },
+    "NSubstitute.Analyzers.CSharp/1.0.16": {
+      "sha512": "+sdWbGyEQl22A4fBWo17/T53TMdbxegNjqwCxdBUS5/tp8ESJwfvHvGdIGj83sR0jKxvpUQoHO35qcf9tdgmdw==",
+      "type": "package",
+      "path": "nsubstitute.analyzers.csharp/1.0.16",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "analyzers/dotnet/cs/NSubstitute.Analyzers.CSharp.dll",
+        "analyzers/dotnet/cs/NSubstitute.Analyzers.Shared.dll",
+        "nsubstitute.analyzers.csharp.1.0.16.nupkg.sha512",
+        "nsubstitute.analyzers.csharp.nuspec",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
+      ]
+    },
     "NuGet.Frameworks/5.11.0": {
       "sha512": "eaiXkUjC4NPcquGWzAGMXjuxvLwc6XGKMptSyOGQeT0X70BUZObuybJFZLA0OfTdueLd3US23NBPTBb6iF3V1Q==",
       "type": "package",
@@ -1784,6 +1904,37 @@
         "swashbuckle.aspnetcore.swaggerui.nuspec"
       ]
     },
+    "System.Diagnostics.EventLog/6.0.0": {
+      "sha512": "lcyUiXTsETK2ALsZrX+nWuHSIQeazhqPphLfaRxzdGaG93+0kELqpgEHtwWOlQe7+jSFnKwaCAgL4kjeZCQJnw==",
+      "type": "package",
+      "path": "system.diagnostics.eventlog/6.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/netcoreapp2.0/System.Diagnostics.EventLog.targets",
+        "buildTransitive/netcoreapp3.1/_._",
+        "lib/net461/System.Diagnostics.EventLog.dll",
+        "lib/net461/System.Diagnostics.EventLog.xml",
+        "lib/net6.0/System.Diagnostics.EventLog.dll",
+        "lib/net6.0/System.Diagnostics.EventLog.xml",
+        "lib/netcoreapp3.1/System.Diagnostics.EventLog.dll",
+        "lib/netcoreapp3.1/System.Diagnostics.EventLog.xml",
+        "lib/netstandard2.0/System.Diagnostics.EventLog.dll",
+        "lib/netstandard2.0/System.Diagnostics.EventLog.xml",
+        "runtimes/win/lib/net6.0/System.Diagnostics.EventLog.Messages.dll",
+        "runtimes/win/lib/net6.0/System.Diagnostics.EventLog.dll",
+        "runtimes/win/lib/net6.0/System.Diagnostics.EventLog.xml",
+        "runtimes/win/lib/netcoreapp3.1/System.Diagnostics.EventLog.Messages.dll",
+        "runtimes/win/lib/netcoreapp3.1/System.Diagnostics.EventLog.dll",
+        "runtimes/win/lib/netcoreapp3.1/System.Diagnostics.EventLog.xml",
+        "system.diagnostics.eventlog.6.0.0.nupkg.sha512",
+        "system.diagnostics.eventlog.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
     "System.Reflection.Metadata/1.6.0": {
       "sha512": "COC1aiAJjCoA5GBF+QKL2uLqEBew4JsCkQmoHKbN3TlOZKa2fKLz5CpiRQKDz0RsAOEGsVKqOD5bomsXq/4STQ==",
       "type": "package",
@@ -1855,6 +2006,8 @@
     "net6.0": [
       "Microsoft.NET.Test.Sdk >= 17.5.0",
       "Misa_TruongWeb03 >= 1.0.0",
+      "NSubstitute >= 5.0.0",
+      "NSubstitute.Analyzers.CSharp >= 1.0.16",
       "NUnit >= 3.13.3",
       "NUnit.Analyzers >= 3.6.1",
       "NUnit3TestAdapter >= 4.4.2",
@@ -1862,19 +2015,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Tngo\\.nuget\\packages\\": {}
+    "C:\\Users\\mr_tr\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03.UnitTests\\Misa_TruongWeb03.UnitTests.csproj",
+      "projectUniqueName": "C:\\Users\\mr_tr\\WorkPlace\\MISA\\BE\\Misa_TruongWeb03.UnitTests\\Misa_TruongWeb03.UnitTests.csproj",
       "projectName": "Misa_TruongWeb03.UnitTests",
-      "projectPath": "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03.UnitTests\\Misa_TruongWeb03.UnitTests.csproj",
-      "packagesPath": "C:\\Users\\Tngo\\.nuget\\packages\\",
-      "outputPath": "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03.UnitTests\\obj\\",
+      "projectPath": "C:\\Users\\mr_tr\\WorkPlace\\MISA\\BE\\Misa_TruongWeb03.UnitTests\\Misa_TruongWeb03.UnitTests.csproj",
+      "packagesPath": "C:\\Users\\mr_tr\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\mr_tr\\WorkPlace\\MISA\\BE\\Misa_TruongWeb03.UnitTests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Tngo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\mr_tr\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1888,8 +2041,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\MISA2023\\BackendFolder\\Backend_web03\\Misa_TruongWeb03.csproj": {
-              "projectPath": "D:\\MISA2023\\BackendFolder\\Backend_web03\\Misa_TruongWeb03.csproj"
+            "C:\\Users\\mr_tr\\WorkPlace\\MISA\\BE\\Backend_web03\\Misa_TruongWeb03.csproj": {
+              "projectPath": "C:\\Users\\mr_tr\\WorkPlace\\MISA\\BE\\Backend_web03\\Misa_TruongWeb03.csproj"
             }
           }
         }
@@ -1907,6 +2060,16 @@
           "Microsoft.NET.Test.Sdk": {
             "target": "Package",
             "version": "[17.5.0, )"
+          },
+          "NSubstitute": {
+            "target": "Package",
+            "version": "[5.0.0, )"
+          },
+          "NSubstitute.Analyzers.CSharp": {
+            "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+            "suppressParent": "All",
+            "target": "Package",
+            "version": "[1.0.16, )"
           },
           "NUnit": {
             "target": "Package",
@@ -1941,7 +2104,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   },

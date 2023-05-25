@@ -27,3 +27,5 @@ D:\MISA2023\BackendFolder\Misa_TruongWeb03.Common\obj\Debug\net6.0\Misa_TruongWe
 D:\MISA2023\BackendFolder\Misa_TruongWeb03.Common\obj\Debug\net6.0\Misa_TruongWeb03.Common.Resource.Resources.en.resources
 D:\MISA2023\BackendFolder\Misa_TruongWeb03.Common\obj\Debug\net6.0\Misa_TruongWeb03.Common.csproj.GenerateResource.cache
 D:\MISA2023\BackendFolder\Misa_TruongWeb03.Common\obj\Debug\net6.0\en\Misa_TruongWeb03.Common.resources.dll
+C:\Users\mr_tr\WorkPlace\MISA\BE\Misa_TruongWeb03.Common\obj\Debug\net6.0\Misa_TruongWeb03.Common.Resource.VN.resources
+C:\Users\mr_tr\WorkPlace\MISA\BE\Misa_TruongWeb03.Common\obj\Debug\net6.0\Misa_TruongWeb03.Common.csproj.GenerateResource.cache

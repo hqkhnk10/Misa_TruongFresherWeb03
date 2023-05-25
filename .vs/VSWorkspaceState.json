@@ -5,8 +5,9 @@
     "\\Backend_web03\\Controller",
     "\\Misa_TruongWeb03.DL",
     "\\Misa_TruongWeb03.DL\\Repository",
+    "\\Misa_TruongWeb03.DL\\Repository\\Base",
     "\\Misa_TruongWeb03.DL\\Repository\\EmulationTitle"
   ],
-  "SelectedNode": "\\Misa_TruongWeb03.DL\\Repository\\EmulationTitle\\EmulationTitleRepository.cs",
+  "SelectedNode": "\\Misa_TruongWeb03.DL\\Repository\\Base\\BaseRepository.cs",
   "PreviewInSolutionExplorer": false
 }

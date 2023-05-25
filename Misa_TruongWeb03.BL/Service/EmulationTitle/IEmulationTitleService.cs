@@ -12,8 +12,6 @@ namespace Misa_TruongWeb03.BL.Service.EmulationTitleService
     public interface IEmulationTitleService : IBaseService<EmulationTitle, GetEmulationTitle, PostEmulationTitle, UpdateEmulationTitle>
     {
         #region Method
-        Task<BaseEntity> Post(PostEmulationTitle model);
-        Task<BaseEntity> Put(int id, PostEmulationTitle model);
         Task<BaseEntity> DeleteMultiple(DeleteEmulationTitle model); 
         #endregion
     }
