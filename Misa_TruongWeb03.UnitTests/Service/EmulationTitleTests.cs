@@ -14,6 +14,7 @@ namespace Misa_TruongWeb03.UnitTests.Service
     [TestFixture]
     public class EmulationTitleTests
     {
+        #region Property
         private BaseEntity notFoundEntity = new NotFoundError();
         private BaseEntity zeroEntity = new DatabaseReturn0Error();
         private BaseEntity duplicateEntity = new DuplicateError();
@@ -22,7 +23,9 @@ namespace Misa_TruongWeb03.UnitTests.Service
             Data = 200,
             ErrorCode = 200,
         };
+        #endregion
 
+        #region Method
         [Test]
         public async Task GetAll_ValidInput_ReturnsOk()
         {
@@ -347,6 +350,7 @@ namespace Misa_TruongWeb03.UnitTests.Service
             Assert.That(actualResult.Data == null || (int)actualResult.Data == 0);
             await emulationTitleRepository.Received(1).GetById(id);
             await emulationTitleRepository.Received(1).Delete(id);
-        }
+        } 
+        #endregion
     }
 }

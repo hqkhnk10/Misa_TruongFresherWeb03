@@ -162,12 +162,11 @@ namespace Misa_TruongWeb03.DL.Repository.Base
                 var parameters = ParameterObjectBuilder.CreateParameterObject(model);
                 var storedProcedureName = $"proc_{typeof(T).Name.ToLower()}_update";
                 connection.Open();
-                var result = await connection.QueryAsync<T>(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
-                var listModel = result.AsList();
+                var result = await connection.QueryFirstOrDefaultAsync<T>(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
                 var newResult = new BaseEntity
                 {
                     ErrorCode = StatusCodes.Status200OK,
-                    Data = listModel,
+                    Data = result,
                 };
                 return newResult;
             }
