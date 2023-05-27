@@ -53,11 +53,11 @@ namespace FresherWeb03.Controller
             }
         }
 
-        // DELETE api/<EmulationTitleController>/5
+        // put api/<EmulationTitleController>/STATUS
         /// <summary>
-        /// Xóa nhiều phong trào thi đua 1 lúc
+        ///  Thay đổi trạng thái 1 danh hiệu thi đua
         /// </summary>
-        /// <param name="model">List id cần xóa</param>
+        /// <param name="model">Id : Id của bản ghi, trạng thái thay đổi 1:Inactive, 0:Active</param>
         /// <returns></returns>
         /// Created By: QTNgo (23/05/2023)
         [HttpPut, Route("Status")]
@@ -81,11 +81,11 @@ namespace FresherWeb03.Controller
             }
         }
 
-        // DELETE api/<EmulationTitleController>/5
+        // PUT api/<EmulationTitleController>/MultipleStatus
         /// <summary>
-        /// Xóa nhiều phong trào thi đua 1 lúc
+        ///  Thay đổi trạng thái nhiều danh hiệu thi đua
         /// </summary>
-        /// <param name="model">List id cần xóa</param>
+        /// <param name="model">List id cần xóa, trạng thái thay đổi 1:Inactive, 0:Active</param>
         /// <returns></returns>
         /// Created By: QTNgo (23/05/2023)
         [HttpPut, Route("MulitpleStatus")]

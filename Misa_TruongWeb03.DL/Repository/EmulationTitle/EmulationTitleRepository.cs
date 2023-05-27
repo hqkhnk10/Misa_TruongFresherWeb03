@@ -112,7 +112,7 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitleRepository
             finally { conn.Close(); }
         }
         /// <summary>
-        /// Xóa nhiều danh hiệu thi đua
+        ///  Thay đổi trạng thái nhiều danh hiệu thi đua
         /// </summary>
         /// <param name="model"></param>
         /// <returns>BaseEntity</returns>

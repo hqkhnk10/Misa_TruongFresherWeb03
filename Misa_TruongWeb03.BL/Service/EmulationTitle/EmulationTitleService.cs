@@ -63,10 +63,10 @@ namespace Misa_TruongWeb03.BL.Service.EmulationTitleService
             }
             var updateModel = _mapper.Map<UpdateEmulationTitle>(et);
             var result = await _baseRepository.Put(updateModel);
-            if (result.Data == null || (int)result.Data == 0)
-            {
-                return new DatabaseError();
-            }
+            //if (result.Data == null || (int)result.Data == 0)
+            //{
+            //    return new DatabaseError();
+            //}
             return result;
         }
         /// <summary>
@@ -85,7 +85,7 @@ namespace Misa_TruongWeb03.BL.Service.EmulationTitleService
             return result;
         }
         /// <summary>
-        /// Xóa nhiều danh hiệu thi đua
+        /// Thay đổi trạng thái nhiều danh hiệu thi đua
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
@@ -100,7 +100,7 @@ namespace Misa_TruongWeb03.BL.Service.EmulationTitleService
             return result;
         }
         /// <summary>
-        /// Xóa nhiều danh hiệu thi đua
+        /// Thay đổi trạng thái nhiều danh hiệu thi đua
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
