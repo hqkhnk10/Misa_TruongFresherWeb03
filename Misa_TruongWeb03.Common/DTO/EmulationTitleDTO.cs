@@ -79,7 +79,7 @@ namespace Misa_TruongWeb03.Common.DTO
     public class UpdateMultipleEmulationTitleStatusDto
     {
         [Required]
-        public List<int> Id { get; set; } = new List<int>();
+        public List<int> Id { get; set; }
         [Required]
         [EnumDataType(typeof(Inactive))]
         public int? Inactive { get; set; }

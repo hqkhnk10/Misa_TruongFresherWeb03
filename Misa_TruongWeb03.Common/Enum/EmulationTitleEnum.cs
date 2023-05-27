@@ -20,6 +20,8 @@ namespace Misa_TruongWeb03.Common.Enum
             Personal = 1,
             [Description("Cá nhân và tập thể")]
             PersonalAndGroup = 3,
+            [Description("Gia đình")]
+            Family = 4,
         }
         /// <summary>
         /// Loại phong trào
