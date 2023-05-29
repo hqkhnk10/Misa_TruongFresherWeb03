@@ -198,7 +198,7 @@ namespace Misa_TruongWeb03.DL.Repository.Base
             try
             {
                 connection.Open();
-                var result = await connection.QueryFirstOrDefaultAsync<T>(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
+                var result = await connection.QueryFirstOrDefaultAsync<int>(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
                 var newResult = new BaseEntity
                 {
                     ErrorCode = StatusCodes.Status200OK,
