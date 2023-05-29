@@ -13,13 +13,20 @@ builder.Services.AddScoped<IEmulationTitleRepository,EmulationTitleRepository>()
 builder.Services.AddScoped<IEmulationCommendationService, EmulationCommendationService>();
 builder.Services.AddScoped<IEmulationCommendationRepository, EmulationCommendationRepository>();
 
-builder.Services.AddControllers();
+
+builder.Services.AddControllers()
+    .ConfigureApiBehaviorOptions(options =>
+    {
+        options.SuppressModelStateInvalidFilter = true;
+    });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

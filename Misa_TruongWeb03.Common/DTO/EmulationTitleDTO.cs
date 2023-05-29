@@ -1,4 +1,5 @@
 ﻿using Misa_TruongWeb03.Common.Entity;
+using Misa_TruongWeb03.Common.Resource;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using static Misa_TruongWeb03.Common.Enum.EmulationTitleEnum;
@@ -27,25 +28,31 @@ namespace Misa_TruongWeb03.Common.DTO
     /// CreatedBy: QTNgo (24/05/2023)
     public class PostEmulationTitle
     {
-        [Required]
+        [Required(ErrorMessage = "Tên danh hiệu không được để trống")]
+        [MaxLength(255, ErrorMessage = "Tên danh hiệu tối đa 255 kí tự")]
         [DefaultValue("test")]
         public string EmulationTitleName { get; set; } = string.Empty;
-        [Required]
+        [Required(ErrorMessage = "Mã danh hiệu không được để trống")]
+        [MaxLength(20, ErrorMessage = "Mã danh hiệu tối đa 20 kí tự")]
         [DefaultValue("test")]
         public string EmulationTitleCode { get; set; } = string.Empty;
-        [EnumDataType(typeof(ApplyObject))]
+        [Required(ErrorMessage = "Đối tượng khen thưởng không được để trống")]
+        [EnumDataType(typeof(ApplyObject), ErrorMessage = "Dữ liệu không phù hợp cho Đối tượng khen thưởng")]
         [DefaultValue(2)]
         public int? ApplyObject { get; set; } = null;
-        [Required]
-        [EnumDataType(typeof(CommendationLevel))]
+        [Required(ErrorMessage = "Cấp khen thưởng không được để trống")]
+        [EnumDataType(typeof(CommendationLevel), ErrorMessage = "Dữ liệu không phù hợp cho Cấp khen thưởng")]
         [DefaultValue(1)]
         public int? CommendationLevel { get; set; } = null;
-        [EnumDataType(typeof(MovementType))]
+        [Required(ErrorMessage = "Cấp phong trào không được để trống")]
+        [EnumDataType(typeof(MovementType), ErrorMessage = "Dữ liệu không phù hợp cho Cấp phong trào")]
         [DefaultValue(1)]
         public int? MovementType { get; set; } = null;
-        [EnumDataType(typeof(Inactive))]
+        [EnumDataType(typeof(Inactive), ErrorMessage = "Dữ liệu không phù hợp cho Trạng thái")]
         [DefaultValue(1)]
         public int? Inactive { get; set; } = null;
+
+        [MaxLength(255, ErrorMessage = "Tối đa 255 kí tự")]
         public string EmulationTitleNote { get; set; } = string.Empty;
         public string CreatedBy { get; set; } = "demo";
     }
@@ -57,6 +64,7 @@ namespace Misa_TruongWeb03.Common.DTO
     {
         [Required]
         public int EmulationTitleID { get; set; }
+
     }
     /// <summary>
     /// Model cho xóa nhiều của danh hiệu thi đua

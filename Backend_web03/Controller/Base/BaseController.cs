@@ -3,6 +3,8 @@ using Misa_TruongWeb03.BL.Service.Base;
 using Misa_TruongWeb03.Common.DTO;
 using Misa_TruongWeb03.Common.Entity;
 using Misa_TruongWeb03.Common.Resource;
+using Misa_TruongWeb03.Middleware;
+using System.ComponentModel.DataAnnotations;
 using System.Web.Http.ModelBinding;
 
 namespace Misa_TruongWeb03.Controller.Base
@@ -149,8 +151,8 @@ namespace Misa_TruongWeb03.Controller.Base
             var response = new BaseEntity
             {
                 ErrorCode = StatusCodes.Status400BadRequest,
-                UserMsg = VN.ValidationError,
-                DevMsg = errors.ToString() ?? VN.Error
+                UserMsg = string.Join(",", errors) ?? VN.ValidationError,
+                DevMsg = string.Join(",", errors) ?? VN.ValidationError,
             };
 
             return BadRequest(response);

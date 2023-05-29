@@ -124,6 +124,24 @@ namespace Misa_TruongWeb03.Common.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tối đa 20 kí tự.
+        /// </summary>
+        public static string MaxLength20 {
+            get {
+                return ResourceManager.GetString("MaxLength20", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tối đa 255 kí tự.
+        /// </summary>
+        public static string MaxLength255 {
+            get {
+                return ResourceManager.GetString("MaxLength255", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Không bản ghi nào bị thay đổi trong database.
         /// </summary>
         public static string NoAffectedRows {

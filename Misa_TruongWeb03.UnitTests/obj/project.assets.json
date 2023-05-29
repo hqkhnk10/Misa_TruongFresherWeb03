@@ -2015,19 +2015,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mr_tr\\.nuget\\packages\\": {}
+    "C:\\Users\\Tngo\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mr_tr\\WorkPlace\\MISA\\BE\\Misa_TruongWeb03.UnitTests\\Misa_TruongWeb03.UnitTests.csproj",
+      "projectUniqueName": "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03.UnitTests\\Misa_TruongWeb03.UnitTests.csproj",
       "projectName": "Misa_TruongWeb03.UnitTests",
-      "projectPath": "C:\\Users\\mr_tr\\WorkPlace\\MISA\\BE\\Misa_TruongWeb03.UnitTests\\Misa_TruongWeb03.UnitTests.csproj",
-      "packagesPath": "C:\\Users\\mr_tr\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mr_tr\\WorkPlace\\MISA\\BE\\Misa_TruongWeb03.UnitTests\\obj\\",
+      "projectPath": "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03.UnitTests\\Misa_TruongWeb03.UnitTests.csproj",
+      "packagesPath": "C:\\Users\\Tngo\\.nuget\\packages\\",
+      "outputPath": "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03.UnitTests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\mr_tr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Tngo\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2041,8 +2041,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\mr_tr\\WorkPlace\\MISA\\BE\\Backend_web03\\Misa_TruongWeb03.csproj": {
-              "projectPath": "C:\\Users\\mr_tr\\WorkPlace\\MISA\\BE\\Backend_web03\\Misa_TruongWeb03.csproj"
+            "D:\\MISA2023\\BackendFolder\\Backend_web03\\Misa_TruongWeb03.csproj": {
+              "projectPath": "D:\\MISA2023\\BackendFolder\\Backend_web03\\Misa_TruongWeb03.csproj"
             }
           }
         }
@@ -2104,7 +2104,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   },

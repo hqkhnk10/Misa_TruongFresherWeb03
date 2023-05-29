@@ -3,6 +3,7 @@ using Misa_TruongWeb03.BL.Service.EmulationTitleService;
 using Misa_TruongWeb03.Common.DTO;
 using Misa_TruongWeb03.Common.Entity;
 using Misa_TruongWeb03.Controller.Base;
+using Misa_TruongWeb03.Middleware;
 
 namespace FresherWeb03.Controller
 {

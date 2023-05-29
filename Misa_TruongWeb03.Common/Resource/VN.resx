@@ -145,6 +145,14 @@
     <value>Lỗi không thể xóa</value>
     <comment>Lỗi không thể xóa</comment>
   </data>
+  <data name="MaxLength20" xml:space="preserve">
+    <value>Tối đa 20 kí tự</value>
+    <comment>Tối đa 20 kí tự</comment>
+  </data>
+  <data name="MaxLength255" xml:space="preserve">
+    <value>Tối đa 255 kí tự</value>
+    <comment>Tối đa 255 kí tự</comment>
+  </data>
   <data name="NoAffectedRows" xml:space="preserve">
     <value>Không bản ghi nào bị thay đổi trong database</value>
   </data>
