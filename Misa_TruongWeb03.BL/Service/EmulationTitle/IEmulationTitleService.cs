@@ -8,7 +8,7 @@ namespace Misa_TruongWeb03.BL.Service.EmulationTitleService
     /// Service Emulation Title
     /// Kế thừa các thuộc tính lớp base service
     /// </summary>
-    /// CreatedBy: QTNgo (24/05/2023)
+    /// CreatedBy: NQTruong (24/05/2023)
     public interface IEmulationTitleService : IBaseService<EmulationTitle, GetEmulationTitle, PostEmulationTitle, UpdateEmulationTitle>
     {
         #region Method

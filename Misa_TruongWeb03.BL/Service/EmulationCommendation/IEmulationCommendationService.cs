@@ -8,7 +8,7 @@ namespace Misa_TruongWeb03.BL.Service.EmulationCommendationService
     /// Service Emulation Commendation
     /// Kế thừa các thuộc tính lớp base service
     /// </summary>
-    /// CreatedBy: QTNgo (24/05/2023)
+    /// CreatedBy: NQTruong (24/05/2023)
     public interface IEmulationCommendationService : IBaseService<EmulationCommendation, GetEmulationCommendationDTO, PostEmulationCommendationDTO, UpdateEmulationCommendationDTO>
     {
     }

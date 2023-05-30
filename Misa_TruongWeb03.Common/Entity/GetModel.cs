@@ -9,23 +9,23 @@ namespace Misa_TruongWeb03.Common.Entity
     /// <summary>
     /// Model phân trang
     /// </summary>
-    /// CreatedBy: QTNgo (24/05/2023)
+    /// CreatedBy: NQTruong (24/05/2023)
     public class GetModel
     {
         /// <summary>
         /// Tổng số bản ghi/ trang
         /// </summary>
-        /// CreatedBy: QTNgo (24/05/2023)
+        /// CreatedBy: NQTruong (24/05/2023)
         public int pageSize { get; set; } = 10;
         /// <summary>
         /// Trang số
         /// </summary>
-        /// CreatedBy: QTNgo (24/05/2023)
+        /// CreatedBy: NQTruong (24/05/2023)
         public int pageIndex { get; set; } = 1;
         /// <summary>
         /// Từ khóa tìm kiếm
         /// </summary>
-        /// CreatedBy: QTNgo (24/05/2023)
+        /// CreatedBy: NQTruong (24/05/2023)
         public string? keyword { get; set; } = null;
     }
 }

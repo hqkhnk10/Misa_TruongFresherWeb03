@@ -9,7 +9,7 @@ namespace Misa_TruongWeb03.Common.Entity
 {
     /// <summary>
     /// Lớp lỗi từ database ( database không thay đổi dữ liệu)
-    /// Created By: QTNgo (25/05/2023)
+    /// Created By: NQTruong (25/05/2023)
     /// </summary>
     public class DatabaseError : BaseEntity
     {
@@ -23,7 +23,7 @@ namespace Misa_TruongWeb03.Common.Entity
     }
     /// <summary>
     /// Database trả ra kết quả null
-    /// Created By: QTNgo (25/05/2023)
+    /// Created By: NQTruong (25/05/2023)
     /// </summary>
     public class DatabaseReturnNullError : BaseEntity
     {
@@ -37,7 +37,7 @@ namespace Misa_TruongWeb03.Common.Entity
     }
     /// <summary>
     /// Database trả ra kết quả 0
-    /// Created By: QTNgo (25/05/2023)
+    /// Created By: NQTruong (25/05/2023)
     /// </summary>
     public class DatabaseReturn0Error : BaseEntity
     {
@@ -51,7 +51,7 @@ namespace Misa_TruongWeb03.Common.Entity
     }
     /// <summary>
     /// Không tìm thấy bản ghi
-    /// Created By: QTNgo (25/05/2023)
+    /// Created By: NQTruong (25/05/2023)
     /// </summary>
     public class NotFoundError : BaseEntity
     {
@@ -64,7 +64,7 @@ namespace Misa_TruongWeb03.Common.Entity
     }
     /// <summary>
     /// Lỗi trùng dữ liệu
-    /// Created By: QTNgo (25/05/2023)
+    /// Created By: NQTruong (25/05/2023)
     /// </summary>
     public class DuplicateError : BaseEntity
     {

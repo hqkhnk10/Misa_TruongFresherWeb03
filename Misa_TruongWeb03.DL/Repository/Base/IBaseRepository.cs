@@ -10,7 +10,7 @@ namespace Misa_TruongWeb03.DL.Repository.Base
     /// <typeparam name="TGetDTO">Generic Get DTO model</typeparam>
     /// <typeparam name="TPostDTO">Generic Post DTO model</typeparam>
     /// <typeparam name="TPutDTO">Generic Put DTO model</typeparam>
-    /// CreatedBy: QTNgo (24/05/2023)
+    /// CreatedBy: NQTruong (24/05/2023)
     public interface IBaseRepository<T, TGetDTO, TPostDTO, TPutDTO>
     {
         #region Method

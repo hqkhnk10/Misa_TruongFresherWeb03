@@ -12,7 +12,7 @@ namespace Misa_TruongWeb03.BL.Service.EmulationTitleService
     /// Tầng Service của danh hiệu thi đua
     /// Kế thừa CRUD từ base
     /// </summary>
-    /// CreatedBy: QTNgo (24/05/2023)
+    /// CreatedBy: NQTruong (24/05/2023)
     public class EmulationTitleService : BaseService<EmulationTitle,GetEmulationTitle,PostEmulationTitle,UpdateEmulationTitle>,IEmulationTitleService
     {
         #region Property
@@ -30,7 +30,7 @@ namespace Misa_TruongWeb03.BL.Service.EmulationTitleService
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        /// Created By: QTNgo (23/05/2023)
+        /// Created By: NQTruong (23/05/2023)
         public override async Task<BaseEntity> Post(PostEmulationTitle model)
         {
             //Check trùng mã danh hiệu
@@ -50,7 +50,7 @@ namespace Misa_TruongWeb03.BL.Service.EmulationTitleService
         /// <param name="id"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        /// Created By: QTNgo (23/05/2023)
+        /// Created By: NQTruong (23/05/2023)
         public override async Task<BaseEntity> Put(int id, PostEmulationTitle model)
         {
             //Check trùng mã danh hiệu
@@ -74,7 +74,7 @@ namespace Misa_TruongWeb03.BL.Service.EmulationTitleService
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        /// Created By: QTNgo (23/05/2023)
+        /// Created By: NQTruong (23/05/2023)
         public async Task<BaseEntity> DeleteMultiple(DeleteEmulationTitle model)
         {
             var result = await _emulationTitleRepository.DeleteMultiple(model);
@@ -89,7 +89,7 @@ namespace Misa_TruongWeb03.BL.Service.EmulationTitleService
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        /// Created By: QTNgo (23/05/2023)
+        /// Created By: NQTruong (23/05/2023)
         public async Task<BaseEntity> UpdateStatus(UpdateEmulationTitleStatusDto model)
         {
             var result = await _emulationTitleRepository.UpdateStatus(model);
@@ -104,7 +104,7 @@ namespace Misa_TruongWeb03.BL.Service.EmulationTitleService
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        /// Created By: QTNgo (23/05/2023)
+        /// Created By: NQTruong (23/05/2023)
         public async Task<BaseEntity> UpdateMultipleStatus(UpdateMultipleEmulationTitleStatusDto model)
         {
             var result = await _emulationTitleRepository.UpdateMultipleStatus(model);

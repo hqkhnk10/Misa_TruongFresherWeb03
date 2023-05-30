@@ -18,7 +18,7 @@ namespace Misa_TruongWeb03.BL.Service.Base
     /// <typeparam name="TEntityGetDto">Generic Get DTO model</typeparam>
     /// <typeparam name="TEntityPostDto">Generic Post DTO model</typeparam>
     /// <typeparam name="TEntityPutDto">Generic Put DTO model</typeparam>
-    /// CreatedBy: QTNgo (24/05/2023)
+    /// CreatedBy: NQTruong (24/05/2023)
     public abstract class BaseService<TEntity, TEntityGetDto, TEntityPostDto, TEntityPutDto> : IBaseService<TEntity, TEntityGetDto, TEntityPostDto, TEntityPutDto>
     {
         #region Property
@@ -38,7 +38,7 @@ namespace Misa_TruongWeb03.BL.Service.Base
         /// </summary>
         /// <param name="model"></param>
         /// <returns>BaseEntity</returns>
-        /// CreatedBy: QTNgo (24/05/2023)
+        /// CreatedBy: NQTruong (24/05/2023)
         public async Task<BaseEntity> Get(TEntityGetDto model)
         {
             var result = await _baseRepository.Get(model);
@@ -49,7 +49,7 @@ namespace Misa_TruongWeb03.BL.Service.Base
         /// </summary>
         /// <param name="model"></param>
         /// <returns>BaseEntity</returns>
-        /// CreatedBy: QTNgo (24/05/2023)
+        /// CreatedBy: NQTruong (24/05/2023)
         public async Task<BaseEntity> GetDetail(int id)
         {
             var result = await _baseRepository.GetById(id);
@@ -68,7 +68,7 @@ namespace Misa_TruongWeb03.BL.Service.Base
         /// </summary>
         /// <param name="model"></param>
         /// <returns>BaseEntity</returns>
-        /// CreatedBy: QTNgo (24/05/2023)
+        /// CreatedBy: NQTruong (24/05/2023)
         public virtual async Task<BaseEntity> Post(TEntityPostDto model)
         {
             var result = await _baseRepository.Post(model);
@@ -83,7 +83,7 @@ namespace Misa_TruongWeb03.BL.Service.Base
         /// </summary>
         /// <param name="model"></param>
         /// <returns>BaseEntity</returns>
-        /// CreatedBy: QTNgo (24/05/2023)
+        /// CreatedBy: NQTruong (24/05/2023)
         public virtual async Task<BaseEntity> Put(int id, TEntityPostDto model)
         {
             var entity = _mapper.Map<TEntityPutDto>(model);
@@ -99,7 +99,7 @@ namespace Misa_TruongWeb03.BL.Service.Base
         /// </summary>
         /// <param name="model"></param>
         /// <returns>BaseEntity</returns>
-        /// CreatedBy: QTNgo (24/05/2023)
+        /// CreatedBy: NQTruong (24/05/2023)
         public async Task<BaseEntity> Delete(int id)
         {
             var exist = await _baseRepository.GetById(id);
@@ -119,7 +119,7 @@ namespace Misa_TruongWeb03.BL.Service.Base
         /// </summary>
         /// <param name="model"></param>
         /// <returns>BaseEntity</returns>
-        /// CreatedBy: QTNgo (24/05/2023)
+        /// CreatedBy: NQTruong (24/05/2023)
         public async Task<BaseEntity> CheckDuplicate(TEntity model)
         {
             return await _baseRepository.CheckDuplicate(model);

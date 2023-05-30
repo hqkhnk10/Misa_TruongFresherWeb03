@@ -8,7 +8,7 @@ namespace Misa_TruongWeb03.Middleware;
 /// <summary>
 /// Middleware xử lí exception
 /// </summary>
-/// CreatedBy: QTNgo (24/05/2023)
+/// CreatedBy: NQTruong (24/05/2023)
 public class ExceptionHandlingMiddleware
 {
     #region Property

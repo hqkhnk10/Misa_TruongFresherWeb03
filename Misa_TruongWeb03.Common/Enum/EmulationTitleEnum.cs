@@ -5,13 +5,13 @@ namespace Misa_TruongWeb03.Common.Enum
     /// <summary>
     /// Enum của danh hiệu thi đua
     /// </summary>
-    /// CreatedBy: QTNgo (24/05/2023)
+    /// CreatedBy: NQTruong (24/05/2023)
     public class EmulationTitleEnum
     {
         /// <summary>
         /// Đối tượng khen thưởng
         /// </summary>
-        /// CreatedBy: QTNgo (24/05/2023)
+        /// CreatedBy: NQTruong (24/05/2023)
         public enum ApplyObject
         {
             [Description("Tập thể")]
@@ -26,7 +26,7 @@ namespace Misa_TruongWeb03.Common.Enum
         /// <summary>
         /// Loại phong trào
         /// </summary>
-        /// CreatedBy: QTNgo (24/05/2023)
+        /// CreatedBy: NQTruong (24/05/2023)
         public enum MovementType
         {
             [Description("Thường xuyên")]
@@ -39,7 +39,7 @@ namespace Misa_TruongWeb03.Common.Enum
         /// <summary>
         /// Trạng thái
         /// </summary>
-        /// CreatedBy: QTNgo (24/05/2023)
+        /// CreatedBy: NQTruong (24/05/2023)
         public enum Inactive
         {
             [Description("Ngưng sử dụng")]
@@ -50,7 +50,7 @@ namespace Misa_TruongWeb03.Common.Enum
         /// <summary>
         /// Cấp khen thưởng
         /// </summary>
-        /// CreatedBy: QTNgo (24/05/2023)
+        /// CreatedBy: NQTruong (24/05/2023)
         public enum CommendationLevel
         {
             [Description("Cấp nhà nước")]

@@ -8,7 +8,7 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitleRepository
     /// Interface danh hiệu thi đua
     /// Kế thừa lớp base repo
     /// </summary>
-    /// CreatedBy: QTNgo (24/05/2023)
+    /// CreatedBy: NQTruong (24/05/2023)
     public interface IEmulationTitleRepository : IBaseRepository<EmulationTitle, GetEmulationTitle, PostEmulationTitle, UpdateEmulationTitle>
     {
         #region Method

@@ -9,7 +9,7 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationCommendationRepository
     /// Repo của cấp phong trào
     /// Kế thừa CRUD từ base
     /// </summary>
-    /// CreatedBy: QTNgo (24/05/2023)
+    /// CreatedBy: NQTruong (24/05/2023)
     public class EmulationCommendationRepository : BaseRepository<EmulationCommendation, GetEmulationCommendationDTO, PostEmulationCommendationDTO, UpdateEmulationCommendationDTO>, IEmulationCommendationRepository
     {
         #region Constructor

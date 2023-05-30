@@ -18,7 +18,7 @@ namespace Misa_TruongWeb03.DL.Repository.Base
     /// <typeparam name="TGetDTO">Generic Get DTO model</typeparam>
     /// <typeparam name="TPostDTO">Generic Post DTO model</typeparam>
     /// <typeparam name="TPutDTO">Generic Put DTO model</typeparam>
-    /// CreatedBy: QTNgo (24/05/2023)
+    /// CreatedBy: NQTruong (24/05/2023)
     public abstract class BaseRepository<T, TGetDTO, TPostDTO, TPutDTO> : IBaseRepository<T, TGetDTO, TPostDTO, TPutDTO>
     {
         #region Property
@@ -35,7 +35,7 @@ namespace Misa_TruongWeb03.DL.Repository.Base
         /// Tạo connection đến MySQL
         /// </summary>
         /// <returns>Base Entity</returns>
-        /// CreatedBy: QTNgo (24/05/2023)
+        /// CreatedBy: NQTruong (24/05/2023)
         public DbConnection GetConnection()
         {
             return new MySqlConnection(_configuration.GetSection("ConnectionString").Value);
@@ -45,7 +45,7 @@ namespace Misa_TruongWeb03.DL.Repository.Base
         /// </summary>
         /// <param name="model"></param>
         /// <returns>Base Entity</returns>
-        /// CreatedBy: QTNgo (24/05/2023)
+        /// CreatedBy: NQTruong (24/05/2023)
         public async Task<BaseEntity> Get(TGetDTO model)
         {
             using var connection = GetConnection();
@@ -82,7 +82,7 @@ namespace Misa_TruongWeb03.DL.Repository.Base
         /// </summary>
         /// <param name="model"></param>
         /// <returns>Base Entity</returns>
-        /// CreatedBy: QTNgo (24/05/2023)
+        /// CreatedBy: NQTruong (24/05/2023)
         public async Task<BaseEntity> GetById(int id)
         {
             var storedProcedureName = $"proc_{typeof(T).Name.ToLower()}_getdetail";
@@ -118,7 +118,7 @@ namespace Misa_TruongWeb03.DL.Repository.Base
         /// </summary>
         /// <param name="model"></param>
         /// <returns>Base Entity</returns>
-        /// CreatedBy: QTNgo (24/05/2023)
+        /// CreatedBy: NQTruong (24/05/2023)
         public async Task<BaseEntity> Post(TPostDTO model)
         {
             using var connection = GetConnection();
@@ -153,7 +153,7 @@ namespace Misa_TruongWeb03.DL.Repository.Base
         /// </summary>
         /// <param name="model"></param>
         /// <returns>Base Entity</returns>
-        /// CreatedBy: QTNgo (24/05/2023)
+        /// CreatedBy: NQTruong (24/05/2023)
         public async Task<BaseEntity> Put(TPutDTO model)
         {
             using var connection = GetConnection();
@@ -188,7 +188,7 @@ namespace Misa_TruongWeb03.DL.Repository.Base
         /// </summary>
         /// <param name="model"></param>
         /// <returns>Base Entity</returns>
-        /// CreatedBy: QTNgo (24/05/2023)
+        /// CreatedBy: NQTruong (24/05/2023)
         public async Task<BaseEntity> Delete(int id)
         {
             var storedProcedureName = $"proc_{typeof(T).Name.ToLower()}_delete";
@@ -223,7 +223,7 @@ namespace Misa_TruongWeb03.DL.Repository.Base
         /// </summary>
         /// <param name="model"></param>
         /// <returns>Base Entity</returns>
-        /// CreatedBy: QTNgo (24/05/2023)
+        /// CreatedBy: NQTruong (24/05/2023)
         public async Task<BaseEntity> CheckDuplicate(T model)
         {
             using var connection = GetConnection();

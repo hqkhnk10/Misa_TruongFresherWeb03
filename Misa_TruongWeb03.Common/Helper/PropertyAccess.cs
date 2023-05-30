@@ -12,7 +12,7 @@ public static class PropertyAccess
     /// <param name="propertyName">property</param>
     /// <returns>value</returns>
     /// <exception cref="ArgumentException"></exception>
-    /// Created By: QTNgo (23/05/2023)
+    /// Created By: NQTruong (23/05/2023)
     public static dynamic? GetPropertyValue(object obj, string propertyName)
     {
         Type objectType = obj.GetType();

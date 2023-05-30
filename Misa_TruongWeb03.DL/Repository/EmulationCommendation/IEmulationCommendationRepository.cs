@@ -8,7 +8,7 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationCommendationRepository
     /// Repository Emulation Commendation
     /// Kế thừa các thuộc tính lớp base repo
     /// </summary>
-    /// CreatedBy: QTNgo (24/05/2023)
+    /// CreatedBy: NQTruong (24/05/2023)
     public interface IEmulationCommendationRepository : IBaseRepository<EmulationCommendation, GetEmulationCommendationDTO, PostEmulationCommendationDTO, UpdateEmulationCommendationDTO>
     {
     }

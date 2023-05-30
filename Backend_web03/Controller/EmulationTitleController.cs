@@ -11,7 +11,7 @@ namespace FresherWeb03.Controller
     /// Danh hiệu thi đua Controller
     /// kế thừa các CRUD từ Base Controller
     /// </summary>
-    /// CreatedBy: QTNgo (24/05/2023)
+    /// CreatedBy: NQTruong (24/05/2023)
     [Route("api/v1/[controller]")]
     [ApiController]
     public class EmulationTitleController : BaseController<EmulationTitle, GetEmulationTitle, PostEmulationTitle, UpdateEmulationTitle>
@@ -32,7 +32,7 @@ namespace FresherWeb03.Controller
         /// </summary>
         /// <param name="model">List id cần xóa</param>
         /// <returns></returns>
-        /// Created By: QTNgo (23/05/2023)
+        /// Created By: NQTruong (23/05/2023)
         [HttpDelete, Route("Multiple")]
         public async Task<IActionResult> DeleteMultiple([FromBody] DeleteEmulationTitle model)
         {
@@ -60,7 +60,7 @@ namespace FresherWeb03.Controller
         /// </summary>
         /// <param name="model">Id : Id của bản ghi, trạng thái thay đổi 1:Inactive, 0:Active</param>
         /// <returns></returns>
-        /// Created By: QTNgo (23/05/2023)
+        /// Created By: NQTruong (23/05/2023)
         [HttpPut, Route("Status")]
         public async Task<IActionResult> UpdateStatus([FromBody] UpdateEmulationTitleStatusDto model)
         {
@@ -88,7 +88,7 @@ namespace FresherWeb03.Controller
         /// </summary>
         /// <param name="model">List id cần xóa, trạng thái thay đổi 1:Inactive, 0:Active</param>
         /// <returns></returns>
-        /// Created By: QTNgo (23/05/2023)
+        /// Created By: NQTruong (23/05/2023)
         [HttpPut, Route("MulitpleStatus")]
         public async Task<IActionResult> UpdateMultipleStatus(UpdateMultipleEmulationTitleStatusDto model)
         {

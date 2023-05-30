@@ -10,7 +10,7 @@ namespace Misa_TruongWeb03.BL.Service.EmulationCommendationService
     /// Tầng Service của cấp phong trào
     /// Kế thừa CRUD từ base
     /// </summary>
-    /// CreatedBy: QTNgo (24/05/2023)
+    /// CreatedBy: NQTruong (24/05/2023)
     public class EmulationCommendationService : BaseService<EmulationCommendation, GetEmulationCommendationDTO, PostEmulationCommendationDTO, UpdateEmulationCommendationDTO>, IEmulationCommendationService
     {
         #region Constructor

@@ -9,7 +9,7 @@ namespace Misa_TruongWeb03.Common.DTO
     /// <summary>
     /// Model cho GET của danh hiệu thi đua
     /// </summary>
-    /// CreatedBy: QTNgo (24/05/2023)
+    /// CreatedBy: NQTruong (24/05/2023)
     public class GetEmulationTitle : GetModel
     {
         public ApplyObject? ApplyObject { get; set; } = null;
@@ -25,7 +25,7 @@ namespace Misa_TruongWeb03.Common.DTO
     /// <summary>
     /// Model cho POST của danh hiệu thi đua
     /// </summary>
-    /// CreatedBy: QTNgo (24/05/2023)
+    /// CreatedBy: NQTruong (24/05/2023)
     public class PostEmulationTitle
     {
         [Required(ErrorMessage = "Tên danh hiệu không được để trống")]
@@ -59,7 +59,7 @@ namespace Misa_TruongWeb03.Common.DTO
     /// <summary>
     /// Model cho PUT của danh hiệu thi đua
     /// </summary>
-    /// CreatedBy: QTNgo (24/05/2023)
+    /// CreatedBy: NQTruong (24/05/2023)
     public class UpdateEmulationTitle : PostEmulationTitle
     {
         [Required]
@@ -69,7 +69,7 @@ namespace Misa_TruongWeb03.Common.DTO
     /// <summary>
     /// Model cho xóa nhiều của danh hiệu thi đua
     /// </summary>
-    /// CreatedBy: QTNgo (24/05/2023)
+    /// CreatedBy: NQTruong (24/05/2023)
     public class DeleteEmulationTitle
     {
         [Required]

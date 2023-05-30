@@ -14,7 +14,7 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitleRepository
     /// Kế thừa CRUD từ base
     /// kết nối với database
     /// </summary>
-    /// CreatedBy: QTNgo (24/05/2023)
+    /// CreatedBy: NQTruong (24/05/2023)
     public class EmulationTitleRepository : BaseRepository<EmulationTitle, GetEmulationTitle, PostEmulationTitle, UpdateEmulationTitle>, IEmulationTitleRepository
     {
         #region Constructor
@@ -29,7 +29,7 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitleRepository
         /// </summary>
         /// <param name="model"></param>
         /// <returns>BaseEntity</returns>
-        /// CreatedBy: QTNgo (24/05/2023)
+        /// CreatedBy: NQTruong (24/05/2023)
         public async Task<BaseEntity> DeleteMultiple(DeleteEmulationTitle model)
         {
             using var conn = this.GetConnection();
@@ -79,7 +79,7 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitleRepository
         /// </summary>
         /// <param name="model"></param>
         /// <returns>BaseEntity</returns>
-        /// CreatedBy: QTNgo (24/05/2023)
+        /// CreatedBy: NQTruong (24/05/2023)
         public async Task<BaseEntity> UpdateStatus(UpdateEmulationTitleStatusDto model)
         {
             using var conn = this.GetConnection();
@@ -116,7 +116,7 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitleRepository
         /// </summary>
         /// <param name="model"></param>
         /// <returns>BaseEntity</returns>
-        /// CreatedBy: QTNgo (24/05/2023)
+        /// CreatedBy: NQTruong (24/05/2023)
         public async Task<BaseEntity> UpdateMultipleStatus(UpdateMultipleEmulationTitleStatusDto model)
         {
             using var conn = this.GetConnection();

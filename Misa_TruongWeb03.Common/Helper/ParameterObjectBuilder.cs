@@ -11,7 +11,7 @@ public static class ParameterObjectBuilder
     /// <typeparam name="T">Generic Type</typeparam>
     /// <param name="model"></param>
     /// <returns>Object</returns>
-    /// Created By: QTNgo (22/05/2023)
+    /// Created By: NQTruong (22/05/2023)
     public static object? CreateParameterObject<T>(T model)
     {
         var parameterObject = Activator.CreateInstance<T>();

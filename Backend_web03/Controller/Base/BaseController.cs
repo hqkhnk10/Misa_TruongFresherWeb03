@@ -16,7 +16,7 @@ namespace Misa_TruongWeb03.Controller.Base
     /// <typeparam name="TEntityGetDto">Generic Get DTO model</typeparam>
     /// <typeparam name="TEntityPostDto">Generic Post DTO model</typeparam>
     /// <typeparam name="TEntityPutDto">Generic Put DTO model</typeparam>
-    /// CreatedBy: QTNgo (24/05/2023)
+    /// CreatedBy: NQTruong (24/05/2023)
     [Route("api/v1/[controller]")]
     public class BaseController<TEntity, TEntityGetDto, TEntityPostDto, TEntityPutDto> : ControllerBase
     {
