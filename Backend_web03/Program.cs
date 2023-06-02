@@ -1,5 +1,6 @@
 using Misa_TruongWeb03.BL.Service.EmulationCommendationService;
 using Misa_TruongWeb03.BL.Service.EmulationTitleService;
+using Misa_TruongWeb03.BL.Service.FileService;
 using Misa_TruongWeb03.DL.Repository.EmulationCommendationRepository;
 using Misa_TruongWeb03.DL.Repository.EmulationTitleRepository;
 using Misa_TruongWeb03.Middleware;
@@ -10,7 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IEmulationTitleService,EmulationTitleService>();
 builder.Services.AddScoped<IEmulationTitleRepository,EmulationTitleRepository>();
 
+
 builder.Services.AddScoped<IEmulationCommendationService, EmulationCommendationService>();
+builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddScoped<IEmulationCommendationRepository, EmulationCommendationRepository>();
 
 
@@ -41,6 +44,7 @@ app.UseCors(x => x
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseHttpsRedirection();
+
 app.UseAuthorization();
 
 app.MapControllers();

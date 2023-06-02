@@ -19,5 +19,9 @@
     <ProjectReference Include="..\Misa_TruongWeb03.BL\Misa_TruongWeb03.BL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="FileStorage\" />
+  </ItemGroup>
+
 
 </Project>

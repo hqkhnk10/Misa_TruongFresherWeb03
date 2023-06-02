@@ -2,7 +2,6 @@
   "ExpandedNodes": [
     "",
     "\\Backend_web03",
-    "\\Backend_web03\\Controller",
     "\\Misa_TruongWeb03.DL",
     "\\Misa_TruongWeb03.DL\\Repository",
     "\\Misa_TruongWeb03.DL\\Repository\\Base",
@@ -10,6 +9,6 @@
     "\\Misa_TruongWeb03.UnitTests",
     "\\Misa_TruongWeb03.UnitTests\\Service"
   ],
-  "SelectedNode": "\\Misa_TruongWeb03.UnitTests\\Service\\EmulationTitleTests.cs",
+  "SelectedNode": "\\Backend_web03\\appsettings.json",
   "PreviewInSolutionExplorer": false
 }
