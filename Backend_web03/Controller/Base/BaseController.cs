@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using Misa_TruongWeb03.BL.Service.Base;
+using Misa_TruongWeb03.BL.Service.FileService;
 using Misa_TruongWeb03.Common.DTO;
 using Misa_TruongWeb03.Common.Entity;
+using Misa_TruongWeb03.Common.Helper;
 using Misa_TruongWeb03.Common.Resource;
-using Misa_TruongWeb03.Middleware;
-using System.ComponentModel.DataAnnotations;
-using System.Web.Http.ModelBinding;
 
 namespace Misa_TruongWeb03.Controller.Base
 {
@@ -18,16 +18,18 @@ namespace Misa_TruongWeb03.Controller.Base
     /// <typeparam name="TEntityPutDto">Generic Put DTO model</typeparam>
     /// CreatedBy: NQTruong (24/05/2023)
     [Route("api/v1/[controller]")]
-    public class BaseController<TEntity, TEntityGetDto, TEntityPostDto, TEntityPutDto> : ControllerBase
+    public abstract class BaseController<TEntity, TEntityGetDto, TEntityPostDto, TEntityPutDto> : ControllerBase, IFileController
     {
         #region Property
         protected readonly IBaseService<TEntity, TEntityGetDto, TEntityPostDto, TEntityPutDto> _baseService;
+        private readonly IFileService _fileService;
         #endregion
 
         #region Constructor
-        public BaseController(IBaseService<TEntity, TEntityGetDto, TEntityPostDto, TEntityPutDto> baseService)
+        public BaseController(IBaseService<TEntity, TEntityGetDto, TEntityPostDto, TEntityPutDto> baseService, IFileService fileService)
         {
             _baseService = baseService;
+            _fileService = fileService;
         }
         #endregion
         #region Method
@@ -123,8 +125,7 @@ namespace Misa_TruongWeb03.Controller.Base
         /// </summary>
         /// <param name="id"></param>
         /// <returns>IActionResult</returns>
-        [HttpDelete("{id}")] 
-        #endregion
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -137,6 +138,38 @@ namespace Misa_TruongWeb03.Controller.Base
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+        [HttpPost("ValidateFile")]
+        public async Task<IActionResult> ValidateFile([FromForm] ValidateFileDTO model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return HandleValidationErrors();
+            }
+            try
+            {
+                var res = await _fileService.Validate<TEntity>(model.File, model.SheetIndex, model.Header);
+                return Ok(res);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        [HttpGet]
+        [Route("SampleFile")]
+        public IActionResult GetSampleFile()
+        {
+            var name = new GetTableTitle<TEntity>().GetTableName();
+            var fileData = _fileService.GetSampleFile(name);
+            if (fileData == null)
+            {
+                return NotFound();
+            }
+            // Return the file
+            return File(fileData, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{name}.xlsx");
+
+        }
+        #endregion
         #region Event
         /// <summary>
         /// Trả về lỗi validate

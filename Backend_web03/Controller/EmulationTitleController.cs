@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Misa_TruongWeb03.BL.Service.EmulationTitleService;
+using Misa_TruongWeb03.BL.Service.FileService;
 using Misa_TruongWeb03.Common.DTO;
 using Misa_TruongWeb03.Common.Entity;
 using Misa_TruongWeb03.Controller.Base;
@@ -20,7 +21,7 @@ namespace FresherWeb03.Controller
         private readonly IEmulationTitleService _emulationTitleService; 
         #endregion
         #region Constructor
-        public EmulationTitleController(IEmulationTitleService emulationTitleService) : base(emulationTitleService)
+        public EmulationTitleController(IEmulationTitleService emulationTitleService, IFileService fileService) : base(emulationTitleService, fileService)
         {
             _emulationTitleService = emulationTitleService;
         }

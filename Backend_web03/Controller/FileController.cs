@@ -91,23 +91,5 @@ namespace FresherWeb03.Controller
 
 
         }
-
-        [HttpPost("ValidateFile")]
-        public async Task<IActionResult> ValidateFile(IFormFile file,int sheetIndex, int header, string key)
-        {
-            if (file == null)
-            {
-                return BadRequest();
-            }
-            try
-            {
-                var res = await _fileService.Validate(file, sheetIndex, header, key);
-                return Ok(res);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
     }
 }
