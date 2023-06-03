@@ -166,7 +166,8 @@ namespace Misa_TruongWeb03.Controller.Base
                 return NotFound();
             }
             // Return the file
-            return File(fileData, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{name}.xlsx");
+            HttpContext.Response.Headers.Add("Access-Control-Expose-Headers", "Content-Disposition");
+            return File(fileData, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "example.xlsx");
 
         }
         #endregion

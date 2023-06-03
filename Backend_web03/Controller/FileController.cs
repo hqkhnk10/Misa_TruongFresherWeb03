@@ -8,7 +8,7 @@ using System;
 
 namespace FresherWeb03.Controller
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class FilesController : ControllerBase
     {
