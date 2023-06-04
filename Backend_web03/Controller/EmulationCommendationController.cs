@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Misa_TruongWeb03.BL.Service.EmulationCommendationService;
-using Misa_TruongWeb03.BL.Service.FileService;
 using Misa_TruongWeb03.Common.DTO;
 using Misa_TruongWeb03.Common.Entity;
 using Misa_TruongWeb03.Controller.Base;
@@ -17,7 +16,7 @@ namespace FresherWeb03.Controller
     public class EmulationCommendationController : BaseController<EmulationCommendation, GetEmulationCommendationDTO, PostEmulationCommendationDTO, UpdateEmulationCommendationDTO>
     {
         #region Constructor
-        public EmulationCommendationController(IEmulationCommendationService emulationCommendationService, IFileService fileService) : base(emulationCommendationService, fileService)
+        public EmulationCommendationController(IEmulationCommendationService emulationCommendationService) : base(emulationCommendationService)
         {
         } 
         #endregion
