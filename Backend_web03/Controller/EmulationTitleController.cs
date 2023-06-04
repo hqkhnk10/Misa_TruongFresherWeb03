@@ -110,6 +110,27 @@ namespace FresherWeb03.Controller
                 }
             }
         }
+
+        [HttpPost, Route("InsertMultiple")]
+        public async Task<IActionResult> InsertMultiple([FromBody] IEnumerable<PostEmulationTitle> models)
+        {
+            if (!ModelState.IsValid)
+            {
+                return HandleValidationErrors();
+            }
+            else
+            {
+                try
+                {
+                    var result = await _emulationTitleService.InsertMultiple(models);
+                    return StatusCode(result.ErrorCode, result);
+                }
+                catch (Exception ex)
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                }
+            }
+        }
         #endregion
     }
 }

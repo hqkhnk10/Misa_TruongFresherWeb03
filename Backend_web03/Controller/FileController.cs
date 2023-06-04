@@ -52,7 +52,11 @@ namespace FresherWeb03.Controller
             try
             {
                 var filePath = Path.Combine(_env.ContentRootPath, "FileStorage", fileName);
-                return File(System.IO.File.ReadAllBytes(filePath), "application/vnd.ms-excel", System.IO.Path.GetFileName(filePath));
+                if (!System.IO.File.Exists(filePath))
+                {
+                    return StatusCode(404);
+                }
+                return File(System.IO.File.ReadAllBytes(filePath), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", System.IO.Path.GetFileName(filePath));
             }
             catch (Exception)
             {
