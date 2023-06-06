@@ -111,7 +111,7 @@ namespace Misa_TruongWeb03_File.Controller
                 return NotFound();
             }
             // Return the file
-            return File(fileData, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "${name}.xlsx");
+            return File(fileData, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{name}.xlsx");
         }
         private dynamic? GetService(string key)
         {

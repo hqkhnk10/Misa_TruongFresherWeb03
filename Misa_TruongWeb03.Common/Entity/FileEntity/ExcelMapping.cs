@@ -12,6 +12,7 @@ namespace Misa_TruongWeb03.Common.Entity.FileEntity
         public Type? DataType { get; set; }
         public Func<object, bool>? ValidatorFunc { get; set; }
         public Func<object, dynamic>? FormatFunc { get; set; }
+        public Func<object, dynamic>? ConvertFunc { get; set; }
         public string? TableKey { get; set; }
         public bool IsDuplicateCheckEnabled { get; set; }
     }
@@ -23,6 +24,7 @@ namespace Misa_TruongWeb03.Common.Entity.FileEntity
         public string DataType { get; set; }
         public string ValidatorFunc { get; set; }
         public string FormatFunc { get; set; }
+        public string? ConvertFunc { get; set; }
         public string? TableKey { get; set; }
         public bool IsDuplicateCheckEnabled { get; set; }
     }
@@ -41,7 +43,8 @@ namespace Misa_TruongWeb03.Common.Entity.FileEntity
                     IsDuplicateCheckEnabled = item.IsDuplicateCheckEnabled,
                     DataType = Type.GetType(item.DataType) ?? typeof(string),
                     ValidatorFunc = ConvertToValidatorFunc(item.ValidatorFunc),
-                    FormatFunc = ConvertToFormatFunc(item.FormatFunc)
+                    FormatFunc = ConvertToFormatFunc(item.FormatFunc),
+                    ConvertFunc = ConvertToFormatFunc(item.ConvertFunc),
                 };
                 config.Add(excelEntity);
             }

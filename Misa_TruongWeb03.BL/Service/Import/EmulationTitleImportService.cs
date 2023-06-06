@@ -26,7 +26,7 @@ namespace Misa_TruongWeb03.BL.Service.Import
         public override async Task<dynamic> Get(dynamic model)
         {
             var getModel = _mapper.Map<GetEmulationTitle>(model);
-            var res = _emulationTitleRepository.Get(getModel);
+            var res = await _emulationTitleRepository.Get(getModel);
             return res.Data;
         }
     public override async Task<bool> IsDuplicateRecord(object cellValue)

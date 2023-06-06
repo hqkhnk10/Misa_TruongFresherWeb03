@@ -83,7 +83,9 @@ namespace Misa_TruongWeb03.BL.Service.Import
                 var listData = await Get(model.Params);
                 //Gọi hàm clone
                 var sourceFile = "${fileName}_export";
-                CloneExcelFile(fileName, sourceFile);
+                var filePath = Path.Combine(_env.ContentRootPath, "FileStorage", $"{fileName}.xlsx");
+                var sourceFilePath = Path.Combine(_env.ContentRootPath, "FileStorage", $"{sourceFile}.xlsx");
+                CloneExcelFile(filePath, sourceFile);
                 //Viết vào file clone
                 WriteToExcel(sourceFile, listData, configs);
                 //Đọc dữ liệu của file
@@ -159,7 +161,7 @@ namespace Misa_TruongWeb03.BL.Service.Import
             workbook.Save(filePath);
             return new FileValidateModel { ValidData = validData, InValidData = invalidData, Count = maxRow - header };
         }
-        public void WriteToExcel(string newFilePath, List<dynamic> data, List<ExcelMapping> configs)
+        public void WriteToExcel(string newFilePath, dynamic data, List<ExcelMapping> configs)
         {
             // Create a new workbook
             Workbook workbook = new Workbook(newFilePath);
@@ -173,7 +175,7 @@ namespace Misa_TruongWeb03.BL.Service.Import
                 {
                     ExcelMapping config = configs[columnIndex];
                     object value = GetPropertyValue(item, config.PropertyName);
-                    object formatValue = FormatCell(value, config.FormatFunc);
+                    object formatValue = FormatCell(value, config.ConvertFunc);
                     worksheet.Cells[rowIndex + 1, columnIndex].PutValue(formatValue);
                 }
             }

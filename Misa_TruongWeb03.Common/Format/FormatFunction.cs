@@ -65,5 +65,22 @@ namespace Misa_TruongWeb03.Common.Format
                     return null;
             }
         }
+        public static string? convertCommendationLevel(CommendationLevel value)
+        {
+            switch (value)
+            {
+                case CommendationLevel.CountryLevel:
+                    return "Cấp Nhà nước";
+                case CommendationLevel.ProvinceLevel:
+                    return "Cấp Tỉnh/tương đương";
+                case CommendationLevel.DistrictLevel:
+                    return "Cấp Huyện/tương đương";
+                case CommendationLevel.CommuneLevel:
+                    return "Cấp Xã/tương đương";
+                default:
+                    return null;
+            }
+        }
+
     }
 }
