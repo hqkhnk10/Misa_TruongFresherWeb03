@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Misa_TruongWeb03.BL.Service.EmulationTitleService;
 using Misa_TruongWeb03.Common.DTO;
-using Misa_TruongWeb03.Common.Entity;
+using Misa_TruongWeb03.Common.Entity.EmulationTitle;
 using Misa_TruongWeb03.Controller.Base;
 using Misa_TruongWeb03.Middleware;
 
@@ -53,7 +53,6 @@ namespace FresherWeb03.Controller
                 }
             }
         }
-
         // put api/<EmulationTitleController>/STATUS
         /// <summary>
         ///  Thay đổi trạng thái 1 danh hiệu thi đua
@@ -81,7 +80,6 @@ namespace FresherWeb03.Controller
                 }
             }
         }
-
         // PUT api/<EmulationTitleController>/MultipleStatus
         /// <summary>
         ///  Thay đổi trạng thái nhiều danh hiệu thi đua
@@ -109,7 +107,12 @@ namespace FresherWeb03.Controller
                 }
             }
         }
-
+        /// <summary>
+        /// Thêm nhiều danh hiêu thi đua cùng 1 lúc
+        /// </summary>
+        /// <param name="models"></param>
+        /// <returns></returns>
+        /// Created By: NQTruong (10/05/2023)
         [HttpPost, Route("InsertMultiple")]
         public async Task<IActionResult> InsertMultiple([FromBody] IEnumerable<PostEmulationTitle> models)
         {

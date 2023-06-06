@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Misa_TruongWeb03.BL.Service.Base;
 using Misa_TruongWeb03.Common.Entity;
+using Misa_TruongWeb03.Common.Entity.Base;
 using Misa_TruongWeb03.Common.Resource;
 
 namespace Misa_TruongWeb03.Controller.Base
@@ -131,8 +132,6 @@ namespace Misa_TruongWeb03.Controller.Base
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
-        #endregion
-        #region Event
         /// <summary>
         /// Trả về lỗi validate
         /// </summary>
