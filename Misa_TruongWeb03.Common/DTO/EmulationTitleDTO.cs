@@ -53,8 +53,8 @@ namespace Misa_TruongWeb03.Common.DTO
         public int? Inactive { get; set; } = null;
 
         [MaxLength(255, ErrorMessage = "Tối đa 255 kí tự")]
-        public string EmulationTitleNote { get; set; } = string.Empty;
-        public string CreatedBy { get; set; } = "demo";
+        public string? EmulationTitleNote { get; set; } = string.Empty;
+        public string? CreatedBy { get; set; } = "demo";
     }
     /// <summary>
     /// Model cho PUT của danh hiệu thi đua

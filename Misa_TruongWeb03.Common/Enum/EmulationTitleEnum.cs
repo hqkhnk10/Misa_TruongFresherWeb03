@@ -53,13 +53,13 @@ namespace Misa_TruongWeb03.Common.Enum
         /// CreatedBy: NQTruong (24/05/2023)
         public enum CommendationLevel
         {
-            [Description("Cấp nhà nước")]
+            [Description("Cấp Nhà nước")]
             CountryLevel = 1,
-            [Description("Cấp tỉnh")]
+            [Description("Cấp Tỉnh/tương đương")]
             ProvinceLevel = 2,
-            [Description("Cấp Huyện")]
+            [Description("Cấp Huyện/tương đương")]
             DistrictLevel = 3,
-            [Description("Cấp Xã")]
+            [Description("Cấp Xã/tương đương")]
             CommuneLevel = 4,
         }
     }

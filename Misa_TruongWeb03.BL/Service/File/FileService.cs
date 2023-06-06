@@ -1,31 +1,61 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Aspose.Cells;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
+using Misa_TruongWeb03.Common.DTO;
+using Misa_TruongWeb03.Common.Entity;
+using Misa_TruongWeb03.Common.Entity.FileEntity;
+using Misa_TruongWeb03.DL.Repository.FileRepository;
+using System.Drawing;
 
-namespace Misa_TruongWeb03.BL.Service.FileService
+namespace Misa_TruongWeb03.BL.Service.FileServices
 {
     public class FileService : IFileService
     {
         private readonly IWebHostEnvironment _env;
-
         public FileService(IWebHostEnvironment env)
         {
             _env = env;
         }
-        public async Task<string> Upload(IFormFile Image)
+        public async Task<FileModel> Upload(IFormFile file)
         {
+            try
+            {
+                var uploadsFolder = Path.Combine(_env.ContentRootPath, "FileStorage");
 
-            var uploadsFolder = Path.Combine(_env.ContentRootPath, "FileStorage");
+                string uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
 
-            string uniqueFileName = Guid.NewGuid().ToString() + "_" + Image.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
-            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using var stream = File.Create(filePath);
 
-            using var stream = File.Create(filePath);
+                await file.CopyToAsync(stream);
 
-            await Image.CopyToAsync(stream);
-
-            return uniqueFileName;
+                var fileObject = new FileModel
+                {
+                    FileStoreName = uniqueFileName,
+                    FilePath = filePath,
+                    FileSize = file.Length,
+                    FileName = file.FileName
+                };
+                return fileObject;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
         }
+        public dynamic? Download(string filename)
+        {
+            var filePath = Path.Combine(_env.ContentRootPath, "FileStorage", filename);
+            if (!System.IO.File.Exists(filePath))
+            {
+                return null;
+            }
+            return System.IO.File.ReadAllBytes(filePath);
+        }
+
     }
 }

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mr_tr\\WorkPlace\\MISA\\BE\\Misa_TruongWeb03.DL\\Misa_TruongWeb03.DL.csproj": {}
+    "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03.DL\\Misa_TruongWeb03.DL.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mr_tr\\WorkPlace\\MISA\\BE\\Misa_TruongWeb03.Common\\Misa_TruongWeb03.Common.csproj": {
+    "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03.Common\\Misa_TruongWeb03.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mr_tr\\WorkPlace\\MISA\\BE\\Misa_TruongWeb03.Common\\Misa_TruongWeb03.Common.csproj",
+        "projectUniqueName": "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03.Common\\Misa_TruongWeb03.Common.csproj",
         "projectName": "Misa_TruongWeb03.Common",
-        "projectPath": "C:\\Users\\mr_tr\\WorkPlace\\MISA\\BE\\Misa_TruongWeb03.Common\\Misa_TruongWeb03.Common.csproj",
-        "packagesPath": "C:\\Users\\mr_tr\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mr_tr\\WorkPlace\\MISA\\BE\\Misa_TruongWeb03.Common\\obj\\",
+        "projectPath": "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03.Common\\Misa_TruongWeb03.Common.csproj",
+        "packagesPath": "C:\\Users\\Tngo\\.nuget\\packages\\",
+        "outputPath": "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03.Common\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\mr_tr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Tngo\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,6 +40,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Aspose.Cells": {
+              "target": "Package",
+              "version": "[23.5.0, )"
+            },
             "AutoMapper": {
               "target": "Package",
               "version": "[12.0.1, )"
@@ -47,6 +51,14 @@
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[12.0.1, )"
+            },
+            "Microsoft.AspNetCore.Http.Features": {
+              "target": "Package",
+              "version": "[5.0.17, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
             }
           },
           "imports": [
@@ -65,21 +77,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\mr_tr\\WorkPlace\\MISA\\BE\\Misa_TruongWeb03.DL\\Misa_TruongWeb03.DL.csproj": {
+    "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03.DL\\Misa_TruongWeb03.DL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mr_tr\\WorkPlace\\MISA\\BE\\Misa_TruongWeb03.DL\\Misa_TruongWeb03.DL.csproj",
+        "projectUniqueName": "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03.DL\\Misa_TruongWeb03.DL.csproj",
         "projectName": "Misa_TruongWeb03.DL",
-        "projectPath": "C:\\Users\\mr_tr\\WorkPlace\\MISA\\BE\\Misa_TruongWeb03.DL\\Misa_TruongWeb03.DL.csproj",
-        "packagesPath": "C:\\Users\\mr_tr\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mr_tr\\WorkPlace\\MISA\\BE\\Misa_TruongWeb03.DL\\obj\\",
+        "projectPath": "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03.DL\\Misa_TruongWeb03.DL.csproj",
+        "packagesPath": "C:\\Users\\Tngo\\.nuget\\packages\\",
+        "outputPath": "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03.DL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\mr_tr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Tngo\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -93,8 +105,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\mr_tr\\WorkPlace\\MISA\\BE\\Misa_TruongWeb03.Common\\Misa_TruongWeb03.Common.csproj": {
-                "projectPath": "C:\\Users\\mr_tr\\WorkPlace\\MISA\\BE\\Misa_TruongWeb03.Common\\Misa_TruongWeb03.Common.csproj"
+              "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03.Common\\Misa_TruongWeb03.Common.csproj": {
+                "projectPath": "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03.Common\\Misa_TruongWeb03.Common.csproj"
               }
             }
           }
@@ -109,6 +121,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Aspose.Cells": {
+              "target": "Package",
+              "version": "[23.5.0, )"
+            },
             "AutoMapper": {
               "target": "Package",
               "version": "[12.0.1, )"
@@ -128,6 +144,10 @@
             "MySqlConnector": {
               "target": "Package",
               "version": "[2.2.6, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -150,7 +170,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

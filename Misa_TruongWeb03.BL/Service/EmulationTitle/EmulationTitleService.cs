@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Misa_TruongWeb03.BL.Service.Base;
 using Misa_TruongWeb03.Common.DTO;
 using Misa_TruongWeb03.Common.Entity;
+using Misa_TruongWeb03.Common.Resource;
 using Misa_TruongWeb03.DL.Repository.EmulationTitleRepository;
 using System.Reflection;
 
@@ -113,6 +115,35 @@ namespace Misa_TruongWeb03.BL.Service.EmulationTitleService
                 return new DatabaseError();
             }
             return result;
+        }
+        /// <summary>
+        /// Thêm danh hiệu thi đua
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        /// Created By: NQTruong (23/05/2023)
+        public async Task<BaseEntity> InsertMultiple(IEnumerable<PostEmulationTitle> models)
+        {
+            //Check trùng mã danh hiệu
+            var listCode = models.Select(model => model.EmulationTitleCode);
+            var check = await _emulationTitleRepository.CheckDuplicateMultiple(listCode);
+            if(check.ErrorCode == StatusCodes.Status200OK)
+            {
+                var result = await _emulationTitleRepository.InsertMultiple(models);
+                return result;
+            }
+            else
+            {
+                check.DevMsg = VN.DuplicateError;
+                check.UserMsg = VN.DuplicateError;
+                return check;
+            }
+
+
+        }
+        public async Task<bool> CheckDuplicateCode(string code)
+        {
+            return await _emulationTitleRepository.CheckDuplicateCode(code);
         }
         #endregion
     }

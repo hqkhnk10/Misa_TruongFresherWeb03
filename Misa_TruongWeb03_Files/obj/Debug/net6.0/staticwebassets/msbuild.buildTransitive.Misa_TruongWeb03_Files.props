@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\Misa_TruongWeb03_Files.props" />
+</Project>

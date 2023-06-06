@@ -15,6 +15,8 @@ namespace Misa_TruongWeb03.BL.Service.EmulationTitleService
         Task<BaseEntity> DeleteMultiple(DeleteEmulationTitle model);
         Task<BaseEntity> UpdateStatus(UpdateEmulationTitleStatusDto model);
         Task<BaseEntity> UpdateMultipleStatus(UpdateMultipleEmulationTitleStatusDto model);
+        Task<BaseEntity> InsertMultiple(IEnumerable<PostEmulationTitle> models);
+        Task<bool> CheckDuplicateCode(string code);
         #endregion
     }
 }

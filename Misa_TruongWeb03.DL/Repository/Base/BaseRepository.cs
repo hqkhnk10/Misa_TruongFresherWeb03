@@ -51,6 +51,10 @@ namespace Misa_TruongWeb03.DL.Repository.Base
             using var connection = GetConnection();
             try
             {
+                if(model == null)
+                {
+                    return new NotFoundError();
+                }
                 var parameters = ParameterObjectBuilder.CreateParameterObject(model);
                 var storedProcedureName = $"proc_{typeof(T).Name.ToLower()}_get";
                 connection.Open();
