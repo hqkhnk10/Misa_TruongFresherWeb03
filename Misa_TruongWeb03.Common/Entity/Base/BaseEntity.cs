@@ -1,6 +1,6 @@
 ﻿using Misa_TruongWeb03.Common.Resource;
 
-namespace Misa_TruongWeb03.Common.Entity
+namespace Misa_TruongWeb03.Common.Entity.Base
 {
     /// <summary>
     /// Return class of every service, repo
@@ -78,7 +78,8 @@ namespace Misa_TruongWeb03.Common.Entity
         {
             get
             {
-                if (Count != null && PageSize != null) {
+                if (Count != null && PageSize != null)
+                {
                     return (int)Math.Ceiling((float)Count / (float)PageSize);
                 }
                 else return 0;

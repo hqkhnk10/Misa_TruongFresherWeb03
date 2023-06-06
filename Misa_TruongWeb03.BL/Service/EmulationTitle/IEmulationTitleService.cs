@@ -1,6 +1,7 @@
 ﻿using Misa_TruongWeb03.BL.Service.Base;
 using Misa_TruongWeb03.Common.DTO;
-using Misa_TruongWeb03.Common.Entity;
+using Misa_TruongWeb03.Common.Entity.Base;
+using Misa_TruongWeb03.Common.Entity.EmulationTitle;
 
 namespace Misa_TruongWeb03.BL.Service.EmulationTitleService
 {

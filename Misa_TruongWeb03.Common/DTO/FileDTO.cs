@@ -7,6 +7,10 @@ namespace Misa_TruongWeb03.Common.DTO
     public class FileDTO
     {
     }
+    /// <summary>
+    /// Model client gửi xác thực file
+    /// </summary>
+    /// Created By: NQTruong (01/06/2023)
     public class ValidateFileDTO
     {
         [Required]
@@ -20,8 +24,11 @@ namespace Misa_TruongWeb03.Common.DTO
         [Required]
         [DefaultValue("emulationtitle")]
         public string Key { get; set; }
-
     }
+    /// <summary>
+    /// Model kết quả server trả
+    /// </summary>
+    /// Created By: NQTruong (01/06/2023)
     public class FileValidateModel
     {
         public object? ValidData { get; set; }

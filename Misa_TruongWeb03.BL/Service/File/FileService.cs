@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Misa_TruongWeb03.Common.DTO;
-using Misa_TruongWeb03.Common.Entity;
 using Misa_TruongWeb03.Common.Entity.FileEntity;
 using Misa_TruongWeb03.DL.Repository.FileRepository;
 using System.Drawing;
@@ -13,11 +12,22 @@ namespace Misa_TruongWeb03.BL.Service.FileServices
 {
     public class FileService : IFileService
     {
-        private readonly IWebHostEnvironment _env;
+        #region Property
+        private readonly IWebHostEnvironment _env; 
+        #endregion
+        #region Constuctor
         public FileService(IWebHostEnvironment env)
         {
             _env = env;
         }
+        #endregion
+        #region Method
+        /// <summary>
+        /// Tải file lên server
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        /// Created By: NQTruong (01/06/2023)
         public async Task<FileModel> Upload(IFormFile file)
         {
             try
@@ -47,6 +57,12 @@ namespace Misa_TruongWeb03.BL.Service.FileServices
             }
 
         }
+        /// <summary>
+        /// Tải file theo tên
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <returns></returns>
+        /// Created By: NQTruong (01/06/2023)
         public dynamic? Download(string filename)
         {
             var filePath = Path.Combine(_env.ContentRootPath, "FileStorage", filename);
@@ -55,7 +71,8 @@ namespace Misa_TruongWeb03.BL.Service.FileServices
                 return null;
             }
             return System.IO.File.ReadAllBytes(filePath);
-        }
+        } 
+        #endregion
 
     }
 }

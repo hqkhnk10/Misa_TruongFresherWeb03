@@ -1,7 +1,7 @@
 ﻿using Dapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
-using Misa_TruongWeb03.Common.Entity;
+using Misa_TruongWeb03.Common.Entity.Base;
 using Misa_TruongWeb03.Common.Helper;
 using Misa_TruongWeb03.Common.Resource;
 using MySqlConnector;

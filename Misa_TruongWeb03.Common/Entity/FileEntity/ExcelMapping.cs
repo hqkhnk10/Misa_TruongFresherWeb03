@@ -24,7 +24,7 @@ namespace Misa_TruongWeb03.Common.Entity.FileEntity
         public string DataType { get; set; }
         public string ValidatorFunc { get; set; }
         public string FormatFunc { get; set; }
-        public string? ConvertFunc { get; set; }
+        public string ConvertFunc { get; set; }
         public string? TableKey { get; set; }
         public bool IsDuplicateCheckEnabled { get; set; }
     }

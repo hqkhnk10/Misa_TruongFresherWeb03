@@ -1,6 +1,7 @@
-﻿using static Misa_TruongWeb03.Common.Enum.EmulationTitleEnum;
+﻿using Misa_TruongWeb03.Common.Entity.Base;
+using static Misa_TruongWeb03.Common.Enum.EmulationTitleEnum;
 
-namespace Misa_TruongWeb03.Common.Entity
+namespace Misa_TruongWeb03.Common.Entity.EmulationTitle
 {
     /// <summary>
     /// Model danh hiệu thi đua
@@ -23,7 +24,7 @@ namespace Misa_TruongWeb03.Common.Entity
         /// </summary>
         /// Created By: NQTruong (23/05/2023)
         /// 
-        public string EmulationTitleName { get; set; } = String.Empty;
+        public string EmulationTitleName { get; set; } = string.Empty;
         /// <summary>
         /// Đối tượng khen thưởng danh hiệu thi đua
         /// </summary>

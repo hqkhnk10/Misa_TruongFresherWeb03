@@ -1,4 +1,4 @@
-﻿using Misa_TruongWeb03.Common.Entity;
+﻿using Misa_TruongWeb03.Common.Entity.Base;
 using Misa_TruongWeb03.Common.Resource;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -92,4 +92,5 @@ namespace Misa_TruongWeb03.Common.DTO
         [EnumDataType(typeof(Inactive))]
         public int? Inactive { get; set; }
     }
+
 }

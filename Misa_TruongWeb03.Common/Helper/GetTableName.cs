@@ -8,6 +8,11 @@ namespace Misa_TruongWeb03.Common.Helper
 {
     public class GetTableTitle
     {
+        /// <summary>
+        /// Lấy tên table dựa theo keys
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public string GetTableName(string key)
         {
             // Define the mapping or lookup mechanism

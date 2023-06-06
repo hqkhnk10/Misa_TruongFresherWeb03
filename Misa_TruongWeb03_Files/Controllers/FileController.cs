@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Misa_TruongWeb03.BL.Service.FileServices;
 using Misa_TruongWeb03.BL.Service.Import;
-using Misa_TruongWeb03.Common.DTO;
+using Misa_TruongWeb03.Common.Entity.Base;
+using Misa_TruongWeb03.Common.Entity.Base;
 using Misa_TruongWeb03.Common.Entity.FileEntity;
+using Misa_TruongWeb03.Common.Entity.Base;
 using Misa_TruongWeb03.Common.Helper;
+using Misa_TruongWeb03.Common.DTO;
 
 namespace Misa_TruongWeb03_File.Controller
 {
@@ -11,27 +14,32 @@ namespace Misa_TruongWeb03_File.Controller
     [ApiController]
     public class FileController : ControllerBase
     {
+        #region Property
         private IServiceProvider _serviceProvider;
         private IFileService _fileService;
+        #endregion
+        #region Constructor
         public FileController(IServiceProvider serviceProvider, IFileService fileService)
         {
             _serviceProvider = serviceProvider;
             _fileService = fileService;
         }
+        #endregion
 
+        #region Method
         /// <summary>
         /// Single File Upload
         /// </summary>
         /// <param name="file"></param>
+        /// Created By: NQTruong (01/06/2023)
         /// <returns></returns>
         [HttpPost("PostSingleFile")]
         public async Task<IActionResult> PostSingleFile(IFormFile file)
         {
             if (file == null)
             {
-                return BadRequest();
+                return StatusCode(StatusCodes.Status404NotFound, new NotFoundError()); ;
             }
-
             try
             {
                 var res = await _fileService.Upload(file);
@@ -42,7 +50,12 @@ namespace Misa_TruongWeb03_File.Controller
                 throw;
             }
         }
-
+        /// <summary>
+        /// Tải faile dựa trên tên file
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// Created By: NQTruong (01/06/2023)
+        /// <returns></returns>
         [HttpGet("download")]
         public IActionResult Download(string fileName)
         {
@@ -56,14 +69,19 @@ namespace Misa_TruongWeb03_File.Controller
                 throw;
             }
         }
-
+        /// <summary>
+        /// Xác thực dữ liệu file
+        /// </summary>
+        /// <param name="model"></param>
+        /// Created By: NQTruong (01/06/2023)
+        /// <returns></returns>
         [HttpPost("ValidateFile")]
         public async Task<IActionResult> ValidateFile([FromForm] ValidateFileDTO model)
         {
             var service = GetService(model.Key);
             if (service == null)
             {
-                return NotFound();
+                return StatusCode(StatusCodes.Status404NotFound, new NotFoundError()); ;
             }
             try
             {
@@ -75,6 +93,12 @@ namespace Misa_TruongWeb03_File.Controller
                 throw;
             }
         }
+        /// <summary>
+        /// Lấy file nhập khẩu mẫu
+        /// </summary>
+        /// <param name="key"></param>
+        /// Created By: NQTruong (01/06/2023)
+        /// <returns></returns>
         [HttpGet]
         [Route("SampleFile")]
         public IActionResult GetSampleFile(string key)
@@ -94,7 +118,12 @@ namespace Misa_TruongWeb03_File.Controller
             HttpContext.Response.Headers.Add("Access-Control-Expose-Headers", "Content-Disposition");
             return File(fileData, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "example.xlsx");
         }
-
+        /// <summary>
+        /// Xuất file excel
+        /// </summary>
+        /// <param name="model"></param>
+        /// Created By: NQTruong (01/06/2023)
+        /// <returns></returns>
         [HttpPost]
         [Route("ExportFile")]
         public async Task<IActionResult> ExportFile([FromBody] ExportModel model)
@@ -103,16 +132,22 @@ namespace Misa_TruongWeb03_File.Controller
             var service = GetService(model.Key);
             if (service == null)
             {
-                return NotFound();
+                return StatusCode(StatusCodes.Status404NotFound, new NotFoundError());
             }
             var fileData = await service.ExportFile(name, model);
             if (fileData == null)
             {
-                return NotFound();
+                return StatusCode(StatusCodes.Status404NotFound, new NotFoundError());
             }
             // Return the file
             return File(fileData, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{name}.xlsx");
         }
+        /// <summary>
+        /// Lấy service dựa theo key
+        /// </summary>
+        /// <param name="key"></param>
+        /// Created By: NQTruong (01/06/2023)
+        /// <returns></returns>
         private dynamic? GetService(string key)
         {
             switch (key)
@@ -122,6 +157,7 @@ namespace Misa_TruongWeb03_File.Controller
                 default:
                     return null;
             }
-        }
+        } 
+        #endregion
     }
 }

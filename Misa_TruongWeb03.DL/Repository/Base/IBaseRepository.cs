@@ -1,4 +1,4 @@
-﻿using Misa_TruongWeb03.Common.Entity;
+﻿using Misa_TruongWeb03.Common.Entity.Base;
 using System.Data.Common;
 
 namespace Misa_TruongWeb03.DL.Repository.Base

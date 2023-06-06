@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Misa_TruongWeb03.Common.DTO;
-using Misa_TruongWeb03.Common.Entity;
+using Misa_TruongWeb03.Common.Entity.Base;
+using Misa_TruongWeb03.Common.Entity.EmulationTitle;
 using Misa_TruongWeb03.Common.Resource;
 using Misa_TruongWeb03.DL.Repository.Base;
 using Newtonsoft.Json.Linq;
@@ -152,6 +153,12 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitleRepository
             }
             finally { conn.Close(); }
         }
+        /// <summary>
+        /// Thêm nhiều dữ liệu vào DB
+        /// </summary>
+        /// <param name="models"></param>
+        /// <returns></returns>
+        /// CreatedBy: NQTruong (24002/062023)
         public async Task<BaseEntity> InsertMultiple(IEnumerable<PostEmulationTitle> models)
         {
             using var connection = this.GetConnection();
@@ -181,7 +188,13 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitleRepository
             }
             finally { connection.Close(); }
         }
-        public async Task<BaseEntity> CheckDuplicateMultiple(IEnumerable<string> models)
+        /// <summary>
+        /// Kiểm tra trùng code trong 1 list
+        /// </summary>
+        /// <param name="models"></param>
+        /// <returns></returns>
+            /// CreatedBy: NQTruong (02/06/2023)
+public async Task<BaseEntity> CheckDuplicateMultiple(IEnumerable<string> models)
         {
             using var connection = this.GetConnection();
             try
@@ -211,7 +224,13 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitleRepository
             }
             finally { connection.Close(); }
         }
-        public async Task<bool> CheckDuplicateCode(string code)
+        /// <summary>
+        /// Kiểm tra code trùng
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+            /// CreatedBy: NQTruong (02/06/2023)
+public async Task<bool> CheckDuplicateCode(string code)
         {
             using var connection = this.GetConnection();
             try

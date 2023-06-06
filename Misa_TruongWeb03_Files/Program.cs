@@ -3,6 +3,7 @@ using Misa_TruongWeb03.BL.Service.FileServices;
 using Misa_TruongWeb03.BL.Service.Import;
 using Misa_TruongWeb03.DL.Repository.EmulationTitleRepository;
 using Misa_TruongWeb03.DL.Repository.FileRepository;
+using Misa_TruongWeb03.Files.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +33,7 @@ app.UseCors(x => x
                .AllowAnyOrigin()
                .AllowAnyMethod()
                .AllowAnyHeader());
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

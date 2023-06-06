@@ -10,16 +10,20 @@ using Misa_TruongWeb03.Common.DTO;
 using Misa_TruongWeb03.Common.Entity.FileEntity;
 using Misa_TruongWeb03.DL.Repository.FileRepository;
 using System.Drawing;
+using System.Dynamic;
 
-namespace Misa_TruongWeb03.BL.Service.Import
+namespace Misa_TruongWeb03.BL.Service.BaseImport
 {
     public class BaseImportService<T> : IBaseImportService<T>
     {
+        #region Property
         private readonly IWebHostEnvironment _env;
         private readonly IFileRepository _fileRepository;
         private readonly IMemoryCache _memoryCache;
         private readonly IFileService _fileService;
+        #endregion
 
+        #region Constructor
         public BaseImportService(IWebHostEnvironment env, IFileRepository fileRepository, IMemoryCache memoryCache, IFileService fileService)
         {
             _env = env;
@@ -27,6 +31,14 @@ namespace Misa_TruongWeb03.BL.Service.Import
             _memoryCache = memoryCache;
             _fileService = fileService;
         }
+        #endregion
+        #region Method
+        /// <summary>
+        /// Lấy file mẫu theo key
+        /// </summary>
+        /// <param name="cacheKey"></param>
+        /// <returns></returns>
+        /// Created By: NQTruong (01/06/2023)
         public dynamic? GetSampleFile(string cacheKey)
         {
             if (_memoryCache.TryGetValue(cacheKey, out byte[] cachedData))
@@ -37,12 +49,12 @@ namespace Misa_TruongWeb03.BL.Service.Import
             // Load the file from disk based on the file type
             var filePath = Path.Combine(_env.ContentRootPath, "FileStorage", $"{cacheKey}.xlsx");
 
-            if (!System.IO.File.Exists(filePath))
+            if (!File.Exists(filePath))
             {
                 return null;
             }
 
-            var fileData = System.IO.File.ReadAllBytes(filePath);
+            var fileData = File.ReadAllBytes(filePath);
 
             // Cache the file data
             var options = new MemoryCacheEntryOptions()
@@ -54,6 +66,14 @@ namespace Misa_TruongWeb03.BL.Service.Import
             _memoryCache.Set(cacheKey, fileData, options);
             return fileData;
         }
+        /// <summary>
+        /// Xác thực dữ liệu của file
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="sheetIndex"></param>
+        /// <param name="header"></param>
+        /// <returns></returns>
+        /// Created By: NQTruong (01/06/2023)
         public async Task<FileValidateModel> Validate(IFormFile file, int sheetIndex, int header)
         {
             try
@@ -71,6 +91,13 @@ namespace Misa_TruongWeb03.BL.Service.Import
                 throw;
             }
         }
+        /// <summary>
+        /// Xuất file
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        /// Created By: NQTruong (01/06/2023)
         public async Task<byte[]> ExportFile(string fileName, ExportModel model)
         {
             try
@@ -80,7 +107,7 @@ namespace Misa_TruongWeb03.BL.Service.Import
                 var mapper = new ExcelConfigMapper();
                 var configs = mapper.MapToExcelConfig(configEntity);
                 //Gọi đến repo lấy danh sách
-                var listData = await Get(model.Params);
+                var listData = await Get(model.Parameters);
                 //Gọi hàm clone
                 var sourceFile = "${fileName}_export";
                 var filePath = Path.Combine(_env.ContentRootPath, "FileStorage", $"{fileName}.xlsx");
@@ -89,15 +116,22 @@ namespace Misa_TruongWeb03.BL.Service.Import
                 //Viết vào file clone
                 WriteToExcel(sourceFile, listData, configs);
                 //Đọc dữ liệu của file
-                return System.IO.File.ReadAllBytes(sourceFile);
+                return File.ReadAllBytes(sourceFile);
             }
             catch (Exception)
             {
                 throw;
             }
         }
-
-        //Helper function
+        /// <summary>
+        /// Đọc file Excel và trả ra lỗi nếu file ko hợp lệ
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="sheetIndex"></param>
+        /// <param name="header"></param>
+        /// <param name="configs"></param>
+        /// <returns></returns>
+        /// Created By: NQTruong (01/06/2023)
         public async Task<FileValidateModel> ReadExcel(string filePath, int sheetIndex, int header, List<ExcelMapping> configs)
         {
             Workbook workbook = new Workbook(filePath);
@@ -130,7 +164,7 @@ namespace Misa_TruongWeb03.BL.Service.Import
                         isValid = false;
                         errorMessage += cells[0, columnIndex].Value + " Trùng dữ liệu.";
                     }
-                    if (formatValue == null)
+                    if (formatValue == null && cellValue != null)
                     {
                         isValid = false;
                         errorMessage += cells[0, columnIndex].Value + " Không đúng định dạng";
@@ -161,6 +195,13 @@ namespace Misa_TruongWeb03.BL.Service.Import
             workbook.Save(filePath);
             return new FileValidateModel { ValidData = validData, InValidData = invalidData, Count = maxRow - header };
         }
+        /// <summary>
+        /// Viết dữ liệu vào file để xuất ra
+        /// </summary>
+        /// <param name="newFilePath"></param>
+        /// <param name="data"></param>
+        /// <param name="configs"></param>
+        /// Created By: NQTruong (01/06/2023)
         public void WriteToExcel(string newFilePath, dynamic data, List<ExcelMapping> configs)
         {
             // Create a new workbook
@@ -183,12 +224,23 @@ namespace Misa_TruongWeb03.BL.Service.Import
             // Save the workbook
             workbook.Save(newFilePath);
         }
-
-        // Helper method to retrieve property value using reflection
+        /// <summary>
+        /// Lấy dữ liệu của object dùng reflection
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        /// Created By: NQTruong (01/06/2023)
         private object GetPropertyValue(object obj, string propertyName)
         {
             return obj.GetType().GetProperty(propertyName)?.GetValue(obj);
         }
+        /// <summary>
+        /// Tạo 1 file excel mới dựa trên file cũ
+        /// </summary>
+        /// <param name="sourceFilePath"></param>
+        /// <param name="targetFilePath"></param>
+        /// Created By: NQTruong (01/06/2023)
         public void CloneExcelFile(string sourceFilePath, string targetFilePath)
         {
             // Load the source workbook
@@ -201,6 +253,14 @@ namespace Misa_TruongWeb03.BL.Service.Import
             // Save the target workbook to the target file path
             targetWorkbook.Save(targetFilePath);
         }
+        /// <summary>
+        /// Gọi đến hàm validate của từng cell theo config
+        /// </summary>
+        /// <param name="cellValue"></param>
+        /// <param name="propertyName"></param>
+        /// <param name="validatorFunc"></param>
+        /// <returns></returns>
+        /// Created By: NQTruong (01/06/2023)
         private bool ValidateCell(object cellValue, string propertyName, Func<object, bool> validatorFunc)
         {
             // Add your custom validation logic here
@@ -230,6 +290,13 @@ namespace Misa_TruongWeb03.BL.Service.Import
 
             return validatorFunc(cellValue);
         }
+        /// <summary>
+        /// Gọi đến hàm format của từng cell theo config
+        /// </summary>
+        /// <param name="cellValue"></param>
+        /// <param name="formatFunc"></param>
+        /// <returns></returns>
+        /// Created By: NQTruong (01/06/2023)
         private dynamic FormatCell(object cellValue, Func<object, dynamic> formatFunc)
         {
             if (formatFunc == null)
@@ -237,6 +304,13 @@ namespace Misa_TruongWeb03.BL.Service.Import
 
             return formatFunc(cellValue);
         }
+        /// <summary>
+        /// Gán dữ liệu cho object không biết trước property
+        /// </summary>
+        /// <param name="instance"></param>
+        /// <param name="propertyName"></param>
+        /// <param name="value"></param>
+        /// Created By: NQTruong (01/06/2023)
         private void SetProperty(T instance, string propertyName, object value)
         {
             var propertyInfo = typeof(T).GetProperty(propertyName);
@@ -272,6 +346,15 @@ namespace Misa_TruongWeb03.BL.Service.Import
                 propertyInfo.SetValue(instance, convertedValue);
             }
         }
+        /// <summary>
+        /// Kiểm tra trùng trong file
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="cells"></param>
+        /// <param name="columnIndex"></param>
+        /// <param name="currentRow"></param>
+        /// <returns></returns>
+        /// Created By: NQTruong (01/06/2023)
         private bool IsDuplicateValue(object value, Cells cells, int columnIndex, int currentRow)
         {
             // Iterate through the rows above the current row
@@ -288,13 +371,25 @@ namespace Misa_TruongWeb03.BL.Service.Import
 
             return false; // No duplicate value found
         }
+        /// <summary>
+        /// Kiểm tra trùng trong DB
+        /// </summary>
+        /// <param name="cellValue"></param>
+        /// <returns></returns>
         public virtual async Task<bool> IsDuplicateRecord(object cellValue)
         {
             return true;
         }
+        /// <summary>
+        /// Lấy dữ liệu của bảng để viết vào excel
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        /// Created By: NQTruong (01/06/2023)
         public virtual async Task<dynamic> Get(dynamic parameters)
         {
             return null;
         }
+        #endregion
     }
 }

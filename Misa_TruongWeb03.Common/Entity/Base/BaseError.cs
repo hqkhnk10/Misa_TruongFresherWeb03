@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Misa_TruongWeb03.Common.Entity
+namespace Misa_TruongWeb03.Common.Entity.Base
 {
     /// <summary>
     /// Lớp lỗi từ database ( database không thay đổi dữ liệu)

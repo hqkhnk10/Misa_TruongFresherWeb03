@@ -7,8 +7,17 @@ using static Misa_TruongWeb03.Common.Enum.EmulationTitleEnum;
 
 namespace Misa_TruongWeb03.Common.Format
 {
+    /// <summary>
+    /// Hàm format cho excel config
+    /// </summary>
     public class FormatFunction
     {
+        /// <summary>
+        /// Format đối tượng khen thưởng
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>ApplyObject?</returns>
+        /// Created By: NQTruong (05/06/2023)
         public static ApplyObject? formatApplyObject(string value)
         {
             switch (value)
@@ -23,6 +32,12 @@ namespace Misa_TruongWeb03.Common.Format
                     return null;
             }
         }
+        /// <summary>
+        /// Format loại phong trào
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>MovementType?</returns>
+        /// Created By: NQTruong (05/06/2023)
         public static MovementType? formatMovementType(string value)
         {
             switch (value)
@@ -37,6 +52,12 @@ namespace Misa_TruongWeb03.Common.Format
                     return null;
             }
         }
+        /// <summary>
+        /// Format trạng thái
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>Inactive?</returns>
+        /// Created By: NQTruong (05/06/2023)
         public static Inactive? formatInactive(string value)
         {
             switch (value)
@@ -49,6 +70,12 @@ namespace Misa_TruongWeb03.Common.Format
                     return null;
             }
         }
+        /// <summary>
+        /// Format cấp khen thưởng
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>CommendationLevel?</returns>
+        /// Created By: NQTruong (05/06/2023)
         public static CommendationLevel? formatCommendationLevel(string value)
         {
             switch (value)
@@ -65,6 +92,70 @@ namespace Misa_TruongWeb03.Common.Format
                     return null;
             }
         }
+        /// <summary>
+        /// Convert đối tượng khen thưởng
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>string?</returns>
+        /// Created By: NQTruong (05/06/2023)
+        public static string? convertApplyObject(ApplyObject value)
+        {
+            switch (value)
+            {
+                case ApplyObject.Personal:
+                    return "Cá nhân";
+                case ApplyObject.Group:
+                    return "Tập thể";
+                case ApplyObject.PersonalAndGroup:
+                    return "Cá nhân và tập thể";
+                default:
+                    return null;
+            }
+        }
+        /// <summary>
+        /// Convert loại phong trào
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>string?</returns>
+        /// Created By: NQTruong (05/06/2023)
+        public static string? convertMovementType(MovementType value)
+        {
+            switch (value)
+            {
+                case MovementType.Regular:
+                    return "Thường xuyên";
+                case MovementType.Period:
+                    return "Theo đợt";
+                case MovementType.RegularAndPeriod:
+                    return "Thường xuyên;Theo đợt";
+                default:
+                    return null;
+            }
+        }
+        /// <summary>
+        /// Convert trạng thái
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>string?</returns>
+        /// Created By: NQTruong (05/06/2023)
+        public static string? convertInactive(Inactive value)
+        {
+            switch (value)
+            {
+                case Inactive.Inactive:
+                    return "Ngưng sử dụng";
+                case Inactive.Active:
+                    return "Đang sử dụng";
+                default:
+                    return null;
+            }
+        }
+        /// <summary>
+        /// Conver cấp khen thưởng
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>string?</returns>
+        /// Created By: NQTruong (05/06/2023)
         public static string? convertCommendationLevel(CommendationLevel value)
         {
             switch (value)

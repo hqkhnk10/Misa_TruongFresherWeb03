@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
-using Misa_TruongWeb03.Common.Entity;
+using Misa_TruongWeb03.Common.Entity.Base;
 using Misa_TruongWeb03.Common.Resource;
 using Misa_TruongWeb03.DL.Repository.Base;
 using System;

@@ -1,5 +1,5 @@
 ﻿using Misa_TruongWeb03.Common.DTO;
-using Misa_TruongWeb03.Common.Entity;
+using Misa_TruongWeb03.Common.Entity.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;

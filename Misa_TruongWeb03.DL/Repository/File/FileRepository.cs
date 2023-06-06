@@ -29,6 +29,12 @@ namespace Misa_TruongWeb03.DL.Repository.FileRepository
         {
             return new MySqlConnection(_configuration.GetSection("ConnectionString").Value);
         }
+        /// <summary>
+        /// Lấy mapping config theo key
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        /// Created By: NQTruong (01/06/2023)
         public async Task<List<ExcelConfigEntity>> MappingConfig(string key)
         {
             using var connection = this.GetConnection();

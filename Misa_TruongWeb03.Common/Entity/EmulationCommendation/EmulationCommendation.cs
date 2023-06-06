@@ -1,4 +1,4 @@
-﻿namespace Misa_TruongWeb03.Common.Entity
+﻿namespace Misa_TruongWeb03.Common.Entity.EmulationCommendation
 {
     /// <summary>
     /// Model của cấp phong trào
