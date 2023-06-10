@@ -35,5 +35,6 @@ namespace Misa_TruongWeb03.Common.DTO
         public object? InValidData { get; set; }
         public string FileName { get; set; }
         public int Count { get; set; }
+        public string InvalidFilePath { get; set; }
     }
 }
