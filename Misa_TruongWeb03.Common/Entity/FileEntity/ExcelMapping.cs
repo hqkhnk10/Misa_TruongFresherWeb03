@@ -15,6 +15,7 @@ namespace Misa_TruongWeb03.Common.Entity.FileEntity
         public Func<object, dynamic>? ConvertFunc { get; set; }
         public string? TableKey { get; set; }
         public bool IsDuplicateCheckEnabled { get; set; }
+        public bool IsRequired { get; set; }
     }
     public class ExcelConfigEntity
     {
@@ -27,6 +28,7 @@ namespace Misa_TruongWeb03.Common.Entity.FileEntity
         public string ConvertFunc { get; set; }
         public string? TableKey { get; set; }
         public bool IsDuplicateCheckEnabled { get; set; }
+        public bool IsRequired { get; set; }
     }
     public class ExcelConfigMapper
     {
@@ -41,6 +43,7 @@ namespace Misa_TruongWeb03.Common.Entity.FileEntity
                     PropertyName = item.PropertyName,
                     TableKey = item.TableKey,
                     IsDuplicateCheckEnabled = item.IsDuplicateCheckEnabled,
+                    IsRequired = item.IsRequired,
                     DataType = Type.GetType(item.DataType) ?? typeof(string),
                     ValidatorFunc = ConvertToValidatorFunc(item.ValidatorFunc),
                     FormatFunc = ConvertToFormatFunc(item.FormatFunc),

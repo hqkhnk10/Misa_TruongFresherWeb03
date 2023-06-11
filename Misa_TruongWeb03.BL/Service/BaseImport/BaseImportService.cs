@@ -1,16 +1,12 @@
 ﻿using Aspose.Cells;
-using AutoMapper;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.DependencyInjection;
-using Misa_TruongWeb03.BL.Service.EmulationTitleService;
 using Misa_TruongWeb03.BL.Service.FileServices;
 using Misa_TruongWeb03.Common.DTO;
 using Misa_TruongWeb03.Common.Entity.FileEntity;
 using Misa_TruongWeb03.DL.Repository.FileRepository;
 using System.Drawing;
-using System.Dynamic;
 
 namespace Misa_TruongWeb03.BL.Service.BaseImport
 {
@@ -83,6 +79,7 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
                 var config = mapper.MapToExcelConfig(configEntity);
                 var data = await ReadExcel(res.FilePath, sheetIndex, header, config);
                 data.FileName = res.FileStoreName;
+
                 return data;
             }
             catch (Exception)
@@ -133,6 +130,7 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
         /// Created By: NQTruong (01/06/2023)
         public async Task<FileValidateModel> ReadExcel(string filePath, int sheetIndex, int header, List<ExcelMapping> configs)
         {
+            
             Workbook workbook = new Workbook(filePath);
             Worksheet worksheet = workbook.Worksheets[sheetIndex];
             Cells cells = worksheet.Cells;
@@ -145,6 +143,8 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
             var validData = new List<dynamic>();
             var invalidData = new List<dynamic>();
 
+            var invalidFileName = $"{Path.GetFileNameWithoutExtension(filePath)}_invalid";
+            var validIndex = new List<int>();
             for (int row = header; row < maxRow; row++)
             {
                 T instance = Activator.CreateInstance<T>();
@@ -155,29 +155,38 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
                     int columnIndex = config.ColumnIndex;
                     string propertyName = config.PropertyName;
                     Type dataType = config.DataType;
-                    object cellValue = cells[row, columnIndex].Value;
+                    var cellValue = cells[row, columnIndex].Value;
+                    //check không được để trống
+                    if (config.IsRequired && (cellValue == null || string.IsNullOrEmpty(cellValue.ToString())))
+                    {
+                        isValid = false;
+                        errorMessage += cells[header - 1, columnIndex].Value + " Không được để trống.";
+                    }
                     object formatValue = FormatCell(cellValue, config.FormatFunc);
                     //check trùng
                     if (config.IsDuplicateCheckEnabled && (IsDuplicateValue(formatValue, cells, columnIndex, row) || await IsDuplicateRecord(formatValue)))
                     {
                         isValid = false;
-                        errorMessage += cells[0, columnIndex].Value + " Trùng dữ liệu.";
+                        errorMessage += cells[header - 1, columnIndex].Value + " Trùng dữ liệu.";
                     }
+                    //check format dữ liệu
                     if (formatValue == null && cellValue != null)
                     {
                         isValid = false;
-                        errorMessage += cells[0, columnIndex].Value + " Không đúng định dạng";
+                        errorMessage += cells[header - 1, columnIndex].Value + " Không đúng định dạng";
                     }
-                    if (!ValidateCell(formatValue, propertyName, config.ValidatorFunc))
+                    //check theo hàm
+                    if (config.ValidatorFunc != null && !ValidateCell(formatValue, propertyName, config.ValidatorFunc))
                     {
                         isValid = false;
-                        errorMessage += cells[0, columnIndex].Value + " Không hợp lệ.";
+                        errorMessage += cells[header - 1, columnIndex].Value + " Không hợp lệ.";
                     }
                     SetProperty(instance, propertyName, formatValue);
                 }
                 if (isValid)
                 {
                     validData.Add(instance);
+                    validIndex.Add(row);
                 }
                 else
                 {
@@ -187,12 +196,12 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
                     style.ForegroundColor = Color.Red;
                     style.Pattern = BackgroundType.Solid;
                     cells[row, maxCol].SetStyle(style);
-
                     invalidData.Add(instance);
                 }
             }
             workbook.Save(filePath);
-            return new FileValidateModel { ValidData = validData, InValidData = invalidData, Count = maxRow - header };
+            CopyRowsToNewExcelFile(filePath, invalidFileName, validIndex);
+            return new FileValidateModel { ValidData = validData, InValidData = invalidData, Count = maxRow - header, InvalidFilePath = $"{invalidFileName}.xlsx" };
         }
         /// <summary>
         /// Viết dữ liệu vào file để xuất ra
@@ -216,7 +225,7 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
                     ExcelMapping config = configs[columnIndex];
                     object value = GetPropertyValue(item, config.PropertyName);
                     object formatValue = FormatCell(value, config.ConvertFunc);
-                    worksheet.Cells[rowIndex + 1, columnIndex].PutValue(formatValue);
+                    worksheet.Cells[rowIndex + 2, columnIndex].PutValue(formatValue);
                 }
             }
 
@@ -235,7 +244,7 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
             return obj.GetType().GetProperty(propertyName)?.GetValue(obj);
         }
         /// <summary>
-        /// Tạo 1 file excel mới dựa trên file cũ
+        /// Tạo link file excel mới dựa trên file cũ
         /// </summary>
         /// <param name="sourceFilePath"></param>
         /// <param name="targetFilePath"></param>
@@ -250,7 +259,31 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
             targetWorkbook.Copy(sourceWorkbook);
 
             // Save the target workbook to the target file path
-            targetWorkbook.Save(targetFilePath);
+            var filePath = Path.Combine(_env.ContentRootPath, "FileStorage", $"{targetFilePath}.xlsx");
+            targetWorkbook.Save(filePath);
+        }
+        /// <summary>
+        /// Copy sang file excel khác
+        /// </summary>
+        /// <param name="sourceFilePath"></param>
+        /// <param name="destinationFilePath"></param>
+        /// <param name="sheetName"></param>
+        /// <param name="rowIndices"></param>
+        public void CopyRowsToNewExcelFile(string sourceFilePath, string destinationFilePath, List<int> rowIndices)
+        {
+            // Add a new worksheet to the destination workbook
+            Workbook destinationWorkbook = new Workbook(sourceFilePath);
+            Worksheet destinationWorksheet = destinationWorkbook.Worksheets[0];
+
+            // Copy rows from source to destination worksheet based on the specified row indices
+            foreach (int rowIndex in rowIndices)
+            {
+                // Get the source row
+                destinationWorksheet.Cells.DeleteRow(rowIndex);
+            }
+            var filePath = Path.Combine(_env.ContentRootPath, "FileStorage", $"{destinationFilePath}.xlsx");
+            // Save the destination workbook to a new Excel file
+            destinationWorkbook.Save(filePath, SaveFormat.Xlsx);
         }
         /// <summary>
         /// Gọi đến hàm validate của từng cell theo config
@@ -271,7 +304,7 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
                 }
                 else
                 {
-                    return validatorFunc(cellValue);
+                    return validatorFunc(cellValue.ToString());
                 }
             }
             var propertyInfo = typeof(T).GetProperty(propertyName);
