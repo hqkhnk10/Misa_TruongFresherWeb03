@@ -22,7 +22,6 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
         private readonly IMemoryCache _memoryCache;
         private readonly IFileService _fileService;
         #endregion
-
         #region Constructor
         public BaseImportService(IWebHostEnvironment env, IFileRepository fileRepository, IMemoryCache memoryCache, IFileService fileService)
         {
