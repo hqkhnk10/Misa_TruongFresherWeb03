@@ -23,7 +23,6 @@ namespace Misa_TruongWeb03_File.Controller
             _fileService = fileService;
         }
         #endregion
-
         #region Method
         /// <summary>
         /// Single File Upload
@@ -43,9 +42,9 @@ namespace Misa_TruongWeb03_File.Controller
                 var res = await _fileService.Upload(file);
                 return Ok(res);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                return StatusCode(StatusCodes.Status500InternalServerError, new ExceptionError(ex));
             }
         }
         /// <summary>
@@ -62,9 +61,9 @@ namespace Misa_TruongWeb03_File.Controller
                 var fileData = _fileService.Download(fileName);
                 return File(fileData, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                return StatusCode(StatusCodes.Status500InternalServerError, new ExceptionError(ex));
             }
         }
         /// <summary>
@@ -86,9 +85,9 @@ namespace Misa_TruongWeb03_File.Controller
                 var res = await service.Validate(model.File, model.SheetIndex, model.Header);
                 return Ok(res);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                return StatusCode(StatusCodes.Status500InternalServerError, new ExceptionError(ex));
             }
         }
         /// <summary>
@@ -101,20 +100,27 @@ namespace Misa_TruongWeb03_File.Controller
         [Route("SampleFile")]
         public IActionResult GetSampleFile(string key)
         {
-            var name = new GetTableTitle().GetTableName(key);
-            var service = GetService(key);
-            if (service == null)
+            try
             {
-                return NotFound();
+                var name = new GetTableTitle().GetTableName(key);
+                var service = GetService(key);
+                if (service == null)
+                {
+                    return NotFound();
+                }
+                var fileData = service.GetSampleFile(name);
+                if (fileData == null)
+                {
+                    return NotFound();
+                }
+                // Return the file
+                HttpContext.Response.Headers.Add("Access-Control-Expose-Headers", "Content-Disposition");
+                return File(fileData, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "example.xlsx");
             }
-            var fileData = service.GetSampleFile(name);
-            if (fileData == null)
+            catch (Exception ex)
             {
-                return NotFound();
+                return StatusCode(StatusCodes.Status500InternalServerError, new ExceptionError(ex));
             }
-            // Return the file
-            HttpContext.Response.Headers.Add("Access-Control-Expose-Headers", "Content-Disposition");
-            return File(fileData, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "example.xlsx");
         }
         /// <summary>
         /// Xuất file excel
@@ -126,19 +132,27 @@ namespace Misa_TruongWeb03_File.Controller
         [Route("ExportFile")]
         public async Task<IActionResult> ExportFile([FromBody] ExportModel model)
         {
-            var name = new GetTableTitle().GetTableName(model.Key);
-            var service = GetService(model.Key);
-            if (service == null)
+            try
             {
-                return StatusCode(StatusCodes.Status404NotFound, new NotFoundError());
+                var name = new GetTableTitle().GetTableName(model.Key);
+                var service = GetService(model.Key);
+                if (service == null)
+                {
+                    return NotFound(new NotFoundError());
+                }
+                var fileData = await service.ExportFile(name, model);
+                if (fileData == null)
+                {
+                    return NotFound(new NotFoundError());
+                }
+                // Return the file
+                return File(fileData, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{name}.xlsx");
             }
-            var fileData = await service.ExportFile(name, model);
-            if (fileData == null)
+            catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status404NotFound, new NotFoundError());
+                return StatusCode(StatusCodes.Status500InternalServerError, new ExceptionError(ex));
+
             }
-            // Return the file
-            return File(fileData, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{name}.xlsx");
         }
         /// <summary>
         /// Lấy service dựa theo key

@@ -34,7 +34,7 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
         /// <param name="cacheKey"></param>
         /// <returns></returns>
         /// Created By: NQTruong (01/06/2023)
-        public dynamic? GetSampleFile(string cacheKey)
+        public byte[]? GetSampleFile(string cacheKey)
         {
             if (_memoryCache.TryGetValue(cacheKey, out byte[] cachedData))
             {
@@ -105,7 +105,7 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
                 //Gọi đến repo lấy danh sách
                 var listData = await Get(model.Parameters);
                 //Gọi hàm clone
-                var sourceFile = "${fileName}_export";
+                var sourceFile = Path.Combine(_env.ContentRootPath, "FileStorage", $"{fileName}_export.xlsx");
                 var filePath = Path.Combine(_env.ContentRootPath, "FileStorage", $"{fileName}.xlsx");
                 var sourceFilePath = Path.Combine(_env.ContentRootPath, "FileStorage", $"{sourceFile}.xlsx");
                 CloneExcelFile(filePath, sourceFile);
@@ -200,7 +200,7 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
                 }
             }
             workbook.Save(filePath);
-            CopyRowsToNewExcelFile(filePath, invalidFileName, validIndex);
+            RemoveRowsFromExcel(filePath, invalidFileName, validIndex);
             return new FileValidateModel { ValidData = validData, InValidData = invalidData, Count = maxRow - header, InvalidFilePath = $"{invalidFileName}.xlsx" };
         }
         /// <summary>
@@ -269,7 +269,7 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
         /// <param name="destinationFilePath"></param>
         /// <param name="sheetName"></param>
         /// <param name="rowIndices"></param>
-        public void CopyRowsToNewExcelFile(string sourceFilePath, string destinationFilePath, List<int> rowIndices)
+        public void RemoveRowsFromExcel(string sourceFilePath, string destinationFilePath, List<int> rowIndices)
         {
             // Add a new worksheet to the destination workbook
             Workbook destinationWorkbook = new Workbook(sourceFilePath);

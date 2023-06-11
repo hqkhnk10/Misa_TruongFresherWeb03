@@ -9,6 +9,8 @@ using Misa_TruongWeb03.Common.Resource;
 using Misa_TruongWeb03.DL.Repository.Base;
 using Newtonsoft.Json.Linq;
 using System.Data;
+using System.Data.Common;
+using System.Transactions;
 using static Dapper.SqlMapper;
 
 namespace Misa_TruongWeb03.DL.Repository.EmulationTitleRepository
@@ -71,7 +73,8 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitleRepository
                 {
                     ErrorCode = StatusCodes.Status500InternalServerError,
                     Data = null,
-                    DevMsg = ex.Message
+                    DevMsg = ex.Message,
+                    UserMsg = VN.Error500
                 };
                 return exception;
             }
@@ -109,7 +112,8 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitleRepository
                 {
                     ErrorCode = StatusCodes.Status500InternalServerError,
                     Data = null,
-                    DevMsg = ex.Message
+                    DevMsg = ex.Message,
+                    UserMsg = VN.Error500
                 };
                 return exception;
             }
@@ -147,7 +151,8 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitleRepository
                 {
                     ErrorCode = StatusCodes.Status500InternalServerError,
                     Data = null,
-                    DevMsg = ex.Message
+                    DevMsg = ex.Message,
+                    UserMsg = VN.Error500
                 };
                 return exception;
             }
@@ -162,9 +167,11 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitleRepository
         public async Task<BaseEntity> InsertMultiple(IEnumerable<PostEmulationTitle> models)
         {
             using var connection = this.GetConnection();
+            connection.Open();
+            var transaction = connection.BeginTransaction();
             try
             {
-                connection.Open();
+
                 // Generate the SQL query for the multiple insert
                 var query = "INSERT INTO emulationtitle (EmulationTitleName, EmulationTitleCode,EmulationTitleNote, ApplyObject, CommendationLevelId, MovementType, Inactive, CreatedAt, CreatedBy, ModifiedAt, ModifiedBy)" +
                     " VALUES (@EmulationTitleName, @EmulationTitleCode, @EmulationTitleNote,@ApplyObject, @CommendationLevel, @MovementType, 0, NOW(), @CreatedBy, NOW(), @CreatedBy);";
@@ -174,27 +181,39 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitleRepository
                     var parameters = new DynamicParameters(model);
 
                     // Execute the query with the dynamic parameters
-                    await connection.ExecuteAsync(query, parameters);
+                    await connection.ExecuteAsync(query, parameters, transaction);
                 }
+                transaction.Commit();
                 return new BaseEntity
                 {
                     ErrorCode = 200
                 };
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                transaction.Rollback();
+                var exception = new BaseEntity
+                {
+                    ErrorCode = StatusCodes.Status500InternalServerError,
+                    Data = null,
+                    DevMsg = ex.Message,
+                    UserMsg = VN.Error500
+                };
+                return exception;
             }
-            finally { connection.Close(); }
+            finally
+            {
+                transaction.Dispose();
+                connection.Close();
+            }
         }
         /// <summary>
         /// Kiểm tra trùng code trong 1 list
         /// </summary>
         /// <param name="models"></param>
         /// <returns></returns>
-            /// CreatedBy: NQTruong (02/06/2023)
-public async Task<BaseEntity> CheckDuplicateMultiple(IEnumerable<string> models)
+        /// CreatedBy: NQTruong (02/06/2023)
+        public async Task<BaseEntity> CheckDuplicateMultiple(IEnumerable<string> models)
         {
             using var connection = this.GetConnection();
             try
@@ -207,7 +226,7 @@ public async Task<BaseEntity> CheckDuplicateMultiple(IEnumerable<string> models)
                 var duplicates = await connection.QueryAsync<string>(query, new { Values = models });
                 // If the count is greater than 0, duplicates exist
                 var errorCode = StatusCodes.Status200OK;
-                if(duplicates.Count() > 0)
+                if (duplicates.Count() > 0)
                 {
                     errorCode = StatusCodes.Status302Found;
                 }
@@ -217,10 +236,17 @@ public async Task<BaseEntity> CheckDuplicateMultiple(IEnumerable<string> models)
                     Data = duplicates
                 };
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                var exception = new BaseEntity
+                {
+                    ErrorCode = StatusCodes.Status500InternalServerError,
+                    Data = null,
+                    DevMsg = ex.Message,
+                    UserMsg = VN.Error500
 
-                throw;
+                };
+                return exception;
             }
             finally { connection.Close(); }
         }
@@ -229,8 +255,8 @@ public async Task<BaseEntity> CheckDuplicateMultiple(IEnumerable<string> models)
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-            /// CreatedBy: NQTruong (02/06/2023)
-public async Task<bool> CheckDuplicateCode(string code)
+        /// CreatedBy: NQTruong (02/06/2023)
+        public async Task<bool> CheckDuplicateCode(string code)
         {
             using var connection = this.GetConnection();
             try
@@ -242,7 +268,7 @@ public async Task<bool> CheckDuplicateCode(string code)
                 // Execute the query with the list of values as a parameter
                 var duplicate = await connection.QueryFirstOrDefaultAsync<int?>(query, new { Code = code });
                 // If the count is greater than 0, duplicates exist
-                if(duplicate == 1)
+                if (duplicate == 1)
                 {
                     return true;
                 }
@@ -250,7 +276,6 @@ public async Task<bool> CheckDuplicateCode(string code)
             }
             catch (Exception)
             {
-
                 throw;
             }
             finally { connection.Close(); }

@@ -135,7 +135,7 @@ namespace Misa_TruongWeb03.DL.Repository.Base
                 var newResult = new BaseEntity
                 {
                     Data = result,
-                    ErrorCode = StatusCodes.Status200OK,
+                    ErrorCode = StatusCodes.Status201Created,
                 };
                 return newResult;
             }
@@ -216,7 +216,8 @@ namespace Misa_TruongWeb03.DL.Repository.Base
                 {
                     ErrorCode = StatusCodes.Status500InternalServerError,
                     Data = null,
-                    DevMsg = ex.Message
+                    DevMsg = ex.Message,
+                    UserMsg = VN.Error500
                 };
                 return exception;
             }
@@ -239,13 +240,7 @@ namespace Misa_TruongWeb03.DL.Repository.Base
                 var result = await connection.QueryFirstOrDefaultAsync<int>(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
                 if (result > 0)
                 {
-                    var found = new BaseEntity
-                    {
-                        ErrorCode = StatusCodes.Status302Found,
-                        Data = true,
-                        DevMsg = VN.DuplicateError,
-                        UserMsg = VN.DuplicateError
-                    };
+                    var found = new DuplicateError();
                     return found;
                 }
                 var newResult = new BaseEntity

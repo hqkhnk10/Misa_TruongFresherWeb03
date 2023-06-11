@@ -39,7 +39,7 @@ namespace Misa_TruongWeb03.BL.Service.EmulationTitleService
             //Check trùng mã danh hiệu
             var updateModel = _mapper.Map<EmulationTitle>(model);
             var check = await CheckDuplicate(updateModel);
-            if (check.ErrorCode == StatusCodes.Status302Found)
+            if (check.ErrorCode == StatusCodes.Status409Conflict)
             {
                 return check;
             }
@@ -60,7 +60,7 @@ namespace Misa_TruongWeb03.BL.Service.EmulationTitleService
             var et = _mapper.Map<EmulationTitle>(model);
             et.EmulationTitleID = id;
             var check = await CheckDuplicate(et);
-            if (check.ErrorCode == StatusCodes.Status302Found)
+            if (check.ErrorCode == StatusCodes.Status409Conflict)
             {
                 return check;
             }

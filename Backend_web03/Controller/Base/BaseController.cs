@@ -46,7 +46,7 @@ namespace Misa_TruongWeb03.Controller.Base
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, new ExceptionError(ex));
             }
 
         }
@@ -65,7 +65,7 @@ namespace Misa_TruongWeb03.Controller.Base
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, new ExceptionError(ex));
             }
         }
         /// <summary>
@@ -88,7 +88,7 @@ namespace Misa_TruongWeb03.Controller.Base
             }
             catch (Exception ex)
             {
-                return ServerError(ex);
+                return StatusCode(StatusCodes.Status500InternalServerError, new ExceptionError(ex));
             }
         }
         /// <summary>
@@ -111,7 +111,7 @@ namespace Misa_TruongWeb03.Controller.Base
             }
             catch (Exception ex)
             {
-                return ServerError(ex);
+                return StatusCode(StatusCodes.Status500InternalServerError, new ExceptionError(ex));
             }
         }
         /// <summary>
@@ -150,21 +150,6 @@ namespace Misa_TruongWeb03.Controller.Base
             };
 
             return BadRequest(response);
-        }
-        /// <summary>
-        /// Trả về lỗi hệ thống
-        /// </summary>
-        /// <param name="ex"></param>
-        /// <returns></returns>
-        protected IActionResult ServerError(Exception ex)
-        {
-            var response = new BaseEntity
-            {
-                ErrorCode = StatusCodes.Status500InternalServerError,
-                DevMsg = ex.Message,
-                UserMsg = VN.Error500,
-            };
-            return StatusCode(500, response);
         }
         #endregion
     }

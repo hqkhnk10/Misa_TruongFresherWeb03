@@ -1,4 +1,5 @@
-﻿using Misa_TruongWeb03.Common.Resource;
+﻿using Microsoft.AspNetCore.Http;
+using Misa_TruongWeb03.Common.Resource;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,19 @@ using System.Threading.Tasks;
 namespace Misa_TruongWeb03.Common.Entity.Base
 {
     /// <summary>
+    /// Server Error
+    /// </summary>
+    public class ExceptionError : BaseEntity
+    {
+        public ExceptionError(Exception ex)
+        {
+            Data = null;
+            ErrorCode = StatusCodes.Status500InternalServerError;
+            DevMsg = ex.Message;
+            UserMsg = VN.Error500;
+        }
+    }
+    /// <summary>
     /// Lớp lỗi từ database ( database không thay đổi dữ liệu)
     /// Created By: NQTruong (25/05/2023)
     /// </summary>
@@ -16,7 +30,7 @@ namespace Misa_TruongWeb03.Common.Entity.Base
         public DatabaseError()
         {
             Data = null;
-            ErrorCode = 500;
+            ErrorCode = StatusCodes.Status500InternalServerError;
             DevMsg = VN.NoAffectedRows;
             UserMsg = VN.Error500;
         }
@@ -30,7 +44,7 @@ namespace Misa_TruongWeb03.Common.Entity.Base
         public DatabaseReturnNullError()
         {
             Data = null;
-            ErrorCode = 500;
+            ErrorCode = StatusCodes.Status500InternalServerError;
             DevMsg = VN.NoAffectedRows;
             UserMsg = VN.Error500;
         }
@@ -44,7 +58,7 @@ namespace Misa_TruongWeb03.Common.Entity.Base
         public DatabaseReturn0Error()
         {
             Data = 0;
-            ErrorCode = 500;
+            ErrorCode = StatusCodes.Status500InternalServerError;
             DevMsg = VN.NoAffectedRows;
             UserMsg = VN.Error500;
         }
@@ -57,7 +71,7 @@ namespace Misa_TruongWeb03.Common.Entity.Base
     {
         public NotFoundError()
         {
-            ErrorCode = 404;
+            ErrorCode = StatusCodes.Status404NotFound;
             DevMsg = VN.Error404;
             UserMsg = VN.Error404;
         }
@@ -70,7 +84,7 @@ namespace Misa_TruongWeb03.Common.Entity.Base
     {
         public DuplicateError()
         {
-            ErrorCode = 302;
+            ErrorCode = StatusCodes.Status409Conflict;
             DevMsg = VN.DuplicateError;
             UserMsg = VN.DuplicateError;
         }
