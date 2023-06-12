@@ -108,7 +108,7 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
                 var sourceFile = Path.Combine(_env.ContentRootPath, "FileStorage", $"{fileName}_export.xlsx");
                 var filePath = Path.Combine(_env.ContentRootPath, "FileStorage", $"{fileName}.xlsx");
                 var sourceFilePath = Path.Combine(_env.ContentRootPath, "FileStorage", $"{sourceFile}.xlsx");
-                CloneExcelFile(filePath, sourceFile);
+                CloneExcelFile(filePath, $"{fileName}_export");
                 //Viết vào file clone
                 WriteToExcel(sourceFile, listData, configs);
                 //Đọc dữ liệu của file

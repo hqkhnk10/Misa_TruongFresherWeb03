@@ -186,7 +186,7 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitleRepository
                 transaction.Commit();
                 return new BaseEntity
                 {
-                    ErrorCode = 200
+                    ErrorCode = StatusCodes.Status201Created
                 };
             }
             catch (Exception ex)
@@ -228,7 +228,7 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitleRepository
                 var errorCode = StatusCodes.Status200OK;
                 if (duplicates.Count() > 0)
                 {
-                    errorCode = StatusCodes.Status302Found;
+                    errorCode = StatusCodes.Status409Conflict;
                 }
                 return new BaseEntity
                 {

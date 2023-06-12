@@ -44,6 +44,10 @@ namespace Misa_TruongWeb03.BL.Service.EmulationTitleService
                 return check;
             }
             var result = await _baseRepository.Post(model);
+            if (result.Data == null || (int)result.Data == 0)
+            {
+                return new DatabaseError();
+            }
             return result;
 
         }
@@ -66,10 +70,10 @@ namespace Misa_TruongWeb03.BL.Service.EmulationTitleService
             }
             var updateModel = _mapper.Map<UpdateEmulationTitle>(et);
             var result = await _baseRepository.Put(updateModel);
-            //if (result.Data == null || (int)result.Data == 0)
-            //{
-            //    return new DatabaseError();
-            //}
+            if (result.Data == null || (int)result.Data == 0)
+            {
+                return new DatabaseError();
+            }
             return result;
         }
         /// <summary>

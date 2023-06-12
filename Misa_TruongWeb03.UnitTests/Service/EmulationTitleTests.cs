@@ -144,7 +144,7 @@ namespace Misa_TruongWeb03.UnitTests.Service
             var actualResult = await emulationTitleService.Post(postModel);
 
             //Assert
-            Assert.That(actualResult.ErrorCode == StatusCodes.Status302Found);
+            Assert.That(actualResult.ErrorCode == StatusCodes.Status409Conflict);
             await emulationTitleRepository.Received(1).CheckDuplicate(checkModel);
             await emulationTitleRepository.Received(0).Post(postModel);
         }
@@ -238,7 +238,7 @@ namespace Misa_TruongWeb03.UnitTests.Service
             var actualResult = await emulationTitleService.Put(id, postModel);
 
             //Assert
-            Assert.That(actualResult.ErrorCode == StatusCodes.Status302Found);
+            Assert.That(actualResult.ErrorCode == StatusCodes.Status409Conflict);
             await emulationTitleRepository.Received(1).CheckDuplicate(checkModel);
             await emulationTitleRepository.Received(0).Put(putModel);
         }
