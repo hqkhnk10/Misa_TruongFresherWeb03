@@ -2,6 +2,7 @@
 using Misa_TruongWeb03.BL.Service.Base;
 using Misa_TruongWeb03.Common.DTO.EmisStudy;
 using Misa_TruongWeb03.Common.Entity.Base;
+using Misa_TruongWeb03.Common.Entity.EmisStudy.Exercise;
 using Misa_TruongWeb03.Common.Entity.EmisStudy.Question;
 using Misa_TruongWeb03.DL.Repository.EmisStudy.QuestionRepo;
 using System;
@@ -22,9 +23,9 @@ namespace Misa_TruongWeb03.BL.Service.EmisStudy.QuestionService
         }
         #endregion
         #region Method
-        public async Task<BaseEntity> Post(ExercisePostDTO model)
+        public override async Task<BaseEntity> Post(QuestionPostDTO model)
         {
-            var result = await _questionRepository.Post(model);
+            var result = await _questionRepository.Post(model, model.ExerciseId);
             return result;
         }
         #endregion

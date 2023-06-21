@@ -1,4 +1,5 @@
 ﻿using Misa_TruongWeb03.Common.Entity.Base;
+using Misa_TruongWeb03.Common.Entity.EmisStudy.Answer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,5 +21,9 @@ namespace Misa_TruongWeb03.Common.Entity.EmisStudy.Question
         public string QuestionImage { get; set; }
         public int ExerciseId { get; set; }
 
+    }
+    public class QuestionDetailModel : Question
+    {
+        public List<AnswerModel> Answers { get; set; } = new List<AnswerModel>();
     }
 }

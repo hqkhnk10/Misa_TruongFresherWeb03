@@ -14,8 +14,8 @@ namespace Misa_TruongWeb03.Common.DTO.EmisStudy
     }
     public class QuestionPostDTO
     {
-        [Required]
-        public int ExerciseId { get; set; }
+        public int? ExerciseId { get; set; } = null;
+        public ExerciseModelDTO Exercise { get; set; }
         [Required]
         public QuestionType QuestionType { get; set; }
         [Required]

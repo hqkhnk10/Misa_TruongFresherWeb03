@@ -12,9 +12,20 @@ namespace Misa_TruongWeb03.Common.DTO.EmisStudy
 {
     public class ExerciseGetDTO : GetModel
     {
+        public ExerciseStatus? ExerciseStatus { get; set; }
+        public int? gradeId { get; set; }
+        public int? subjectId { get; set; }
+
     }
     public class ExercisePostDTO
     {
+        public ExerciseModelDTO Exercise { get; set; }
+        public List<QuestionPostModel> Questions { get; set; }
+    }
+    public class ExercisePutDTO
+    {
+    }
+    public class ExerciseModelDTO {
         [Required]
         public string ExerciseName { get; set; }
         [Required]
@@ -23,13 +34,10 @@ namespace Misa_TruongWeb03.Common.DTO.EmisStudy
         public int SubjectId { get; set; }
         [Required]
         public int GradeId { get; set; }
-        public int TopicId { get; set; }
+        public int? TopicId { get; set; }
         public IFormFile? ExerciseImage { get; set; } = null;
-        public List<QuestionPostModel> Questions { get; set; }
     }
-    public class ExercisePutDTO
-    {
-    }
+
     public class QuestionPostModel
     {
         [Required]

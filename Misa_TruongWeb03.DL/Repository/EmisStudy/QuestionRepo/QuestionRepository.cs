@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Misa_TruongWeb03.Common.DTO.EmisStudy;
 using Misa_TruongWeb03.Common.Entity.Base;
+using Misa_TruongWeb03.Common.Entity.EmisStudy.Exercise;
 using Misa_TruongWeb03.Common.Entity.EmisStudy.Question;
 using Misa_TruongWeb03.Common.Resource;
 using Misa_TruongWeb03.DL.Repository.Base;
@@ -23,17 +24,17 @@ namespace Misa_TruongWeb03.DL.Repository.EmisStudy.QuestionRepo
         {
         }
         #endregion
-        public async Task<BaseEntity> Post(QuestionPostDTO model)
+        public async Task<BaseEntity> Post(QuestionPostDTO model, int? ExerciseId)
         {
             using var connection = this.GetConnection();
             try
             {
                 connection.Open();
                 // Generate the SQL query to check for duplicates
-                var store = "proc_exercise_insert";
-                string jsonString = JsonSerializer.Serialize(model);
+                var store = "proc_question_insert";
+                string jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(model);
                 // Execute the query with the list of values as a parameter
-                var result = await connection.QueryAsync<int?>(store,new { jsonData = jsonString }, commandType: CommandType.StoredProcedure);
+                var result = await connection.QueryAsync<int?>(store,new { jsonData = jsonString , exerciseId = ExerciseId}, commandType: CommandType.StoredProcedure);
                 // If the count is greater than 0, duplicates exist
                 return new BaseEntity
                 {

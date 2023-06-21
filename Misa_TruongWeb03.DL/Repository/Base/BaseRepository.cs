@@ -87,7 +87,7 @@ namespace Misa_TruongWeb03.DL.Repository.Base
         /// <param name="model"></param>
         /// <returns>Base Entity</returns>
         /// CreatedBy: NQTruong (24/05/2023)
-        public async Task<BaseEntity> GetById(int id)
+        public virtual async Task<BaseEntity> GetById(int id)
         {
             var storedProcedureName = $"proc_{typeof(T).Name.ToLower()}_getdetail";
             DynamicParameters parameters = new DynamicParameters();

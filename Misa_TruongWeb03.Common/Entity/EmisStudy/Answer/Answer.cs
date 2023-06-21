@@ -15,4 +15,8 @@ namespace Misa_TruongWeb03.Common.Entity.EmisStudy.Answer
         public string AnswerImage { get; set; }
         public int QuestionId { get; set; }
     }
+    public class AnswerModel : Answer
+    {
+
+    }
 }
