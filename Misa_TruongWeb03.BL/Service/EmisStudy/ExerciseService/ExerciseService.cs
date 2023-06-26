@@ -20,6 +20,12 @@ namespace Misa_TruongWeb03.BL.Service.EmisStudy.ExerciseService
         }
         #endregion
         #region Method
+        /// <summary>
+        /// Thêm bài tập
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        /// CreatedBy: NQTruong (20/06/2023)
         public async Task<BaseEntity> Post(ExercisePostDTO model)
         {
             string jsonString = JsonSerializer.Serialize(model);

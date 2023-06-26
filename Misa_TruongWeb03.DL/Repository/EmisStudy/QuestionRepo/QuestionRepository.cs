@@ -24,6 +24,13 @@ namespace Misa_TruongWeb03.DL.Repository.EmisStudy.QuestionRepo
         {
         }
         #endregion
+        #region Method
+        /// <summary>
+        /// Thêm câu hỏi
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="ExerciseId"></param>
+        /// <returns></returns>
         public async Task<BaseEntity> Post(QuestionPostDTO model, int? ExerciseId)
         {
             using var connection = this.GetConnection();
@@ -34,7 +41,7 @@ namespace Misa_TruongWeb03.DL.Repository.EmisStudy.QuestionRepo
                 var store = "proc_question_insert";
                 string jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(model);
                 // Execute the query with the list of values as a parameter
-                var result = await connection.QueryAsync<int?>(store,new { jsonData = jsonString , exerciseId = ExerciseId}, commandType: CommandType.StoredProcedure);
+                var result = await connection.QueryFirstOrDefaultAsync<int?>(store, new { jsonData = jsonString, exerciseId = ExerciseId }, commandType: CommandType.StoredProcedure);
                 // If the count is greater than 0, duplicates exist
                 return new BaseEntity
                 {
@@ -55,6 +62,11 @@ namespace Misa_TruongWeb03.DL.Repository.EmisStudy.QuestionRepo
             }
             finally { connection.Close(); }
         }
+        /// <summary>
+        /// Sửa câu hỏi
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<BaseEntity> Put(QuestionPutDTO model)
         {
             using var connection = this.GetConnection();
@@ -65,7 +77,7 @@ namespace Misa_TruongWeb03.DL.Repository.EmisStudy.QuestionRepo
                 var store = "proc_exercise_update";
                 string jsonString = JsonSerializer.Serialize(model);
                 // Execute the query with the list of values as a parameter
-                var result = await connection.QueryAsync<int?>(store, new { Id = model.QuestionId ,jsonData = jsonString }, commandType: CommandType.StoredProcedure);
+                var result = await connection.QueryAsync<int?>(store, new { Id = model.QuestionId, jsonData = jsonString }, commandType: CommandType.StoredProcedure);
                 // If the count is greater than 0, duplicates exist
                 return new BaseEntity
                 {
@@ -85,7 +97,8 @@ namespace Misa_TruongWeb03.DL.Repository.EmisStudy.QuestionRepo
                 return exception;
             }
             finally { connection.Close(); }
-        }
+        } 
+        #endregion
 
     }
 }

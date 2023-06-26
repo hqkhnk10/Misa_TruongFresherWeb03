@@ -23,6 +23,11 @@ namespace Misa_TruongWeb03.BL.Service.EmisStudy.QuestionService
         }
         #endregion
         #region Method
+        /// <summary>
+        /// Thêm câu hỏi
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public override async Task<BaseEntity> Post(QuestionPostDTO model)
         {
             var result = await _questionRepository.Post(model, model.ExerciseId);

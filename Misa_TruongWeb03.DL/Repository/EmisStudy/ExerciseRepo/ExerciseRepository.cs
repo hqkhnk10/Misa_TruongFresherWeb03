@@ -24,6 +24,13 @@ namespace Misa_TruongWeb03.DL.Repository.EmisStudy.ExerciseRepo
         {
         }
         #endregion
+        #region Method
+        /// <summary>
+        /// Lấy bài tập theo Id
+        /// </summary>
+        /// <param name="Id"></param>
+        /// CreatedBy: NQTruong (20/06/2023)
+        /// <returns></returns>
         public override async Task<BaseEntity> GetById(int Id)
         {
             using var connection = this.GetConnection();
@@ -73,7 +80,12 @@ namespace Misa_TruongWeb03.DL.Repository.EmisStudy.ExerciseRepo
             }
             finally { connection.Close(); }
         }
-
+        /// <summary>
+        /// Thêm bài tập
+        /// </summary>
+        /// <param name="jsonModel"></param>
+        /// CreatedBy: NQTruong (20/06/2023)
+        /// <returns></returns>
         public async Task<BaseEntity> Post(string jsonModel)
         {
             using var connection = this.GetConnection();
@@ -104,6 +116,7 @@ namespace Misa_TruongWeb03.DL.Repository.EmisStudy.ExerciseRepo
                 return exception;
             }
             finally { connection.Close(); }
-        }
+        } 
+        #endregion
     }
 }
