@@ -26,6 +26,7 @@ namespace Misa_TruongWeb03.Common.DTO.EmisStudy
     {
     }
     public class ExerciseModelDTO {
+        public int? ExerciseId { get; set; } = null;
         public string ExerciseName { get; set; }
         [Required]
         public ExerciseStatus ExerciseStatus { get; set; }

@@ -30,7 +30,7 @@ namespace Misa_TruongWeb03.BL.Service.EmisStudy.QuestionService
         /// <returns></returns>
         public override async Task<BaseEntity> Post(QuestionPostDTO model)
         {
-            var result = await _questionRepository.Post(model, model.ExerciseId);
+            var result = await _questionRepository.Post(model, model.Exercise.ExerciseId);
             return result;
         }
         #endregion

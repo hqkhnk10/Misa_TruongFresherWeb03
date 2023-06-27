@@ -77,7 +77,7 @@ namespace Misa_TruongWeb03.DL.Repository.EmisStudy.QuestionRepo
                 var store = "proc_exercise_update";
                 string jsonString = JsonSerializer.Serialize(model);
                 // Execute the query with the list of values as a parameter
-                var result = await connection.QueryAsync<int?>(store, new { Id = model.QuestionId, jsonData = jsonString }, commandType: CommandType.StoredProcedure);
+                var result = await connection.QueryAsync<int?>(store, new { exerciseId = model.QuestionId, jsonData = jsonString }, commandType: CommandType.StoredProcedure);
                 // If the count is greater than 0, duplicates exist
                 return new BaseEntity
                 {
