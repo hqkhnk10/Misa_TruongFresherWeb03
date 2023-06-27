@@ -67,7 +67,7 @@ namespace Misa_TruongWeb03.DL.Repository.EmisStudy.QuestionRepo
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<BaseEntity> Put(QuestionPutDTO model)
+        public async Task<BaseEntity> Put(int id, QuestionPostDTO model)
         {
             using var connection = this.GetConnection();
             try
@@ -77,7 +77,7 @@ namespace Misa_TruongWeb03.DL.Repository.EmisStudy.QuestionRepo
                 var store = "proc_exercise_update";
                 string jsonString = JsonSerializer.Serialize(model);
                 // Execute the query with the list of values as a parameter
-                var result = await connection.QueryAsync<int?>(store, new { exerciseId = model.QuestionId, jsonData = jsonString }, commandType: CommandType.StoredProcedure);
+                var result = await connection.QueryAsync<int?>(store, new { questionId = id, exerciseId = model.Exercise.ExerciseId, jsonData = jsonString }, commandType: CommandType.StoredProcedure);
                 // If the count is greater than 0, duplicates exist
                 return new BaseEntity
                 {

@@ -33,6 +33,16 @@ namespace Misa_TruongWeb03.BL.Service.EmisStudy.QuestionService
             var result = await _questionRepository.Post(model, model.Exercise.ExerciseId);
             return result;
         }
+        /// <summary>
+        /// Sửa câu hỏi
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public override async Task<BaseEntity> Put(int id, QuestionPostDTO model)
+        {
+            var result = await _questionRepository.Put(id, model);
+            return result;
+        }
         #endregion
     }
 }
