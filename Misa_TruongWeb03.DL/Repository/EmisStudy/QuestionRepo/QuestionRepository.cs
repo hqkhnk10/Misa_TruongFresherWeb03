@@ -74,10 +74,10 @@ namespace Misa_TruongWeb03.DL.Repository.EmisStudy.QuestionRepo
             {
                 connection.Open();
                 // Generate the SQL query to check for duplicates
-                var store = "proc_exercise_update";
+                var store = "proc_question_update";
                 string jsonString = JsonSerializer.Serialize(model);
                 // Execute the query with the list of values as a parameter
-                var result = await connection.QueryAsync<int?>(store, new { questionId = id, exerciseId = model.Exercise.ExerciseId, jsonData = jsonString }, commandType: CommandType.StoredProcedure);
+                var result = await connection.QueryAsync<int?>(store, new { Id = id, exerciseId = model.Exercise.ExerciseId, jsonData = jsonString }, commandType: CommandType.StoredProcedure);
                 // If the count is greater than 0, duplicates exist
                 return new BaseEntity
                 {

@@ -49,7 +49,7 @@ namespace Misa_TruongWeb03.DL.Repository.EmisStudy.ExerciseRepo
                 answerData = answerData.ToList();
                 questionData = questionData.Select(q =>
                 {
-                    q.Answers.AddRange(answerData);
+                    q.Answers.AddRange(answerData.Where(a=>a.QuestionId == q.QuestionId));
                     return q;
                 });
                 questionData = questionData.ToList();

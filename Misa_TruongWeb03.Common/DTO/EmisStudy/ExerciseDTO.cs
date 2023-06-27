@@ -53,7 +53,7 @@ namespace Misa_TruongWeb03.Common.DTO.EmisStudy
         [Required]
         public string AnswerContent { get; set; }
         [Required]
-        public bool Status { get; set; }
+        public bool AnswerStatus { get; set; }
         public IFormFile? AnswerImage { get; set; } = null;
     }
 }
