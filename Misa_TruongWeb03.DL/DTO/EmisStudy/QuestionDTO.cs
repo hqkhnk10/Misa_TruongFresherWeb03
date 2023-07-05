@@ -16,10 +16,13 @@ namespace Misa_TruongWeb03.Common.DTO.EmisStudy
     {
         public ExerciseModelDTO Exercise { get; set; }
         [Required]
+        [EnumDataType(typeof(QuestionType))]
         public QuestionType QuestionType { get; set; }
         [Required]
+        [MaxLength(255)]
         public string QuestionContent { get; set; }
-        public string? QuestionNote { get; set; }
+        [MaxLength(255)]
+        public string? QuestionNote { get; set; } = null;
         public IFormFile? QuestionImage { get; set; } = null;
         public List<AnswerPostModel> Answers { get; set; }
     }
