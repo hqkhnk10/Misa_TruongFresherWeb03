@@ -87,4 +87,9 @@ namespace Misa_TruongWeb03.Common.Entity.Base
         }
 
     }
+    public class ValidationResponse
+    {
+        public bool Data { get; set; }
+        public string Message { get; set; }
+    }
 }

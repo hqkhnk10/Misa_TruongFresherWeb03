@@ -19,7 +19,7 @@ builder.Services.AddScoped<IEmulationCommendationRepository, EmulationCommendati
 builder.Services.AddControllers()
     .ConfigureApiBehaviorOptions(options =>
     {
-        options.SuppressModelStateInvalidFilter = true;
+        options.SuppressModelStateInvalidFilter = false;
     });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

@@ -77,10 +77,10 @@ namespace Misa_TruongWeb03.Controller.Base
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] TEntityPostDto model)
         {
-            if (!ModelState.IsValid)
-            {
-                return HandleValidationErrors();
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return HandleValidationErrors();
+            //}
             try
             {
                 var result = await _baseService.Post(model);

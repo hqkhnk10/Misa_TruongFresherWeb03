@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "Hash": "LFN5UKNtgN5MRj0u4SGXxDs+ErqkRaK1N+JtnBUsx9U=",
+  "Hash": "ViWuI+X118fwu5ce9VfkQmlP44RmCoC3ycmp67h9OvY=",
   "Source": "Misa_TruongWeb03.Emis",
   "BasePath": "_content/Misa_TruongWeb03.Emis",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "D:\\MISA2023\\BackendFolder\\Backend_web03\\Misa_TruongWeb03.csproj",
+      "Identity": "C:\\Users\\mr_tr\\WorkPlace\\MISA\\New Backend\\Misa_TruongFresherWeb03\\Backend_web03\\Misa_TruongWeb03.csproj",
       "Version": 2,
       "Source": "Misa_TruongWeb03",
       "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",

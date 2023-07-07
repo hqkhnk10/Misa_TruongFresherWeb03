@@ -43,3 +43,18 @@ C:\Users\mr_tr\WorkPlace\MISA\Misa_TruongFresherWeb03\Misa_TruongWeb03.DL\obj\De
 C:\Users\mr_tr\WorkPlace\MISA\Misa_TruongFresherWeb03\Misa_TruongWeb03.DL\obj\Debug\net6.0\refint\Misa_TruongWeb03.DL.dll
 C:\Users\mr_tr\WorkPlace\MISA\Misa_TruongFresherWeb03\Misa_TruongWeb03.DL\obj\Debug\net6.0\Misa_TruongWeb03.DL.pdb
 C:\Users\mr_tr\WorkPlace\MISA\Misa_TruongFresherWeb03\Misa_TruongWeb03.DL\obj\Debug\net6.0\ref\Misa_TruongWeb03.DL.dll
+C:\Users\mr_tr\WorkPlace\MISA\New Backend\Misa_TruongFresherWeb03\Misa_TruongWeb03.DL\bin\Debug\net6.0\Misa_TruongWeb03.DL.deps.json
+C:\Users\mr_tr\WorkPlace\MISA\New Backend\Misa_TruongFresherWeb03\Misa_TruongWeb03.DL\bin\Debug\net6.0\Misa_TruongWeb03.DL.dll
+C:\Users\mr_tr\WorkPlace\MISA\New Backend\Misa_TruongFresherWeb03\Misa_TruongWeb03.DL\bin\Debug\net6.0\Misa_TruongWeb03.DL.pdb
+C:\Users\mr_tr\WorkPlace\MISA\New Backend\Misa_TruongFresherWeb03\Misa_TruongWeb03.DL\bin\Debug\net6.0\Misa_TruongWeb03.Common.dll
+C:\Users\mr_tr\WorkPlace\MISA\New Backend\Misa_TruongFresherWeb03\Misa_TruongWeb03.DL\bin\Debug\net6.0\Misa_TruongWeb03.Common.pdb
+C:\Users\mr_tr\WorkPlace\MISA\New Backend\Misa_TruongFresherWeb03\Misa_TruongWeb03.DL\obj\Debug\net6.0\Misa_TruongWeb03.DL.csproj.AssemblyReference.cache
+C:\Users\mr_tr\WorkPlace\MISA\New Backend\Misa_TruongFresherWeb03\Misa_TruongWeb03.DL\obj\Debug\net6.0\Misa_TruongWeb03.DL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mr_tr\WorkPlace\MISA\New Backend\Misa_TruongFresherWeb03\Misa_TruongWeb03.DL\obj\Debug\net6.0\Misa_TruongWeb03.DL.AssemblyInfoInputs.cache
+C:\Users\mr_tr\WorkPlace\MISA\New Backend\Misa_TruongFresherWeb03\Misa_TruongWeb03.DL\obj\Debug\net6.0\Misa_TruongWeb03.DL.AssemblyInfo.cs
+C:\Users\mr_tr\WorkPlace\MISA\New Backend\Misa_TruongFresherWeb03\Misa_TruongWeb03.DL\obj\Debug\net6.0\Misa_TruongWeb03.DL.csproj.CoreCompileInputs.cache
+C:\Users\mr_tr\WorkPlace\MISA\New Backend\Misa_TruongFresherWeb03\Misa_TruongWeb03.DL\obj\Debug\net6.0\Misa_TruongWeb03.DL.csproj.CopyComplete
+C:\Users\mr_tr\WorkPlace\MISA\New Backend\Misa_TruongFresherWeb03\Misa_TruongWeb03.DL\obj\Debug\net6.0\Misa_TruongWeb03.DL.dll
+C:\Users\mr_tr\WorkPlace\MISA\New Backend\Misa_TruongFresherWeb03\Misa_TruongWeb03.DL\obj\Debug\net6.0\refint\Misa_TruongWeb03.DL.dll
+C:\Users\mr_tr\WorkPlace\MISA\New Backend\Misa_TruongFresherWeb03\Misa_TruongWeb03.DL\obj\Debug\net6.0\Misa_TruongWeb03.DL.pdb
+C:\Users\mr_tr\WorkPlace\MISA\New Backend\Misa_TruongFresherWeb03\Misa_TruongWeb03.DL\obj\Debug\net6.0\ref\Misa_TruongWeb03.DL.dll
