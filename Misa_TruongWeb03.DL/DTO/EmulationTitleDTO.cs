@@ -10,7 +10,7 @@ namespace Misa_TruongWeb03.Common.DTO
     /// Model cho GET của danh hiệu thi đua
     /// </summary>
     /// CreatedBy: NQTruong (24/05/2023)
-    public class GetEmulationTitle : GetModel
+    public class GetEmulationTitle : FilterModel
     {
         public ApplyObject? ApplyObject { get; set; } = null;
         public CommendationLevel? CommendationLevel { get; set; } = null;

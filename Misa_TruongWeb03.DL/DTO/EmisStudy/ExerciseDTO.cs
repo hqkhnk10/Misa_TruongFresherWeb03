@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Misa_TruongWeb03.Common.Entity.Base;
+using Misa_TruongWeb03.Common.Entity.EmisStudy.Exercise;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,7 +12,7 @@ using static Misa_TruongWeb03.Common.Enum.EmulationTitleEnum;
 
 namespace Misa_TruongWeb03.Common.DTO.EmisStudy
 {
-    public class ExerciseGetDTO : GetModel
+    public class ExerciseGetDTO : FilterModel
     {
         public ExerciseStatus? ExerciseStatus { get; set; }
         public int? gradeId { get; set; }
@@ -36,7 +37,8 @@ namespace Misa_TruongWeb03.Common.DTO.EmisStudy
     public class ExercisePutDTO
     {
     }
-    public class ExerciseModelDTO {
+    public class ExerciseModelDTO
+    {
         public int? ExerciseId { get; set; } = null;
         [MaxLength(255)]
         public string ExerciseName { get; set; }

@@ -10,7 +10,7 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitleRepository
     /// Kế thừa lớp base repo
     /// </summary>
     /// CreatedBy: NQTruong (24/05/2023)
-    public interface IEmulationTitleRepository : IBaseRepository<EmulationTitle, GetEmulationTitle, PostEmulationTitle, UpdateEmulationTitle>
+    public interface IEmulationTitleRepository : IBaseRepository<EmulationTitle>
     {
         #region Method
         Task<BaseEntity> DeleteMultiple(DeleteEmulationTitle model);

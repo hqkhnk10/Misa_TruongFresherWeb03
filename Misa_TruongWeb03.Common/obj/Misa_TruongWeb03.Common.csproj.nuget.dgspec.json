@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mr_tr\\WorkPlace\\MISA\\New Backend\\Misa_TruongFresherWeb03\\Misa_TruongWeb03.Common\\Misa_TruongWeb03.Common.csproj": {}
+    "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03.Common\\Misa_TruongWeb03.Common.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mr_tr\\WorkPlace\\MISA\\New Backend\\Misa_TruongFresherWeb03\\Misa_TruongWeb03.Common\\Misa_TruongWeb03.Common.csproj": {
+    "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03.Common\\Misa_TruongWeb03.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mr_tr\\WorkPlace\\MISA\\New Backend\\Misa_TruongFresherWeb03\\Misa_TruongWeb03.Common\\Misa_TruongWeb03.Common.csproj",
+        "projectUniqueName": "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03.Common\\Misa_TruongWeb03.Common.csproj",
         "projectName": "Misa_TruongWeb03.Common",
-        "projectPath": "C:\\Users\\mr_tr\\WorkPlace\\MISA\\New Backend\\Misa_TruongFresherWeb03\\Misa_TruongWeb03.Common\\Misa_TruongWeb03.Common.csproj",
-        "packagesPath": "C:\\Users\\mr_tr\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mr_tr\\WorkPlace\\MISA\\New Backend\\Misa_TruongFresherWeb03\\Misa_TruongWeb03.Common\\obj\\",
+        "projectPath": "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03.Common\\Misa_TruongWeb03.Common.csproj",
+        "packagesPath": "C:\\Users\\Tngo\\.nuget\\packages\\",
+        "outputPath": "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03.Common\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\mr_tr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Tngo\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -52,6 +52,10 @@
               "target": "Package",
               "version": "[12.0.1, )"
             },
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.0.123, )"
+            },
             "Microsoft.AspNetCore.Http.Abstractions": {
               "target": "Package",
               "version": "[2.2.0, )"
@@ -81,7 +85,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

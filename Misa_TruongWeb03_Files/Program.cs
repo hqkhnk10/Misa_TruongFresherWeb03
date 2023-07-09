@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddScoped<IEmulationTitleImportService, EmulationTitleImportService>();
 builder.Services.AddScoped<IFileRepository, FileRepository>();
-builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.AddScoped<IBaseExportService, BaseExportService>();
 builder.Services.AddScoped<IEmulationTitleService, EmulationTitleService>();
 builder.Services.AddScoped<IEmulationTitleRepository, EmulationTitleRepository>();
 

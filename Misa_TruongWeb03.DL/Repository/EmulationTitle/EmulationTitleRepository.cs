@@ -21,7 +21,7 @@ namespace Misa_TruongWeb03.DL.Repository.EmulationTitleRepository
     /// kết nối với database
     /// </summary>
     /// CreatedBy: NQTruong (24/05/2023)
-    public class EmulationTitleRepository : BaseRepository<EmulationTitle, GetEmulationTitle, PostEmulationTitle, UpdateEmulationTitle>, IEmulationTitleRepository
+    public class EmulationTitleRepository : BaseRepository<EmulationTitle>, IEmulationTitleRepository
     {
         #region Constructor
         public EmulationTitleRepository(IConfiguration configuration) : base(configuration)

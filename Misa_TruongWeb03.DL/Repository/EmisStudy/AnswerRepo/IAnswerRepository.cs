@@ -4,7 +4,7 @@ using Misa_TruongWeb03.DL.Repository.Base;
 
 namespace Misa_TruongWeb03.DL.Repository.EmisStudy.AnswerRepo
 {
-    public interface IAnswerRepository : IBaseRepository<Answer, AnswerGetDTO, AnswerPostDTO, AnswerPutDTO>
+    public interface IAnswerRepository : IBaseRepository<Answer>
     {
     }
 }

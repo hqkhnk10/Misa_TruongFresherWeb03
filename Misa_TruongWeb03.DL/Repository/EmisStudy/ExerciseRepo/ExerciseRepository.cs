@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace Misa_TruongWeb03.DL.Repository.EmisStudy.ExerciseRepo
 {
-    public class ExerciseRepository : BaseRepository<Exercise, ExerciseGetDTO, ExercisePostDTO, ExercisePutDTO>, IExerciseRepository
+    public class ExerciseRepository : BaseRepository<Exercise>, IExerciseRepository
     {
         #region Constructor
         public ExerciseRepository(IConfiguration configuration) : base(configuration)

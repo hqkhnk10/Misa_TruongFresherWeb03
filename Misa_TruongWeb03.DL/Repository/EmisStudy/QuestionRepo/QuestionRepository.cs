@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace Misa_TruongWeb03.DL.Repository.EmisStudy.QuestionRepo
 {
-    public class QuestionRepository : BaseRepository<Question, QuestionGetDTO, QuestionPostDTO, QuestionPutDTO>, IQuestionRepository
+    public class QuestionRepository : BaseRepository<Question>, IQuestionRepository
     {
         #region Constructor
         public QuestionRepository(IConfiguration configuration) : base(configuration)

@@ -14,12 +14,9 @@ namespace Misa_TruongWeb03.DL.Repository.Base
     /// <summary>
     /// Base Repo kết nối tới database, gọi store procedure
     /// </summary>
-    /// <typeparam name="T">Generic Entity model</typeparam>
-    /// <typeparam name="TGetDTO">Generic Get DTO model</typeparam>
-    /// <typeparam name="TPostDTO">Generic Post DTO model</typeparam>
-    /// <typeparam name="TPutDTO">Generic Put DTO model</typeparam>
+    /// <typeparam name="TEntity">Generic Entity model</typeparam>
     /// CreatedBy: NQTruong (24/05/2023)
-    public abstract class BaseRepository<T, TGetDTO, TPostDTO, TPutDTO> : IBaseRepository<T, TGetDTO, TPostDTO, TPutDTO>
+    public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity>
     {
         #region Property
         protected readonly IConfiguration _configuration;
@@ -46,25 +43,29 @@ namespace Misa_TruongWeb03.DL.Repository.Base
         /// <param name="model"></param>
         /// <returns>Base Entity</returns>
         /// CreatedBy: NQTruong (24/05/2023)
-        public async Task<BaseEntity> Get(TGetDTO model)
+        public async Task<BaseEntity> Get(TEntity model, FilterModel getModel)
         {
             using var connection = GetConnection();
             try
             {
-                if(model == null)
-                {
-                    return new NotFoundError();
-                }
-                var parameters = ParameterObjectBuilder.CreateParameterObject(model);
-                var storedProcedureName = $"proc_{typeof(T).Name.ToLower()}_get";
                 connection.Open();
-                var result = await connection.QueryAsync<T>(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
-                var listModel = result.AsList();
+                var storedProcedureName = GenerateProcName.Generate<TEntity>("Get");
+
+                var parameters = DynamicParametersAdd.CreateParameterDynamic(model);
+                foreach (var property in typeof(FilterModel).GetProperties())
+                {
+                    var value = property.GetValue(getModel);
+                    parameters.Add(property.Name, value);
+                }
+
+                var result = await connection.QueryMultipleAsync(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
+                var listModel = await result.ReadAsync<TEntity>();
+                var totalCount = await result.ReadSingleAsync<int>();
                 var newResult = new BaseEntity
                 {
                     ErrorCode = StatusCodes.Status200OK,
                     Data = listModel,
-                    Pagination = new Pagination() { PageIndex = PropertyAccess.GetPropertyValue(model, "pageIndex"), PageSize = PropertyAccess.GetPropertyValue(model, "pageSize"), Count = listModel.Count > 0 ? PropertyAccess.GetPropertyValue(listModel[0], "Count") : 0 }
+                    Pagination = new Pagination() { PageIndex = getModel.PageIndex, PageSize = getModel.PageSize, Count = totalCount }
                 };
                 return newResult;
             }
@@ -89,14 +90,16 @@ namespace Misa_TruongWeb03.DL.Repository.Base
         /// CreatedBy: NQTruong (24/05/2023)
         public virtual async Task<BaseEntity> GetById(int id)
         {
-            var storedProcedureName = $"proc_{typeof(T).Name.ToLower()}_getdetail";
-            DynamicParameters parameters = new DynamicParameters();
+            var storedProcedureName = GenerateProcName.Generate<TEntity>("GetById");
+
+            var parameters = new DynamicParameters();
             parameters.AddDynamicParams(new { id });
+
             using var connection = GetConnection();
             try
             {
                 connection.Open();
-                var result = await connection.QueryFirstOrDefaultAsync<T>(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
+                var result = await connection.QueryFirstOrDefaultAsync<TEntity>(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
                 var newResult = new BaseEntity
                 {
                     ErrorCode = StatusCodes.Status200OK,
@@ -109,7 +112,6 @@ namespace Misa_TruongWeb03.DL.Repository.Base
                 var exception = new BaseEntity
                 {
                     ErrorCode = StatusCodes.Status500InternalServerError,
-                    Data = null,
                     DevMsg = ex.Message,
                     UserMsg = VN.Error500
                 };
@@ -123,15 +125,18 @@ namespace Misa_TruongWeb03.DL.Repository.Base
         /// <param name="model"></param>
         /// <returns>Base Entity</returns>
         /// CreatedBy: NQTruong (24/05/2023)
-        public async Task<BaseEntity> Post(TPostDTO model)
+        public async Task<BaseEntity> Post(TEntity model)
         {
             using var connection = GetConnection();
             try
             {
-                var parameters = ParameterObjectBuilder.CreateParameterObject(model);
-                var storedProcedureName = $"proc_{typeof(T).Name.ToLower()}_insert";
                 connection.Open();
-                var result = await connection.QueryFirstOrDefaultAsync<int>(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
+
+                var storedProcedureName = GenerateProcName.Generate<TEntity>("Post");
+
+                var parameters = DynamicParametersAdd.CreateParameterDynamic(model);
+
+                var result = await connection.QueryAsync<int>(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
                 var newResult = new BaseEntity
                 {
                     Data = result,
@@ -158,15 +163,18 @@ namespace Misa_TruongWeb03.DL.Repository.Base
         /// <param name="model"></param>
         /// <returns>Base Entity</returns>
         /// CreatedBy: NQTruong (24/05/2023)
-        public async Task<BaseEntity> Put(TPutDTO model)
+        public async Task<BaseEntity> Put(TEntity model)
         {
             using var connection = GetConnection();
             try
             {
-                var parameters = ParameterObjectBuilder.CreateParameterObject(model);
-                var storedProcedureName = $"proc_{typeof(T).Name.ToLower()}_update";
                 connection.Open();
-                var result = await connection.QueryFirstOrDefaultAsync<int>(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
+
+                var storedProcedureName = GenerateProcName.Generate<TEntity>("Put");
+
+                var parameters = DynamicParametersAdd.CreateParameterDynamic(model);
+
+                var result = await connection.QueryAsync<int>(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
                 var newResult = new BaseEntity
                 {
                     ErrorCode = StatusCodes.Status200OK,
@@ -195,14 +203,24 @@ namespace Misa_TruongWeb03.DL.Repository.Base
         /// CreatedBy: NQTruong (24/05/2023)
         public async Task<BaseEntity> Delete(int id)
         {
-            var storedProcedureName = $"proc_{typeof(T).Name.ToLower()}_delete";
-            DynamicParameters parameters = new DynamicParameters();
-            parameters.AddDynamicParams(new { id });
+
             using var connection = GetConnection();
             try
             {
                 connection.Open();
+
+                var storedProcedureName = GenerateProcName.Generate<TEntity>("Delete");
+
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.AddDynamicParams(new { id });
+
+                
                 var result = await connection.ExecuteAsync(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
+                if(result == 0)
+                {
+                    return new DatabaseError();
+                }
+
                 var newResult = new BaseEntity
                 {
                     ErrorCode = StatusCodes.Status200OK,
@@ -229,14 +247,16 @@ namespace Misa_TruongWeb03.DL.Repository.Base
         /// <param name="model"></param>
         /// <returns>Base Entity</returns>
         /// CreatedBy: NQTruong (24/05/2023)
-        public async Task<BaseEntity> CheckDuplicate(T model)
+        public async Task<BaseEntity> CheckDuplicate(TEntity model)
         {
             using var connection = GetConnection();
             try
             {
-                var parameters = ParameterObjectBuilder.CreateParameterObject(model);
-                var storedProcedureName = $"proc_{typeof(T).Name.ToLower()}_checkDuplicate";
                 connection.Open();
+
+                var parameters = ParameterObjectBuilder.CreateParameterObject(model);
+                var storedProcedureName = $"proc_{typeof(TEntity).Name.ToLower()}_checkDuplicate";
+
                 var result = await connection.QueryFirstOrDefaultAsync<int>(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
                 if (result > 0)
                 {

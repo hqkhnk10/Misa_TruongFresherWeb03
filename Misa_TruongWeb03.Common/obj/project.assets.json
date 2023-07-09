@@ -49,6 +49,19 @@
           "lib/netstandard2.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
         }
       },
+      "Dapper/2.0.123": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0/Dapper.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net5.0/Dapper.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.AspNetCore.Http.Abstractions/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -386,6 +399,24 @@
         "automapper.extensions.microsoft.dependencyinjection.nuspec",
         "icon.png",
         "lib/netstandard2.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll"
+      ]
+    },
+    "Dapper/2.0.123": {
+      "sha512": "RDFF4rBLLmbpi6pwkY7q/M6UXHRJEOerplDGE5jwEkP/JGJnBauAClYavNKJPW1yOTWRPIyfj4is3EaJxQXILQ==",
+      "type": "package",
+      "path": "dapper/2.0.123",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Dapper.png",
+        "dapper.2.0.123.nupkg.sha512",
+        "dapper.nuspec",
+        "lib/net461/Dapper.dll",
+        "lib/net461/Dapper.xml",
+        "lib/net5.0/Dapper.dll",
+        "lib/net5.0/Dapper.xml",
+        "lib/netstandard2.0/Dapper.dll",
+        "lib/netstandard2.0/Dapper.xml"
       ]
     },
     "Microsoft.AspNetCore.Http.Abstractions/2.2.0": {
@@ -908,25 +939,26 @@
       "Aspose.Cells >= 23.5.0",
       "AutoMapper >= 12.0.1",
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 12.0.1",
+      "Dapper >= 2.0.123",
       "Microsoft.AspNetCore.Http.Abstractions >= 2.2.0",
       "Microsoft.AspNetCore.Http.Features >= 5.0.17",
       "Newtonsoft.Json >= 13.0.3"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mr_tr\\.nuget\\packages\\": {}
+    "C:\\Users\\Tngo\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mr_tr\\WorkPlace\\MISA\\New Backend\\Misa_TruongFresherWeb03\\Misa_TruongWeb03.Common\\Misa_TruongWeb03.Common.csproj",
+      "projectUniqueName": "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03.Common\\Misa_TruongWeb03.Common.csproj",
       "projectName": "Misa_TruongWeb03.Common",
-      "projectPath": "C:\\Users\\mr_tr\\WorkPlace\\MISA\\New Backend\\Misa_TruongFresherWeb03\\Misa_TruongWeb03.Common\\Misa_TruongWeb03.Common.csproj",
-      "packagesPath": "C:\\Users\\mr_tr\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mr_tr\\WorkPlace\\MISA\\New Backend\\Misa_TruongFresherWeb03\\Misa_TruongWeb03.Common\\obj\\",
+      "projectPath": "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03.Common\\Misa_TruongWeb03.Common.csproj",
+      "packagesPath": "C:\\Users\\Tngo\\.nuget\\packages\\",
+      "outputPath": "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03.Common\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\mr_tr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Tngo\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -964,6 +996,10 @@
             "target": "Package",
             "version": "[12.0.1, )"
           },
+          "Dapper": {
+            "target": "Package",
+            "version": "[2.0.123, )"
+          },
           "Microsoft.AspNetCore.Http.Abstractions": {
             "target": "Package",
             "version": "[2.2.0, )"
@@ -993,7 +1029,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }

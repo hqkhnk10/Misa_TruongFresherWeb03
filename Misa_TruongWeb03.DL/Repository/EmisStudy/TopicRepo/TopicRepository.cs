@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Misa_TruongWeb03.DL.Repository.EmisStudy.TopicRepo
 {
-    public class TopicRepository : BaseRepository<Topic, TopicGetDTO, TopicPostDTO, TopicPutDTO>, ITopicRepository
+    public class TopicRepository : BaseRepository<Topic>, ITopicRepository
     {
         #region Constructor
         public TopicRepository(IConfiguration configuration) : base(configuration)

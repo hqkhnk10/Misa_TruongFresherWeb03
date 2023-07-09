@@ -5,7 +5,7 @@ using Misa_TruongWeb03.DL.Repository.Base;
 
 namespace Misa_TruongWeb03.DL.Repository.EmisStudy.ExerciseRepo
 {
-    public interface IExerciseRepository : IBaseRepository<Exercise, ExerciseGetDTO, ExercisePostDTO, ExercisePutDTO>
+    public interface IExerciseRepository : IBaseRepository<Exercise>
     {
         Task<BaseEntity> Post(string jsonModel);
     }

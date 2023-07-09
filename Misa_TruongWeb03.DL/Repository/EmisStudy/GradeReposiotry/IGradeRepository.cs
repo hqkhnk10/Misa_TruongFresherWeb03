@@ -4,7 +4,7 @@ using Misa_TruongWeb03.DL.Repository.Base;
 
 namespace Misa_TruongWeb03.DL.Repository.EmisStudy.GradeReposiotry
 {
-    public interface IGradeRepository : IBaseRepository<Grade, GradeGetDTO, GradePostDTO, GradePutDTO>
+    public interface IGradeRepository : IBaseRepository<Grade>
     {
     }
 }
