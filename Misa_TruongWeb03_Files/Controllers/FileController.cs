@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Misa_TruongWeb03.BL.Service.FileServices;
-using Misa_TruongWeb03.BL.Service.Import;
 using Misa_TruongWeb03.Common.Entity.Base;
 using Misa_TruongWeb03.Common.Entity.FileEntity;
 using Misa_TruongWeb03.Common.Helper;
 using Misa_TruongWeb03.Common.DTO;
+using Misa_TruongWeb03.BL.Service.EmisStudy.QuestionService;
 
 namespace Misa_TruongWeb03_File.Controller
 {
@@ -75,7 +75,7 @@ namespace Misa_TruongWeb03_File.Controller
         [HttpPost("ValidateFile")]
         public async Task<IActionResult> ValidateFile([FromForm] ValidateFileDTO model)
         {
-            var service = GetService(model.Key);
+            var service = GetImportService(model.Key);
             if (service == null)
             {
                 return StatusCode(StatusCodes.Status404NotFound, new NotFoundError()); ;
@@ -103,7 +103,7 @@ namespace Misa_TruongWeb03_File.Controller
             try
             {
                 var name = new GetTableTitle().GetTableName(key);
-                var service = GetService(key);
+                var service = GetExportService(key);
                 if (service == null)
                 {
                     return NotFound();
@@ -135,7 +135,7 @@ namespace Misa_TruongWeb03_File.Controller
             try
             {
                 var name = new GetTableTitle().GetTableName(model.Key);
-                var service = GetService(model.Key);
+                var service = GetImportService(model.Key);
                 if (service == null)
                 {
                     return NotFound(new NotFoundError());
@@ -155,21 +155,39 @@ namespace Misa_TruongWeb03_File.Controller
             }
         }
         /// <summary>
-        /// Lấy service dựa theo key
+        /// Lấy import service dựa theo key
         /// </summary>
         /// <param name="key"></param>
         /// Created By: NQTruong (01/06/2023)
         /// <returns></returns>
-        private dynamic? GetService(string key)
+        private dynamic? GetImportService(string key)
         {
             switch (key)
             {
-                case "emulationtitle":
-                    return _serviceProvider.GetService<IEmulationTitleImportService>();
+
+                case "emisquestion":
+                    return _serviceProvider.GetService<IQuestionImportService>();
                 default:
                     return null;
             }
-        } 
+        }
+
+        /// <summary>
+        /// Lấy export service dựa theo key
+        /// </summary>
+        /// <param name="key"></param>
+        /// Created By: NQTruong (01/06/2023)
+        /// <returns></returns>
+        private dynamic? GetExportService(string key)
+        {
+            switch (key)
+            {
+                case "emisquestion":
+                    return _serviceProvider.GetService<IQuestionExportService>();
+                default:
+                    return null;
+            }
+        }
         #endregion
     }
 }

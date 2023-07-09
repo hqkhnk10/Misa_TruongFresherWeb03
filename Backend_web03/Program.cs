@@ -1,20 +1,10 @@
-using Misa_TruongWeb03.BL.Service.EmulationCommendationService;
-using Misa_TruongWeb03.BL.Service.EmulationTitleService;
-using Misa_TruongWeb03.BL.Service.Import;
-using Misa_TruongWeb03.DL.Repository.EmulationCommendationRepository;
-using Misa_TruongWeb03.DL.Repository.EmulationTitleRepository;
 using Misa_TruongWeb03.DL.Repository.FileRepository;
 using Misa_TruongWeb03.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddScoped<IEmulationTitleService,EmulationTitleService>();
-builder.Services.AddScoped<IEmulationTitleRepository,EmulationTitleRepository>();
 builder.Services.AddScoped<IFileRepository, FileRepository>();
-
-builder.Services.AddScoped<IEmulationCommendationService, EmulationCommendationService>();
-builder.Services.AddScoped<IEmulationCommendationRepository, EmulationCommendationRepository>();
 
 builder.Services.AddControllers()
     .ConfigureApiBehaviorOptions(options =>

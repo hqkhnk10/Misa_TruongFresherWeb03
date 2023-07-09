@@ -12,7 +12,7 @@ namespace Misa_TruongWeb03.BL.Service.FileServices
     {
         #region Method
         Task<FileModel> Upload(IFormFile file);
-        dynamic? Download(string fileName); 
+        byte[]? Download(string fileName); 
         #endregion
 
     }

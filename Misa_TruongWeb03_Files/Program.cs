@@ -1,18 +1,17 @@
-using Misa_TruongWeb03.BL.Service.EmulationTitleService;
+
+using Misa_TruongWeb03.BL.Service.BaseExport;
+using Misa_TruongWeb03.BL.Service.EmisStudy.QuestionService;
 using Misa_TruongWeb03.BL.Service.FileServices;
-using Misa_TruongWeb03.BL.Service.Import;
-using Misa_TruongWeb03.DL.Repository.EmulationTitleRepository;
 using Misa_TruongWeb03.DL.Repository.FileRepository;
 using Misa_TruongWeb03.Files.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddScoped<IEmulationTitleImportService, EmulationTitleImportService>();
 builder.Services.AddScoped<IFileRepository, FileRepository>();
-builder.Services.AddScoped<IBaseExportService, BaseExportService>();
-builder.Services.AddScoped<IEmulationTitleService, EmulationTitleService>();
-builder.Services.AddScoped<IEmulationTitleRepository, EmulationTitleRepository>();
+builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.AddScoped<IQuestionImportService, QuestionImportService>();
+builder.Services.AddScoped<IQuestionExportService, QuestionExportService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -12,11 +12,8 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
     public interface IBaseImportService<T>
     {
         #region Method
-        byte[]? GetSampleFile(string cacheKey);
         Task<FileValidateModel> Validate(IFormFile file, int sheetIndex, int header);
         Task<bool> IsDuplicateRecord(object cellValue);
-        Task<byte[]> ExportFile(string fileName, ExportModel model);
-        Task<dynamic> Get(dynamic parameters); 
         #endregion
     }
 }

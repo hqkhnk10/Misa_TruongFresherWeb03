@@ -63,7 +63,7 @@ namespace Misa_TruongWeb03.BL.Service.FileServices
         /// <param name="filename"></param>
         /// <returns></returns>
         /// Created By: NQTruong (01/06/2023)
-        public dynamic? Download(string filename)
+        public byte[]? Download(string filename)
         {
             var filePath = Path.Combine(_env.ContentRootPath, "FileStorage", filename);
             if (!System.IO.File.Exists(filePath))

@@ -15,52 +15,18 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
         #region Property
         private readonly IWebHostEnvironment _env;
         private readonly IFileRepository _fileRepository;
-        private readonly IMemoryCache _memoryCache;
         private readonly IFileService _fileService;
         #endregion
         #region Constructor
-        public BaseImportService(IWebHostEnvironment env, IFileRepository fileRepository, IMemoryCache memoryCache, IFileService fileService)
+        public BaseImportService(IWebHostEnvironment env, IFileRepository fileRepository, IFileService fileService)
         {
             _env = env;
             _fileRepository = fileRepository;
-            _memoryCache = memoryCache;
             _fileService = fileService;
         }
         #endregion
         #region Method
-        /// <summary>
-        /// Lấy file mẫu theo key
-        /// </summary>
-        /// <param name="cacheKey"></param>
-        /// <returns></returns>
-        /// Created By: NQTruong (01/06/2023)
-        public byte[]? GetSampleFile(string cacheKey)
-        {
-            if (_memoryCache.TryGetValue(cacheKey, out byte[] cachedData))
-            {
-                // Return the cached file if available
-                return cachedData;
-            }
-            // Load the file from disk based on the file type
-            var filePath = Path.Combine(_env.ContentRootPath, "FileStorage", $"{cacheKey}.xlsx");
 
-            if (!File.Exists(filePath))
-            {
-                return null;
-            }
-
-            var fileData = File.ReadAllBytes(filePath);
-
-            // Cache the file data
-            var options = new MemoryCacheEntryOptions()
-            {
-                AbsoluteExpirationRelativeToNow =
-                                    TimeSpan.FromSeconds(3600),
-                SlidingExpiration = TimeSpan.FromSeconds(1200)
-            };
-            _memoryCache.Set(cacheKey, fileData, options);
-            return fileData;
-        }
         /// <summary>
         /// Xác thực dữ liệu của file
         /// </summary>
@@ -81,38 +47,6 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
                 data.FileName = res.FileStoreName;
 
                 return data;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-        /// <summary>
-        /// Xuất file
-        /// </summary>
-        /// <param name="fileName"></param>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        /// Created By: NQTruong (01/06/2023)
-        public async Task<byte[]> ExportFile(string fileName, ExportModel model)
-        {
-            try
-            {
-                //Gọi đến repo lấy config mapping
-                var configEntity = await _fileRepository.MappingConfig(typeof(T).Name.ToLowerInvariant());
-                var mapper = new ExcelConfigMapper();
-                var configs = mapper.MapToExcelConfig(configEntity);
-                //Gọi đến repo lấy danh sách
-                var listData = await Get(model.Parameters);
-                //Gọi hàm clone
-                var sourceFile = Path.Combine(_env.ContentRootPath, "FileStorage", $"{fileName}_export.xlsx");
-                var filePath = Path.Combine(_env.ContentRootPath, "FileStorage", $"{fileName}.xlsx");
-                var sourceFilePath = Path.Combine(_env.ContentRootPath, "FileStorage", $"{sourceFile}.xlsx");
-                CloneExcelFile(filePath, $"{fileName}_export");
-                //Viết vào file clone
-                WriteToExcel(sourceFile, listData, configs);
-                //Đọc dữ liệu của file
-                return File.ReadAllBytes(sourceFile);
             }
             catch (Exception)
             {
@@ -213,8 +147,8 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
         public void WriteToExcel(string newFilePath, dynamic data, List<ExcelMapping> configs)
         {
             // Create a new workbook
-            Workbook workbook = new Workbook(newFilePath);
-            Worksheet worksheet = workbook.Worksheets[0]; // Get the first worksheet
+            using var workbook = new Workbook(newFilePath);
+            var worksheet = workbook.Worksheets[0]; // Get the first worksheet
 
             // Write data
             for (int rowIndex = 0; rowIndex < data.Count; rowIndex++)
@@ -251,13 +185,10 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
         /// Created By: NQTruong (01/06/2023)
         public void CloneExcelFile(string sourceFilePath, string targetFilePath)
         {
-            // Load the source workbook
-            Workbook sourceWorkbook = new Workbook(sourceFilePath);
-
-            // Create a new workbook and copy the source workbook
-            Workbook targetWorkbook = new Workbook();
-            targetWorkbook.Copy(sourceWorkbook);
-
+            //// Load the source workbook
+            //using var sourceWorkbook = new Workbook(sourceFilePath);
+            //// Create a new workbook and copy the source workbook
+            using var targetWorkbook = new Workbook(sourceFilePath);
             // Save the target workbook to the target file path
             var filePath = Path.Combine(_env.ContentRootPath, "FileStorage", $"{targetFilePath}.xlsx");
             targetWorkbook.Save(filePath);
@@ -272,8 +203,8 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
         public void RemoveRowsFromExcel(string sourceFilePath, string destinationFilePath, List<int> rowIndices)
         {
             // Add a new worksheet to the destination workbook
-            Workbook destinationWorkbook = new Workbook(sourceFilePath);
-            Worksheet destinationWorksheet = destinationWorkbook.Worksheets[0];
+            using var destinationWorkbook = new Workbook(sourceFilePath);
+            var destinationWorksheet = destinationWorkbook.Worksheets[0];
 
             // Copy rows from source to destination worksheet based on the specified row indices
             foreach (int rowIndex in rowIndices)
@@ -411,16 +342,6 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
         public virtual async Task<bool> IsDuplicateRecord(object cellValue)
         {
             return true;
-        }
-        /// <summary>
-        /// Lấy dữ liệu của bảng để viết vào excel
-        /// </summary>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
-        /// Created By: NQTruong (01/06/2023)
-        public virtual async Task<dynamic> Get(dynamic parameters)
-        {
-            return null;
         }
         #endregion
     }
