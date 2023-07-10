@@ -7,6 +7,7 @@ using Misa_TruongWeb03.Common.DTO;
 using Misa_TruongWeb03.Common.Entity.FileEntity;
 using Misa_TruongWeb03.DL.Repository.FileRepository;
 using System.Drawing;
+using System.Threading.Tasks;
 
 namespace Misa_TruongWeb03.BL.Service.BaseImport
 {
@@ -84,23 +85,30 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
             var invalidFileName = $"{Path.GetFileNameWithoutExtension(filePath)}_invalid";
             var validIndex = new List<int>();
             var findConfigs = new List<ExcelMapping>();
+            var lastIndex = -1;
 
             foreach (var config in configs)
             {
-                for (int i = 0; i < maxRow; i++)
+                for (int i = lastIndex + 1; i < maxRow; i++)
                 {
-                    if(cells[header, i].Value == null)
+                    var mapper = new ExcelConfigMapper();
+                    var cloneConfig = mapper.MapExcelConfig(config);
+                    if (cells[header, i].Value == null)
                     {
                         continue;
                     }
-                    findConfigs = MapColumn(cells[header, i].Value, config);
+                    if(MapColumn(cells[header, i].Value, i, config)){
+                        lastIndex=i;
+                        cloneConfig.ColumnIndex = lastIndex;
+                        findConfigs.Add(cloneConfig);
+                    }
                 }
             }
 
 
-            for (int row = header; row < maxRow; row++)
+            for (int row = header + 1; row < maxRow; row++)
             {
-                T instance = Activator.CreateInstance<T>();
+                var instance = Activator.CreateInstance<T>();
                 bool isValid = true;
                 var errorMessage = "";
                 foreach (var config in findConfigs)
@@ -122,12 +130,12 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
                         isValid = false;
                         errorMessage += cells[header - 1, columnIndex].Value + " Trùng dữ liệu.";
                     }
-                    //check format dữ liệu
-                    if (formatValue == null && cellValue != null)
-                    {
-                        isValid = false;
-                        errorMessage += cells[header - 1, columnIndex].Value + " Không đúng định dạng";
-                    }
+                    ////check format dữ liệu
+                    //if (formatValue == null && cellValue != null)
+                    //{
+                    //    isValid = false;
+                    //    errorMessage += cells[header - 1, columnIndex].Value + " Không đúng định dạng";
+                    //}
                     //check theo hàm
                     if (config.ValidatorFunc != null && !ValidateCell(formatValue, propertyName, config.ValidatorFunc))
                     {
@@ -154,6 +162,8 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
             }
             workbook.Save(filePath);
             RemoveRowsFromExcel(filePath, invalidFileName, validIndex);
+            validData = FormatReturnData(validData);
+
             return new FileValidateModel { ValidData = validData, InValidData = invalidData, Count = maxRow - header, InvalidFilePath = $"{invalidFileName}.xlsx" };
         }
         /// <summary>
@@ -293,9 +303,10 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
         /// <param name="propertyName"></param>
         /// <param name="value"></param>
         /// Created By: NQTruong (01/06/2023)
-        private void SetProperty(T instance, string propertyName, object value)
+        public virtual void SetProperty(T instance, string propertyName, object value)
         {
             var propertyInfo = typeof(T).GetProperty(propertyName);
+
             if (propertyInfo != null && propertyInfo.CanWrite)
             {
                 Type propertyType = propertyInfo.PropertyType;
@@ -362,14 +373,17 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
         {
             return true;
         }
-        public virtual List<ExcelMapping> MapColumn(object columnName, ExcelMapping config)
+        public virtual bool MapColumn(object columnName,int index, ExcelMapping config)
         {
-            var newConfig = new List<ExcelMapping>();
             if (columnName.ToString().Contains(config.ColumnName))
             {
-                newConfig.Add(config);
+                return true;
             }
-            return newConfig;
+            return false;
+        }
+        public virtual dynamic FormatReturnData(List<dynamic>? data)
+        {
+            return data;
         }
         #endregion
     }

@@ -61,6 +61,23 @@ namespace Misa_TruongWeb03.Common.Entity.FileEntity
             }
             return config;
         }
+        public ExcelMapping MapExcelConfig(ExcelMapping item)
+        {
+            var excelEntity = new ExcelMapping
+            {
+                ColumnIndex = item.ColumnIndex,
+                PropertyName = item.PropertyName,
+                ColumnName = item.ColumnName,
+                TableKey = item.TableKey,
+                IsDuplicateCheckEnabled = item.IsDuplicateCheckEnabled,
+                IsRequired = item.IsRequired,
+                DataType = item.DataType,
+                ValidatorFunc = item.ValidatorFunc,
+                FormatFunc = item.FormatFunc,
+                ConvertFunc = item.ConvertFunc,
+            };
+            return excelEntity;
+        }
         /// <summary>
         /// Lấy hàm validate theo tên lưu trong DB
         /// </summary>

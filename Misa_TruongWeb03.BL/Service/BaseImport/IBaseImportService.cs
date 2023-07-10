@@ -14,6 +14,7 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
         #region Method
         Task<FileValidateModel> Validate(IFormFile file, int sheetIndex, int header);
         Task<bool> IsDuplicateRecord(object cellValue);
+        void SetProperty(T instance, string propertyName, object value);    
         #endregion
     }
 }

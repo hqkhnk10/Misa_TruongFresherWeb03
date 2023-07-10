@@ -70,7 +70,7 @@ namespace Misa_TruongWeb03.Common.DTO.EmisStudy
     {
         [Required]
         [MaxLength(255)]
-        public string AnswerContent { get; set; }
+        public string? AnswerContent { get; set; }
         [Required]
         public bool AnswerStatus { get; set; }
         public IFormFile? AnswerImage { get; set; } = null;

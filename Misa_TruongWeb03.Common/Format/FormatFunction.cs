@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Misa_TruongWeb03.Common.Enum.EmisStudy.EmisStudyEnum;
 using static Misa_TruongWeb03.Common.Enum.EmulationTitleEnum;
 
 namespace Misa_TruongWeb03.Common.Format
@@ -173,5 +174,27 @@ namespace Misa_TruongWeb03.Common.Format
             }
         }
 
+        /// <summary>
+        /// Format loại câu hỏi
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>ApplyObject?</returns>
+        /// Created By: NQTruong (05/07/2023)
+        public static QuestionType? FormatQuestionType(string value)
+        {
+            switch (value)
+            {
+                case "Chọn đáp án":
+                    return QuestionType.Choosing;
+                case "Đúng sai":
+                    return QuestionType.TrueOrFalse;
+                case "Điền vào chỗ trống":
+                    return QuestionType.Fill;
+                case "Tự luận":
+                    return QuestionType.Write;
+                default:
+                    return null;
+            }
+        }
     }
 }
