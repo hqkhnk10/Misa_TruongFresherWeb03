@@ -40,12 +40,6 @@ namespace Misa_TruongWeb03.Common.DTO.EmisStudy
         public string? Result { get; set; } = null;
         public List<AnswerPostModel> Answers { get; set; } = new List<AnswerPostModel>();
     }
-    public class QuestionPostMultipleDTO
-    {
-        public List<QuestionInserDTO> Questions { get; set; }
-        public List<AnswerPostModel> Answers { get; set; }
-    }
-
     public class QuestionInserDTO
     {
         public string QuestionContent { get; set; }
