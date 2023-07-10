@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IzmJCZ1JiIB/IWXniz885QMfSy+VUa1d/3VLWw4QzFlawieq4jM+9/mOEbLr8JuABeQRyLewQOrhUGtUeE9j/A==",
+  "dgSpecHash": "HreeUEHC8uPDOrAl0cASKPJvILLioEDQMQJjtw6M85i70IChlCjpLOu8qjvGyl7IJsI71xPaOHu2WYEkyB6AWA==",
   "success": true,
-  "projectFilePath": "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03.BL\\Misa_TruongWeb03.BL.csproj",
+  "projectFilePath": "D:\\MISA2023\\NewBE\\Misa_TruongFresherWeb03\\Misa_TruongWeb03.BL\\Misa_TruongWeb03.BL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Tngo\\.nuget\\packages\\aspose.cells\\23.5.0\\aspose.cells.23.5.0.nupkg.sha512",
     "C:\\Users\\Tngo\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",

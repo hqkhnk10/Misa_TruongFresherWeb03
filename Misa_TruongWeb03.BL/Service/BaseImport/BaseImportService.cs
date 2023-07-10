@@ -35,14 +35,18 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
         /// <param name="header"></param>
         /// <returns></returns>
         /// Created By: NQTruong (01/06/2023)
-        public async Task<FileValidateModel> Validate(IFormFile file, int sheetIndex, int header)
+        public virtual async Task<FileValidateModel> Validate(IFormFile file, int sheetIndex, int header)
         {
             try
             {
+                //upload file
                 var res = await _fileService.Upload(file);
+                
+                //get config
                 var configEntity = await _fileRepository.MappingConfig(typeof(T).Name.ToLowerInvariant());
                 var mapper = new ExcelConfigMapper();
                 var config = mapper.MapToExcelConfig(configEntity);
+
                 var data = await ReadExcel(res.FilePath, sheetIndex, header, config);
                 data.FileName = res.FileStoreName;
 
@@ -65,7 +69,7 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
         public async Task<FileValidateModel> ReadExcel(string filePath, int sheetIndex, int header, List<ExcelMapping> configs)
         {
             
-            Workbook workbook = new Workbook(filePath);
+            using var workbook = new Workbook(filePath);
             Worksheet worksheet = workbook.Worksheets[sheetIndex];
             Cells cells = worksheet.Cells;
 
@@ -79,12 +83,27 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
 
             var invalidFileName = $"{Path.GetFileNameWithoutExtension(filePath)}_invalid";
             var validIndex = new List<int>();
+            var findConfigs = new List<ExcelMapping>();
+
+            foreach (var config in configs)
+            {
+                for (int i = 0; i < maxRow; i++)
+                {
+                    if(cells[header, i].Value == null)
+                    {
+                        continue;
+                    }
+                    findConfigs = MapColumn(cells[header, i].Value, config);
+                }
+            }
+
+
             for (int row = header; row < maxRow; row++)
             {
                 T instance = Activator.CreateInstance<T>();
                 bool isValid = true;
                 var errorMessage = "";
-                foreach (var config in configs)
+                foreach (var config in findConfigs)
                 {
                     int columnIndex = config.ColumnIndex;
                     string propertyName = config.PropertyName;
@@ -342,6 +361,15 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
         public virtual async Task<bool> IsDuplicateRecord(object cellValue)
         {
             return true;
+        }
+        public virtual List<ExcelMapping> MapColumn(object columnName, ExcelMapping config)
+        {
+            var newConfig = new List<ExcelMapping>();
+            if (columnName.ToString().Contains(config.ColumnName))
+            {
+                newConfig.Add(config);
+            }
+            return newConfig;
         }
         #endregion
     }

@@ -1318,11 +1318,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03_Files\\Misa_TruongWeb03.Files.csproj",
+      "projectUniqueName": "D:\\MISA2023\\NewBE\\Misa_TruongFresherWeb03\\Misa_TruongWeb03_Files\\Misa_TruongWeb03.Files.csproj",
       "projectName": "Misa_TruongWeb03.Files",
-      "projectPath": "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03_Files\\Misa_TruongWeb03.Files.csproj",
+      "projectPath": "D:\\MISA2023\\NewBE\\Misa_TruongFresherWeb03\\Misa_TruongWeb03_Files\\Misa_TruongWeb03.Files.csproj",
       "packagesPath": "C:\\Users\\Tngo\\.nuget\\packages\\",
-      "outputPath": "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03_Files\\obj\\",
+      "outputPath": "D:\\MISA2023\\NewBE\\Misa_TruongFresherWeb03\\Misa_TruongWeb03_Files\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Tngo\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1340,8 +1340,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03.BL\\Misa_TruongWeb03.BL.csproj": {
-              "projectPath": "D:\\MISA2023\\BackendFolder\\Misa_TruongWeb03.BL\\Misa_TruongWeb03.BL.csproj"
+            "D:\\MISA2023\\NewBE\\Misa_TruongFresherWeb03\\Misa_TruongWeb03.BL\\Misa_TruongWeb03.BL.csproj": {
+              "projectPath": "D:\\MISA2023\\NewBE\\Misa_TruongFresherWeb03\\Misa_TruongWeb03.BL\\Misa_TruongWeb03.BL.csproj"
             }
           }
         }

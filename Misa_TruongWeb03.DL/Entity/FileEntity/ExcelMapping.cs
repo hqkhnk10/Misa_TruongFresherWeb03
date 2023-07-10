@@ -8,6 +8,7 @@ namespace Misa_TruongWeb03.Common.Entity.FileEntity
     {
         public int Id { get; set; }
         public int ColumnIndex { get; set; }
+        public string ColumnName { get; set; }
         public string? PropertyName { get; set; }
         public Type? DataType { get; set; }
         public Func<object, bool>? ValidatorFunc { get; set; }
@@ -21,6 +22,7 @@ namespace Misa_TruongWeb03.Common.Entity.FileEntity
     {
         public int Id { get; set; }
         public int ColumnIndex { get; set; }
+        public string ColumnName { get; set; }
         public string? PropertyName { get; set; }
         public string DataType { get; set; }
         public string ValidatorFunc { get; set; }
@@ -32,6 +34,11 @@ namespace Misa_TruongWeb03.Common.Entity.FileEntity
     }
     public class ExcelConfigMapper
     {
+        /// <summary>
+        /// Map dữ liệu config từ DB sang ExcelConfig
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         public List<ExcelMapping> MapToExcelConfig(List<ExcelConfigEntity> entity)
         {
             var config = new List<ExcelMapping>();
@@ -41,6 +48,7 @@ namespace Misa_TruongWeb03.Common.Entity.FileEntity
                 {
                     ColumnIndex = item.ColumnIndex,
                     PropertyName = item.PropertyName,
+                    ColumnName = item.ColumnName,
                     TableKey = item.TableKey,
                     IsDuplicateCheckEnabled = item.IsDuplicateCheckEnabled,
                     IsRequired = item.IsRequired,
@@ -53,7 +61,11 @@ namespace Misa_TruongWeb03.Common.Entity.FileEntity
             }
             return config;
         }
-
+        /// <summary>
+        /// Lấy hàm validate theo tên lưu trong DB
+        /// </summary>
+        /// <param name="funcName"></param>
+        /// <returns></returns>
         private Func<object, bool> ConvertToValidatorFunc(string funcName)
         {
             if (string.IsNullOrEmpty(funcName))
@@ -71,6 +83,11 @@ namespace Misa_TruongWeb03.Common.Entity.FileEntity
 
             return func;
         }
+        /// <summary>
+        /// Lấy hàm format theo tên lưu trong DB
+        /// </summary>
+        /// <param name="funcName"></param>
+        /// <returns></returns>
         private Func<object, object>? ConvertToFormatFunc(string funcName)
         {
             if (string.IsNullOrEmpty(funcName))
