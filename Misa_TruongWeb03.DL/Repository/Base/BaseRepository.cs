@@ -120,10 +120,11 @@ namespace Misa_TruongWeb03.DL.Repository.Base
                 connection.Open();
 
                 var storedProcedureName = GenerateProcName.Generate<TEntity>("Post");
-
+                Guid newGuid = Guid.NewGuid();
                 var parameters = DynamicParametersAdd.CreateParameterDynamic(model);
-
-                return await connection.QueryFirstOrDefaultAsync<Guid>(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
+                parameters.Add("Id", newGuid);
+                var result = await connection.QueryFirstOrDefaultAsync<string>(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
+                return newGuid;
             }
             catch (Exception ex)
             {

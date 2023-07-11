@@ -34,23 +34,8 @@ namespace Misa_TruongWeb03.Common.DTO.EmisStudy
         public Guid GradeId { get; set; }
         public Guid? TopicId { get; set; } = null;
     }
-    public class ExercisePutDTO
+    public class ExercisePutDTO : ExercisePostDTO
     {
-    }
-    public class ExerciseModelDTO
-    {
-        public Guid? ExerciseId { get; set; } = null;
-        [MaxLength(255)]
-        public string ExerciseName { get; set; }
-        [Required]
-        [EnumDataType(typeof(ExerciseStatus))]
-        public ExerciseStatus ExerciseStatus { get; set; }
-        [Required]
-        public Guid SubjectId { get; set; }
-        [Required]
-        public Guid GradeId { get; set; }
-        public Guid? TopicId { get; set; }
-        public IFormFile? ExerciseImage { get; set; } = null;
     }
 
     public class QuestionPostModel

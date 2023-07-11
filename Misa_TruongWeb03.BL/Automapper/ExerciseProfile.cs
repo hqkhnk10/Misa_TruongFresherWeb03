@@ -11,6 +11,7 @@ namespace Misa_TruongWeb03.BL.Automapper
         {
             CreateMap<ExerciseGetDTO, Exercise>();
             CreateMap<ExerciseGetDTO, FilterModel>();
+            CreateMap<ExercisePostDTO, Exercise>();
         }
     }
 }

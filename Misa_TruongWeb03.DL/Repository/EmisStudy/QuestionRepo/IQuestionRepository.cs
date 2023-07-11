@@ -7,8 +7,8 @@ namespace Misa_TruongWeb03.DL.Repository.EmisStudy.QuestionRepo
 {
     public interface IQuestionRepository : IBaseRepository<Question>
     {
-        Task<BaseEntity> Post(QuestionPostDTO model, Guid? ExerciseId);
-        Task<BaseEntity> Put(Guid id, QuestionPostDTO model);
+        Task<Guid> Post(Question model, Guid? ExerciseId);
+        Task<Guid> Put(Guid questionId,Guid excerciseId, Question model);
 
     }
 }

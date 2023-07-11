@@ -40,18 +40,22 @@ namespace Misa_TruongWeb03.BL.Service.Base
         /// <param name="model"></param>
         /// <returns>BaseEntity</returns>
         /// CreatedBy: NQTruong (24/05/2023)
-        public async Task<BaseGet<IEnumerable<TEntity>>> Get(TEntityGetDto model)
+        public virtual async Task<ServiceResponse> Get(TEntityGetDto model)
         {
             try
             {
                 var entity = _mapper.Map<TEntity>(model);
                 var getModel = _mapper.Map<FilterModel>(model);
                 var result = await _baseRepository.Get(entity, getModel);
-                return result;
+                return new ServiceResponse
+                {
+                    Data = result.Data,
+                    Pagination = result.Pagination,
+                };
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                return new ExceptionError(ex);
             }
         }
         /// <summary>
@@ -60,18 +64,24 @@ namespace Misa_TruongWeb03.BL.Service.Base
         /// <param name="model"></param>
         /// <returns>BaseEntity</returns>
         /// CreatedBy: NQTruong (24/05/2023)
-        public async Task<TEntity> GetDetail(Guid id)
+        public virtual async Task<ServiceResponse> GetDetail(Guid id)
         {
-            var result = await _baseRepository.GetById(id);
-            if(result.Data == null)
+            try
             {
-                return new BaseEntity
+                var result = await _baseRepository.GetById(id);
+                if (result == null)
                 {
-                    Data = result.Data,
-                    ErrorCode = StatusCodes.Status404NotFound
+                    return new NotFoundError();
+                }
+                return new ServiceResponse
+                {
+                    Data = result,
                 };
             }
-            return result;
+            catch (Exception ex)
+            {
+                return new ExceptionError(ex);
+            }
         }
         /// <summary>
         /// BASE Post call to BASE Repository
@@ -79,11 +89,21 @@ namespace Misa_TruongWeb03.BL.Service.Base
         /// <param name="model"></param>
         /// <returns>BaseEntity</returns>
         /// CreatedBy: NQTruong (24/05/2023)
-        public virtual async Task<Guid> Post(TEntityPostDto model)
+        public virtual async Task<ServiceResponse> Post(TEntityPostDto model)
         {
-            var entity = _mapper.Map<TEntity>(model);
-            var result = await _baseRepository.Post(entity);
-            return result;
+            try
+            {
+                var entity = _mapper.Map<TEntity>(model);
+                var result = await _baseRepository.Post(entity);
+                return new ServiceResponse
+                {
+                    Data = result,
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ExceptionError(ex);
+            }
         }
         /// <summary>
         /// BASE PUT call to BASE Repository
@@ -91,11 +111,21 @@ namespace Misa_TruongWeb03.BL.Service.Base
         /// <param name="model"></param>
         /// <returns>BaseEntity</returns>
         /// CreatedBy: NQTruong (24/05/2023)
-        public virtual async Task<int> Put(Guid id, TEntityPutDto model)
+        public virtual async Task<ServiceResponse> Put(Guid id, TEntityPutDto model)
         {
-            var entity = _mapper.Map<TEntity>(model);
-            var result = await _baseRepository.Put(id, entity);
-            return result;
+            try
+            {
+                var entity = _mapper.Map<TEntity>(model);
+                var result = await _baseRepository.Put(id, entity);
+                return new ServiceResponse
+                {
+                    Data = result,
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ExceptionError(ex);
+            }
         }
         /// <summary>
         /// BASE DELETE call to BASE Repository
@@ -103,10 +133,20 @@ namespace Misa_TruongWeb03.BL.Service.Base
         /// <param name="model"></param>
         /// <returns>BaseEntity</returns>
         /// CreatedBy: NQTruong (24/05/2023)
-        public async Task<int> Delete(Guid id)
+        public async Task<ServiceResponse> Delete(Guid id)
         {
-            var result = await _baseRepository.Delete(id);
-            return result;
+            try
+            {
+                var result = await _baseRepository.Delete(id);
+                return new ServiceResponse
+                {
+                    Data = result,
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ExceptionError(ex);
+            }
         }
         /// <summary>
         /// BASE check duplicate to BASE Repository
@@ -114,10 +154,25 @@ namespace Misa_TruongWeb03.BL.Service.Base
         /// <param name="model"></param>
         /// <returns>BaseEntity</returns>
         /// CreatedBy: NQTruong (24/05/2023)
-        public async Task<bool> CheckDuplicate(TEntity model)
+        public async Task<ServiceResponse> CheckDuplicate(TEntity model)
         {
-            return await _baseRepository.CheckDuplicate(model);
-        } 
+            try
+            {
+                var result = await _baseRepository.CheckDuplicate(model);
+                if (result)
+                {
+                    return new DuplicateError();
+                }
+                return new ServiceResponse
+                {
+                    Data = result,
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ExceptionError(ex);
+            }
+        }
         #endregion
     }
 }

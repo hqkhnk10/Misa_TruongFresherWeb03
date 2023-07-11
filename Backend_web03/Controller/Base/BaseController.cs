@@ -142,7 +142,7 @@ namespace Misa_TruongWeb03.Controller.Base
                 .Select(e => e.ErrorMessage)
                 .ToList();
 
-            var response = new BaseEntity
+            var response = new ServiceResponse
             {
                 ErrorCode = StatusCodes.Status400BadRequest,
                 UserMsg = string.Join(",", errors) ?? VN.ValidationError,

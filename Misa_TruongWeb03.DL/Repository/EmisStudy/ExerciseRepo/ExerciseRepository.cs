@@ -31,18 +31,17 @@ namespace Misa_TruongWeb03.DL.Repository.EmisStudy.ExerciseRepo
         /// <param name="Id"></param>
         /// CreatedBy: NQTruong (20/06/2023)
         /// <returns></returns>
-        public async Task<IEnumerable<DetailExerciseModel>> GetById(Guid Id)
+        public async Task<IEnumerable<DetailExerciseModel>> GetDetail(Guid Id)
         {
             using var connection = this.GetConnection();
             try
             {
                 connection.Open();
-                // Generate the SQL query to check for duplicates
                 var store = "proc_exercise_getdetail";
 
-                // Execute the query with the list of values as a parameter
                 var multipleResult = await connection.QueryMultipleAsync(store, new { Id }, commandType: CommandType.StoredProcedure);
-                // If the count is greater than 0, duplicates exist
+                
+                
                 var exerciseData = await multipleResult.ReadAsync<DetailExerciseModel>();
                 var questionData = await multipleResult.ReadAsync<QuestionDetailModel>();
                 var answerData = await multipleResult.ReadAsync<AnswerModel>();
@@ -76,7 +75,7 @@ namespace Misa_TruongWeb03.DL.Repository.EmisStudy.ExerciseRepo
         /// <param name="jsonModel"></param>
         /// CreatedBy: NQTruong (20/06/2023)
         /// <returns></returns>
-        public async Task<BaseEntity> Post(string jsonModel)
+        public async Task<ServiceResponse> Post(string jsonModel)
         {
             using var connection = this.GetConnection();
             try
@@ -88,7 +87,7 @@ namespace Misa_TruongWeb03.DL.Repository.EmisStudy.ExerciseRepo
                 // Execute the query with the list of values as a parameter
                 var result = await connection.QueryAsync<int?>(store, new { json_data = jsonModel }, commandType: CommandType.StoredProcedure);
                 // If the count is greater than 0, duplicates exist
-                return new BaseEntity
+                return new ServiceResponse
                 {
                     ErrorCode = StatusCodes.Status200OK,
                     Data = result
@@ -96,7 +95,7 @@ namespace Misa_TruongWeb03.DL.Repository.EmisStudy.ExerciseRepo
             }
             catch (Exception ex)
             {
-                var exception = new BaseEntity
+                var exception = new ServiceResponse
                 {
                     ErrorCode = StatusCodes.Status500InternalServerError,
                     Data = null,
@@ -106,7 +105,7 @@ namespace Misa_TruongWeb03.DL.Repository.EmisStudy.ExerciseRepo
                 return exception;
             }
             finally { connection.Close(); }
-        } 
+        }
         #endregion
     }
 }

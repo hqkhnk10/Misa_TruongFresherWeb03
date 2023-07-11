@@ -14,7 +14,7 @@ namespace Misa_TruongWeb03.Common.DTO.EmisStudy
     }
     public class QuestionPostDTO
     {
-        public ExerciseModelDTO Exercise { get; set; }
+        public ExercisePostDTO Exercise { get; set; }
         [Required]
         [EnumDataType(typeof(QuestionType))]
         public QuestionType QuestionType { get; set; }

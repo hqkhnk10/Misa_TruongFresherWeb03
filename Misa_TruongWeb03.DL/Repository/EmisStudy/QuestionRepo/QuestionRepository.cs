@@ -5,6 +5,7 @@ using Misa_TruongWeb03.Common.DTO.EmisStudy;
 using Misa_TruongWeb03.Common.Entity.Base;
 using Misa_TruongWeb03.Common.Entity.EmisStudy.Exercise;
 using Misa_TruongWeb03.Common.Entity.EmisStudy.Question;
+using Misa_TruongWeb03.Common.Helper;
 using Misa_TruongWeb03.Common.Resource;
 using Misa_TruongWeb03.DL.Repository.Base;
 using System;
@@ -31,27 +32,23 @@ namespace Misa_TruongWeb03.DL.Repository.EmisStudy.QuestionRepo
         /// <param name="model"></param>
         /// <param name="ExerciseId"></param>
         /// <returns></returns>
-        public async Task<BaseEntity> Post(QuestionPostDTO model, Guid? ExerciseId)
+        public async Task<Guid> Post(Question model, Guid? ExerciseId)
         {
             using var connection = this.GetConnection();
             try
             {
                 connection.Open();
-               
+                var newGuid = Guid.NewGuid();
+                var parameters = DynamicParametersAdd.CreateParameterDynamic(model);
+                parameters.Add("ExerciseId", ExerciseId);
+                parameters.Add("QuestionId", newGuid);
                 var store = "proc_question_insert";
-                string jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(model);
-                // Execute the query with the list of values as a parameter
-                var result = await connection.QueryFirstOrDefaultAsync<int?>(store, new { jsonData = jsonString, exerciseId = ExerciseId }, commandType: CommandType.StoredProcedure);
-                // If the count is greater than 0, duplicates exist
-                return new BaseEntity
-                {
-                    ErrorCode = StatusCodes.Status200OK,
-                    Data = result
-                };
+                var result = await connection.QueryFirstOrDefaultAsync<string>(store, parameters, commandType: CommandType.StoredProcedure);
+                return newGuid;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw new Exception();
+                throw;
             }
             finally { connection.Close(); }
         }
@@ -60,37 +57,26 @@ namespace Misa_TruongWeb03.DL.Repository.EmisStudy.QuestionRepo
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<BaseEntity> Put(Guid id, QuestionPostDTO model)
+        public async Task<Guid> Put(Guid id, Guid ExcerciseId, Question model)
         {
             using var connection = this.GetConnection();
             try
             {
                 connection.Open();
-                // Generate the SQL query to check for duplicates
+                var parameters = DynamicParametersAdd.CreateParameterDynamic(model);
+                parameters.AddDynamicParams(new { id });
                 var store = "proc_question_update";
-                string jsonString = JsonSerializer.Serialize(model);
-                // Execute the query with the list of values as a parameter
-                var result = await connection.QueryAsync<int?>(store, new { Id = id, exerciseId = model.Exercise.ExerciseId, jsonData = jsonString }, commandType: CommandType.StoredProcedure);
-                // If the count is greater than 0, duplicates exist
-                return new BaseEntity
-                {
-                    ErrorCode = StatusCodes.Status200OK,
-                    Data = result
-                };
+                var result = await connection.ExecuteAsync(store, parameters, commandType: CommandType.StoredProcedure);
+                return id;
+
+
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                var exception = new BaseEntity
-                {
-                    ErrorCode = StatusCodes.Status500InternalServerError,
-                    Data = null,
-                    DevMsg = ex.Message,
-                    UserMsg = VN.Error500
-                };
-                return exception;
+                throw;
             }
             finally { connection.Close(); }
-        } 
+        }
         #endregion
 
     }

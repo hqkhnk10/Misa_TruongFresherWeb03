@@ -6,7 +6,7 @@ namespace Misa_TruongWeb03.Common.Entity.Base
     /// Return class of every service, repo
     /// </summary>
     /// CreatedBy: NQTruong (24/05/2023)
-    public class BaseEntity
+    public class ServiceResponse
     {
         /// <summary>
         /// Dữ liệu trả về

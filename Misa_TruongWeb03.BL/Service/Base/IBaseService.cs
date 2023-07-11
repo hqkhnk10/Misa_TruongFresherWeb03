@@ -20,13 +20,12 @@ namespace Misa_TruongWeb03.BL.Service.Base
     public interface IBaseService<TEntity, TEntityGetDto, TEntityPostDto, TEntityPutDto>
     {
         #region Method
-        Task<BaseGet<IEnumerable<TEntity>>> Get(TEntityGetDto model);
-        Task<TEntity> GetDetail(Guid id);
-        Task<Guid> Post(TEntityPostDto model);
-        Task<int> Put(Guid id, TEntityPutDto model);
-        Task<int> Delete(Guid id);
-        Task<bool> CheckDuplicate(TEntity model); 
+        Task<ServiceResponse> Get(TEntityGetDto model);
+        Task<ServiceResponse> GetDetail(Guid id);
+        Task<ServiceResponse> Post(TEntityPostDto model);
+        Task<ServiceResponse> Put(Guid id, TEntityPutDto model);
+        Task<ServiceResponse> Delete(Guid id);
+        Task<ServiceResponse> CheckDuplicate(TEntity model); 
         #endregion
-
     }
 }

@@ -7,5 +7,6 @@ namespace Misa_TruongWeb03.BL.Service.EmisStudy.ExerciseService
 {
     public interface IExerciseService: IBaseService<Exercise, ExerciseGetDTO,ExercisePostDTO,ExercisePutDTO>
     {
+        Task<Guid> AddOrUpdate(ExercisePostDTO model);
     }
 }
