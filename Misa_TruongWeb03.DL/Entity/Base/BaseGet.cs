@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Misa_TruongWeb03.Common.Entity.EmisStudy.Grade
+namespace Misa_TruongWeb03.DL.Entity.Base
 {
-    public class Grade : BaseModel
+    public class BaseGet<T>
     {
-        public Guid GradeId { get; set; }
-        public string GradeName { get; set;}
+        public T Data { get; set; }
+        public Pagination Pagination { get; set; }
     }
 }

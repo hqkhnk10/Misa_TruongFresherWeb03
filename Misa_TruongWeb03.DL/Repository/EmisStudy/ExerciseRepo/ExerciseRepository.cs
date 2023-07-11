@@ -31,7 +31,7 @@ namespace Misa_TruongWeb03.DL.Repository.EmisStudy.ExerciseRepo
         /// <param name="Id"></param>
         /// CreatedBy: NQTruong (20/06/2023)
         /// <returns></returns>
-        public override async Task<BaseEntity> GetById(int Id)
+        public async Task<IEnumerable<DetailExerciseModel>> GetById(Guid Id)
         {
             using var connection = this.GetConnection();
             try
@@ -46,6 +46,8 @@ namespace Misa_TruongWeb03.DL.Repository.EmisStudy.ExerciseRepo
                 var exerciseData = await multipleResult.ReadAsync<DetailExerciseModel>();
                 var questionData = await multipleResult.ReadAsync<QuestionDetailModel>();
                 var answerData = await multipleResult.ReadAsync<AnswerModel>();
+
+
                 answerData = answerData.ToList();
                 questionData = questionData.Select(q =>
                 {
@@ -60,23 +62,11 @@ namespace Misa_TruongWeb03.DL.Repository.EmisStudy.ExerciseRepo
                 }
                     );
 
-
-                return new BaseEntity
-                {
-                    ErrorCode = StatusCodes.Status200OK,
-                    Data = exerciseData
-                };
+                return exerciseData;
             }
             catch (Exception ex)
             {
-                var exception = new BaseEntity
-                {
-                    ErrorCode = StatusCodes.Status500InternalServerError,
-                    Data = null,
-                    DevMsg = ex.Message,
-                    UserMsg = VN.Error500
-                };
-                return exception;
+                throw;
             }
             finally { connection.Close(); }
         }

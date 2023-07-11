@@ -48,6 +48,7 @@ namespace Misa_TruongWeb03.BL.Service.EmisStudy.QuestionService
                 };
             }
             var result = await _questionRepository.Post(model, model.Exercise.ExerciseId);
+           
             return result;
         }
         /// <summary>
@@ -56,7 +57,7 @@ namespace Misa_TruongWeb03.BL.Service.EmisStudy.QuestionService
         /// <param name="model"></param>
         /// <returns></returns>
         /// CreatedBy: NQTruong (01/07/2023)
-        public override async Task<BaseEntity> Put(int id, QuestionPostDTO model)
+        public override async Task<BaseEntity> Put(Guid id, QuestionPutDTO model)
         {
             var valid = ValidateQuestion(model.QuestionType, model.Answers);
             if (valid.Data == false)

@@ -11,7 +11,7 @@ namespace Misa_TruongWeb03.Common.Entity.EmisStudy.Question
 {
     public class Question : BaseModel
     {
-        public int QuestionId { get; set; }
+        public Guid QuestionId { get; set; }
         public QuestionType QuestionType
         {
             get; set;
@@ -19,7 +19,7 @@ namespace Misa_TruongWeb03.Common.Entity.EmisStudy.Question
         public string QuestionContent { get; set; }
         public string QuestionNote { get; set; }
         public string QuestionImage { get; set; }
-        public int ExerciseId { get; set; }
+        public Guid ExerciseId { get; set; }
 
     }
     public class QuestionDetailModel : Question

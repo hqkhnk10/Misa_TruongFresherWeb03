@@ -29,7 +29,7 @@ namespace Misa_TruongWeb03.Common.DTO.EmisStudy
     public class QuestionPutDTO : QuestionPostDTO
     {
         [Required]
-        public int QuestionId { get; set; }
+        public Guid QuestionId { get; set; }
     }
     public class QuestionImportDTO
     {

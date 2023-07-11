@@ -9,9 +9,9 @@ namespace Misa_TruongWeb03.Common.Entity.EmisStudy.Topic
 {
     public class Topic : BaseModel
     {
-        public int TopicId { get; set; }
+        public Guid TopicId { get; set; }
         public string TopicName { get; set; }
-        public int SubjectId { get; set; }
-        public int GradeId { get; set; }
+        public Guid SubjectId { get; set; }
+        public Guid GradeId { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Misa_TruongWeb03.Common.Entity.Base;
+using Misa_TruongWeb03.DL.Entity.Base;
 using System.Data.Common;
 
 namespace Misa_TruongWeb03.DL.Repository.Base
@@ -15,12 +16,12 @@ namespace Misa_TruongWeb03.DL.Repository.Base
     {
         #region Method
         DbConnection GetConnection();
-        Task<BaseEntity> Get(T model, FilterModel getModel);
-        Task<BaseEntity> GetById(int id);
-        Task<BaseEntity> Post(T model);
-        Task<BaseEntity> Put( T model);
-        Task<BaseEntity> Delete(int id);
-        Task<BaseEntity> CheckDuplicate(T model); 
+        Task<BaseGet<IEnumerable<T>>> Get(T model, FilterModel getModel);
+        Task<T> GetById(Guid id);
+        Task<Guid> Post(T model);
+        Task<int> Put(Guid id, T model);
+        Task<int> Delete(Guid id);
+        Task<bool> CheckDuplicate(T model); 
         #endregion
 
     }

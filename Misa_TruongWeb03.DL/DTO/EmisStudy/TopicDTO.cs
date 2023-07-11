@@ -8,8 +8,8 @@ namespace Misa_TruongWeb03.Common.DTO.EmisStudy
 {
     public class TopicGetDTO
     {
-        public int? SubjectId { get; set; }
-        public int? GradeId { get; set; }
+        public Guid? SubjectId { get; set; }
+        public Guid? GradeId { get; set; }
     }
     public class TopicPostDTO
     {

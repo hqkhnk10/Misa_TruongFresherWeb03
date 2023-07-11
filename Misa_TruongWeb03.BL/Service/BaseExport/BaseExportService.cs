@@ -62,7 +62,6 @@ namespace Misa_TruongWeb03.BL.Service.BaseExport
             {
                 //Gọi đến repo lấy danh sách
                 var listData = await Get(model.Parameters);
-
                 //Gọi đến repo lấy config mapping
                 var configEntity = await _fileRepository.MappingConfig(typeof(T).Name.ToLowerInvariant());
                 var mapper = new ExcelConfigMapper();

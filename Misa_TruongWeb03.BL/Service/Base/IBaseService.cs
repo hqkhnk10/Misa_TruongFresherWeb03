@@ -1,5 +1,6 @@
 ﻿using Misa_TruongWeb03.Common.DTO;
 using Misa_TruongWeb03.Common.Entity.Base;
+using Misa_TruongWeb03.DL.Entity.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,12 +20,12 @@ namespace Misa_TruongWeb03.BL.Service.Base
     public interface IBaseService<TEntity, TEntityGetDto, TEntityPostDto, TEntityPutDto>
     {
         #region Method
-        Task<BaseEntity> Get(TEntityGetDto model);
-        Task<BaseEntity> GetDetail(int id);
-        Task<BaseEntity> Post(TEntityPostDto model);
-        Task<BaseEntity> Put(int id, TEntityPostDto model);
-        Task<BaseEntity> Delete(int id);
-        Task<BaseEntity> CheckDuplicate(TEntity model); 
+        Task<BaseGet<IEnumerable<TEntity>>> Get(TEntityGetDto model);
+        Task<TEntity> GetDetail(Guid id);
+        Task<Guid> Post(TEntityPostDto model);
+        Task<int> Put(Guid id, TEntityPutDto model);
+        Task<int> Delete(Guid id);
+        Task<bool> CheckDuplicate(TEntity model); 
         #endregion
 
     }

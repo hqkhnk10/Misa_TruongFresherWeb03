@@ -14,14 +14,14 @@ namespace Misa_TruongWeb03.Common.DTO.EmisStudy
 {
     public class ExerciseGetDTO : FilterModel
     {
-        public ExerciseStatus? ExerciseStatus { get; set; }
-        public int? gradeId { get; set; }
-        public int? subjectId { get; set; }
+        public ExerciseStatus? ExerciseStatus { get; set; } = null;
+        public Guid? GradeId { get; set; } = null;
+        public Guid? SubjectId { get; set; } = null;
 
     }
     public class ExercisePostDTO
     {
-        public int? ExerciseId { get; set; } = null;
+        public Guid? ExerciseId { get; set; } = null;
         [Required]
         [MaxLength(255)]
         public string ExerciseName { get; set; }
@@ -29,27 +29,27 @@ namespace Misa_TruongWeb03.Common.DTO.EmisStudy
         [EnumDataType(typeof(ExerciseStatus))]
         public ExerciseStatus ExerciseStatus { get; set; }
         [Required]
-        public int SubjectId { get; set; }
+        public Guid SubjectId { get; set; }
         [Required]
-        public int GradeId { get; set; }
-        public int? TopicId { get; set; } = null;
+        public Guid GradeId { get; set; }
+        public Guid? TopicId { get; set; } = null;
     }
     public class ExercisePutDTO
     {
     }
     public class ExerciseModelDTO
     {
-        public int? ExerciseId { get; set; } = null;
+        public Guid? ExerciseId { get; set; } = null;
         [MaxLength(255)]
         public string ExerciseName { get; set; }
         [Required]
         [EnumDataType(typeof(ExerciseStatus))]
         public ExerciseStatus ExerciseStatus { get; set; }
         [Required]
-        public int SubjectId { get; set; }
+        public Guid SubjectId { get; set; }
         [Required]
-        public int GradeId { get; set; }
-        public int? TopicId { get; set; }
+        public Guid GradeId { get; set; }
+        public Guid? TopicId { get; set; }
         public IFormFile? ExerciseImage { get; set; } = null;
     }
 

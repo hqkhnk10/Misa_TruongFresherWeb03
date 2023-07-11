@@ -31,13 +31,13 @@ namespace Misa_TruongWeb03.DL.Repository.EmisStudy.QuestionRepo
         /// <param name="model"></param>
         /// <param name="ExerciseId"></param>
         /// <returns></returns>
-        public async Task<BaseEntity> Post(QuestionPostDTO model, int? ExerciseId)
+        public async Task<BaseEntity> Post(QuestionPostDTO model, Guid? ExerciseId)
         {
             using var connection = this.GetConnection();
             try
             {
                 connection.Open();
-                // Generate the SQL query to check for duplicates
+               
                 var store = "proc_question_insert";
                 string jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(model);
                 // Execute the query with the list of values as a parameter
@@ -51,14 +51,7 @@ namespace Misa_TruongWeb03.DL.Repository.EmisStudy.QuestionRepo
             }
             catch (Exception ex)
             {
-                var exception = new BaseEntity
-                {
-                    ErrorCode = StatusCodes.Status500InternalServerError,
-                    Data = null,
-                    DevMsg = ex.Message,
-                    UserMsg = VN.Error500
-                };
-                return exception;
+                throw new Exception();
             }
             finally { connection.Close(); }
         }
@@ -67,7 +60,7 @@ namespace Misa_TruongWeb03.DL.Repository.EmisStudy.QuestionRepo
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<BaseEntity> Put(int id, QuestionPostDTO model)
+        public async Task<BaseEntity> Put(Guid id, QuestionPostDTO model)
         {
             using var connection = this.GetConnection();
             try

@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Misa_TruongWeb03.Common.Entity.Base;
 using Misa_TruongWeb03.Common.Helper;
 using Misa_TruongWeb03.Common.Resource;
+using Misa_TruongWeb03.DL.Entity.Base;
 using MySqlConnector;
 using System.Data;
 using System.Data.Common;
@@ -43,7 +44,7 @@ namespace Misa_TruongWeb03.DL.Repository.Base
         /// <param name="model"></param>
         /// <returns>Base Entity</returns>
         /// CreatedBy: NQTruong (24/05/2023)
-        public async Task<BaseEntity> Get(TEntity model, FilterModel getModel)
+        public async Task<BaseGet<IEnumerable<TEntity>>> Get(TEntity model, FilterModel getModel)
         {
             using var connection = GetConnection();
             try
@@ -61,24 +62,22 @@ namespace Misa_TruongWeb03.DL.Repository.Base
                 var result = await connection.QueryMultipleAsync(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
                 var listModel = await result.ReadAsync<TEntity>();
                 var totalCount = await result.ReadSingleAsync<int>();
-                var newResult = new BaseEntity
+
+                var returnModel = new BaseGet<IEnumerable<TEntity>>
                 {
-                    ErrorCode = StatusCodes.Status200OK,
                     Data = listModel,
-                    Pagination = new Pagination() { PageIndex = getModel.PageIndex, PageSize = getModel.PageSize, Count = totalCount }
+                    Pagination = new Pagination
+                    {
+                        Count = totalCount,
+                        PageIndex = getModel.PageIndex,
+                        PageSize = getModel.PageSize,
+                    }
                 };
-                return newResult;
+                return returnModel;
             }
             catch (Exception ex)
             {
-                var exception = new BaseEntity
-                {
-                    ErrorCode = StatusCodes.Status500InternalServerError,
-                    Data = null,
-                    DevMsg = ex.Message,
-                    UserMsg = VN.Error500
-                };
-                return exception;
+                throw;
             }
             finally { connection.Close(); }
         }
@@ -88,7 +87,7 @@ namespace Misa_TruongWeb03.DL.Repository.Base
         /// <param name="model"></param>
         /// <returns>Base Entity</returns>
         /// CreatedBy: NQTruong (24/05/2023)
-        public virtual async Task<BaseEntity> GetById(int id)
+        public virtual async Task<TEntity?> GetById(Guid id)
         {
             var storedProcedureName = GenerateProcName.Generate<TEntity>("GetById");
 
@@ -99,23 +98,11 @@ namespace Misa_TruongWeb03.DL.Repository.Base
             try
             {
                 connection.Open();
-                var result = await connection.QueryFirstOrDefaultAsync<TEntity>(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
-                var newResult = new BaseEntity
-                {
-                    ErrorCode = StatusCodes.Status200OK,
-                    Data = result,
-                };
-                return newResult;
+                return await connection.QueryFirstOrDefaultAsync<TEntity>(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
             }
             catch (Exception ex)
             {
-                var exception = new BaseEntity
-                {
-                    ErrorCode = StatusCodes.Status500InternalServerError,
-                    DevMsg = ex.Message,
-                    UserMsg = VN.Error500
-                };
-                return exception;
+                throw;
             }
             finally { connection.Close(); }
         }
@@ -125,7 +112,7 @@ namespace Misa_TruongWeb03.DL.Repository.Base
         /// <param name="model"></param>
         /// <returns>Base Entity</returns>
         /// CreatedBy: NQTruong (24/05/2023)
-        public async Task<BaseEntity> Post(TEntity model)
+        public async Task<Guid> Post(TEntity model)
         {
             using var connection = GetConnection();
             try
@@ -136,24 +123,11 @@ namespace Misa_TruongWeb03.DL.Repository.Base
 
                 var parameters = DynamicParametersAdd.CreateParameterDynamic(model);
 
-                var result = await connection.QueryAsync<int>(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
-                var newResult = new BaseEntity
-                {
-                    Data = result,
-                    ErrorCode = StatusCodes.Status201Created,
-                };
-                return newResult;
+                return await connection.QueryFirstOrDefaultAsync<Guid>(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
             }
             catch (Exception ex)
             {
-                var exception = new BaseEntity
-                {
-                    ErrorCode = StatusCodes.Status500InternalServerError,
-                    Data = null,
-                    DevMsg = ex.Message,
-                    UserMsg = VN.Error500
-                };
-                return exception;
+                throw;
             }
             finally { connection.Close(); }
         }
@@ -163,7 +137,7 @@ namespace Misa_TruongWeb03.DL.Repository.Base
         /// <param name="model"></param>
         /// <returns>Base Entity</returns>
         /// CreatedBy: NQTruong (24/05/2023)
-        public async Task<BaseEntity> Put(TEntity model)
+        public async Task<int> Put(Guid id, TEntity model)
         {
             using var connection = GetConnection();
             try
@@ -173,25 +147,13 @@ namespace Misa_TruongWeb03.DL.Repository.Base
                 var storedProcedureName = GenerateProcName.Generate<TEntity>("Put");
 
                 var parameters = DynamicParametersAdd.CreateParameterDynamic(model);
+                parameters.AddDynamicParams(new { id });
 
-                var result = await connection.QueryAsync<int>(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
-                var newResult = new BaseEntity
-                {
-                    ErrorCode = StatusCodes.Status200OK,
-                    Data = result,
-                };
-                return newResult;
+                return await connection.ExecuteAsync(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
             }
             catch (Exception ex)
             {
-                var exception = new BaseEntity
-                {
-                    ErrorCode = StatusCodes.Status500InternalServerError,
-                    Data = null,
-                    DevMsg = ex.Message,
-                    UserMsg = VN.Error500
-                };
-                return exception;
+                throw;
             }
             finally { connection.Close(); }
         }
@@ -201,7 +163,7 @@ namespace Misa_TruongWeb03.DL.Repository.Base
         /// <param name="model"></param>
         /// <returns>Base Entity</returns>
         /// CreatedBy: NQTruong (24/05/2023)
-        public async Task<BaseEntity> Delete(int id)
+        public async Task<int> Delete(Guid id)
         {
 
             using var connection = GetConnection();
@@ -213,31 +175,12 @@ namespace Misa_TruongWeb03.DL.Repository.Base
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.AddDynamicParams(new { id });
-
                 
-                var result = await connection.ExecuteAsync(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
-                if(result == 0)
-                {
-                    return new DatabaseError();
-                }
-
-                var newResult = new BaseEntity
-                {
-                    ErrorCode = StatusCodes.Status200OK,
-                    Data = result,
-                };
-                return newResult;
+                return await connection.ExecuteAsync(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
             }
             catch (Exception ex)
             {
-                var exception = new BaseEntity
-                {
-                    ErrorCode = StatusCodes.Status500InternalServerError,
-                    Data = null,
-                    DevMsg = ex.Message,
-                    UserMsg = VN.Error500
-                };
-                return exception;
+                throw;
             }
             finally { connection.Close(); }
         }
@@ -247,7 +190,7 @@ namespace Misa_TruongWeb03.DL.Repository.Base
         /// <param name="model"></param>
         /// <returns>Base Entity</returns>
         /// CreatedBy: NQTruong (24/05/2023)
-        public async Task<BaseEntity> CheckDuplicate(TEntity model)
+        public async Task<bool> CheckDuplicate(TEntity model)
         {
             using var connection = GetConnection();
             try
@@ -257,29 +200,12 @@ namespace Misa_TruongWeb03.DL.Repository.Base
                 var parameters = ParameterObjectBuilder.CreateParameterObject(model);
                 var storedProcedureName = $"proc_{typeof(TEntity).Name.ToLower()}_checkDuplicate";
 
-                var result = await connection.QueryFirstOrDefaultAsync<int>(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
-                if (result > 0)
-                {
-                    var found = new DuplicateError();
-                    return found;
-                }
-                var newResult = new BaseEntity
-                {
-                    ErrorCode = StatusCodes.Status200OK,
-                    Data = result
-                };
-                return newResult;
+                return  await connection.QueryFirstOrDefaultAsync<bool>(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
+                
             }
             catch (Exception ex)
             {
-                var exception = new BaseEntity
-                {
-                    ErrorCode = StatusCodes.Status500InternalServerError,
-                    Data = null,
-                    DevMsg = ex.Message,
-                    UserMsg = VN.Error500
-                };
-                return exception;
+                throw;
             }
             finally { connection.Close(); }
         } 

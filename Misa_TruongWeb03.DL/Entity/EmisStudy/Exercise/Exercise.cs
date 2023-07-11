@@ -11,11 +11,11 @@ namespace Misa_TruongWeb03.Common.Entity.EmisStudy.Exercise
 {
     public class Exercise :BaseModel
     {
-        public int ExerciseId { get; set; }
+        public Guid ExerciseId { get; set; }
         public string ExerciseName { get; set;}
-        public int? SubjectId { get; set; }
-        public int? GradeId { get; set; }
-        public int? TopicId { get; set; }
+        public Guid? SubjectId { get; set; } = null;
+        public Guid? GradeId { get; set; } = null;
+        public Guid? TopicId { get; set; } = null;
         public ExerciseStatus? ExerciseStatus { get; set; }
         public string JsonData { get; set; }
         public string GradeName { get; set; }

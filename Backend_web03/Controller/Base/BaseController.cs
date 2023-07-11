@@ -56,7 +56,7 @@ namespace Misa_TruongWeb03.Controller.Base
         /// <param name="id"></param>
         /// <returns>IActionResult</returns>
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetDetail(int id)
+        public async Task<IActionResult> GetDetail(Guid id)
         {
             try
             {
@@ -98,7 +98,7 @@ namespace Misa_TruongWeb03.Controller.Base
         /// <param name="model"></param>
         /// <returns>IActionResult</returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] TEntityPostDto model)
+        public async Task<IActionResult> Put(Guid id, [FromBody] TEntityPutDto model)
         {
             if (!ModelState.IsValid)
             {
@@ -120,7 +120,7 @@ namespace Misa_TruongWeb03.Controller.Base
         /// <param name="id"></param>
         /// <returns>IActionResult</returns>
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             try
             {
