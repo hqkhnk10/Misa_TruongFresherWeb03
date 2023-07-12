@@ -11,6 +11,7 @@
           "Aspose.Cells": "23.5.0",
           "AutoMapper": "12.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
+          "Dapper.Transaction": "2.0.123",
           "Misa_TruongWeb03.DL": "1.0.0",
           "Newtonsoft.Json": "13.0.3"
         },
@@ -59,6 +60,17 @@
           "lib/net5.0/Dapper.dll": {
             "assemblyVersion": "2.0.0.0",
             "fileVersion": "2.0.123.33578"
+          }
+        }
+      },
+      "Dapper.Transaction/2.0.123": {
+        "dependencies": {
+          "Dapper": "2.0.123"
+        },
+        "runtime": {
+          "lib/net5.0/Dapper.Transaction.dll": {
+            "assemblyVersion": "2.0.123.0",
+            "fileVersion": "2.0.123.0"
           }
         }
       },
@@ -242,6 +254,7 @@
           "AutoMapper": "12.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
           "Dapper": "2.0.123",
+          "Dapper.Transaction": "2.0.123",
           "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
           "Microsoft.AspNetCore.Http.Features": "5.0.17",
           "Newtonsoft.Json": "13.0.3"
@@ -256,6 +269,7 @@
           "AutoMapper": "12.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
           "Dapper": "2.0.123",
+          "Dapper.Transaction": "2.0.123",
           "Microsoft.Extensions.Configuration.Abstractions": "7.0.0",
           "Misa_TruongWeb03.Common": "1.0.0",
           "MySqlConnector": "2.2.6",
@@ -301,6 +315,13 @@
       "sha512": "sha512-RDFF4rBLLmbpi6pwkY7q/M6UXHRJEOerplDGE5jwEkP/JGJnBauAClYavNKJPW1yOTWRPIyfj4is3EaJxQXILQ==",
       "path": "dapper/2.0.123",
       "hashPath": "dapper.2.0.123.nupkg.sha512"
+    },
+    "Dapper.Transaction/2.0.123": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-1ccKEA1LWE+MaR382gatuMS4GqecFm8GDipZ2AEtdUcbj9dM6wT8mTGZ7cvjxUJL1Bacz/5OQuwSwoKYNX62YA==",
+      "path": "dapper.transaction/2.0.123",
+      "hashPath": "dapper.transaction.2.0.123.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Http.Abstractions/2.2.0": {
       "type": "package",

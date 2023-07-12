@@ -17,7 +17,6 @@ namespace Misa_TruongWeb03.Common.Entity.EmisStudy.Exercise
         public Guid? GradeId { get; set; } = null;
         public Guid? TopicId { get; set; } = null;
         public ExerciseStatus? ExerciseStatus { get; set; }
-        public string JsonData { get; set; }
         public string GradeName { get; set; }
         public string SubjectName { get; set; }
         public string SubjectImage { get; set; }

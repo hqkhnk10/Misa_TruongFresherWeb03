@@ -103,4 +103,5 @@ namespace Misa_TruongWeb03.Common.Entity.Base
             UserMsg = message;
         }
     }
+
 }

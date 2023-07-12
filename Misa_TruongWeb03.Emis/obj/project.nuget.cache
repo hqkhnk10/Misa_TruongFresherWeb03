@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "XsmIHBUsETCgtAXOB84WRPYwBuKg5pB6dQoD+VczmSTzS54MQqEEItC3B24IKkLot8op8+yvFzKsTidvdAYJVQ==",
+  "dgSpecHash": "5iaXgrZap5CzqoU4NVVEivb3G/pyAmgG295UjZRrPMN6wxoBf85HXKhDtk5Oj7igJhZhm+acTeBKQ88yZoMnRw==",
   "success": true,
   "projectFilePath": "D:\\MISA2023\\NewBE\\Misa_TruongFresherWeb03\\Misa_TruongWeb03.Emis\\Misa_TruongWeb03.Emis.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "C:\\Users\\Tngo\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Tngo\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\Tngo\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
+    "C:\\Users\\Tngo\\.nuget\\packages\\dapper.transaction\\2.0.123\\dapper.transaction.2.0.123.nupkg.sha512",
     "C:\\Users\\Tngo\\.nuget\\packages\\microsoft.aspnet.cors\\5.2.9\\microsoft.aspnet.cors.5.2.9.nupkg.sha512",
     "C:\\Users\\Tngo\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.9\\microsoft.aspnet.webapi.client.5.2.9.nupkg.sha512",
     "C:\\Users\\Tngo\\.nuget\\packages\\microsoft.aspnet.webapi.core\\5.2.9\\microsoft.aspnet.webapi.core.5.2.9.nupkg.sha512",

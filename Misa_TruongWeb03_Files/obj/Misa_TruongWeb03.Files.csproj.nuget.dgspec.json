@@ -56,6 +56,10 @@
               "target": "Package",
               "version": "[12.0.1, )"
             },
+            "Dapper.Transaction": {
+              "target": "Package",
+              "version": "[2.0.123, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
@@ -130,6 +134,10 @@
               "version": "[12.0.1, )"
             },
             "Dapper": {
+              "target": "Package",
+              "version": "[2.0.123, )"
+            },
+            "Dapper.Transaction": {
               "target": "Package",
               "version": "[2.0.123, )"
             },
@@ -222,6 +230,10 @@
               "target": "Package",
               "version": "[2.0.123, )"
             },
+            "Dapper.Transaction": {
+              "target": "Package",
+              "version": "[2.0.123, )"
+            },
             "Microsoft.Extensions.Configuration.Abstractions": {
               "target": "Package",
               "version": "[7.0.0, )"
@@ -300,6 +312,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Dapper.Transaction": {
+              "target": "Package",
+              "version": "[2.0.123, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"

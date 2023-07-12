@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "CU8/bkDDCfoLaEqHmZIRda0gqr2+vV7zVGKzfzJUJ13Xv4SpNadChm//3OJCa1TqwqKvo/6TiFIM1GyhRFyGsQ==",
+  "dgSpecHash": "G+ftLB+nXIw+YPZSkAl+mnRu9e5RI2PZoOvbedyZMZ90v/MnaCGvs1Om4CbOlQAKcouJz/6PaSuZssZkKqPpNg==",
   "success": true,
   "projectFilePath": "D:\\MISA2023\\NewBE\\Misa_TruongFresherWeb03\\Misa_TruongWeb03.Common\\Misa_TruongWeb03.Common.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "C:\\Users\\Tngo\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Tngo\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\Tngo\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
+    "C:\\Users\\Tngo\\.nuget\\packages\\dapper.transaction\\2.0.123\\dapper.transaction.2.0.123.nupkg.sha512",
     "C:\\Users\\Tngo\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Tngo\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
     "C:\\Users\\Tngo\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
