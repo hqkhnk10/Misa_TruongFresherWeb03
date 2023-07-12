@@ -6,7 +6,7 @@ using Misa_TruongWeb03.DL.Repository.EmisStudy.QuestionRepo;
 
 namespace Misa_TruongWeb03.BL.Service.EmisStudy.QuestionService
 {
-    public interface IQuestionService : IBaseService<Question, QuestionGetDTO,QuestionPostDTO,QuestionPutDTO>
+    public interface IQuestionService : IBaseService<Question, QuestionDTO, QuestionPostDTO, QuestionPostDTO,QuestionPutDTO>
     {
 
     }

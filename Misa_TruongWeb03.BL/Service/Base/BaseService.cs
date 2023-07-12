@@ -21,7 +21,7 @@ namespace Misa_TruongWeb03.BL.Service.Base
     /// <typeparam name="TEntityPostDto">Generic Post DTO model</typeparam>
     /// <typeparam name="TEntityPutDto">Generic Put DTO model</typeparam>
     /// CreatedBy: NQTruong (24/05/2023)
-    public abstract class BaseService<TEntity,TEntityDto, TEntityGetDto, TEntityPostDto, TEntityPutDto> : IBaseService<TEntity, TEntityGetDto, TEntityPostDto, TEntityPutDto>
+    public abstract class BaseService<TEntity,TEntityDto, TEntityGetDto, TEntityPostDto, TEntityPutDto> : IBaseService<TEntity, TEntityDto, TEntityGetDto, TEntityPostDto, TEntityPutDto>
     {
         #region Property
         protected readonly IBaseRepository<TEntity> _baseRepository;
@@ -58,12 +58,17 @@ namespace Misa_TruongWeb03.BL.Service.Base
                     dictionary.Add(propertyName, propertyValue);
                 }
 
-                var result = await _baseRepository.Get(dictionary, filter);
+                var (result,totalCount) = await _baseRepository.Get(dictionary, filter);
                 
                 return new GetResponse
                 {
-                    Data = result.Data,
-                    Pagination = result.Pagination,
+                    Data = _mapper.Map<List<TEntityDto>>(result),
+                    Pagination = new Pagination
+                    {
+                        Count = totalCount,
+                        PageIndex = filter.PageIndex,
+                        PageSize = filter.PageSize,
+                    }
                 };
             }
             catch (Exception ex)
@@ -86,13 +91,18 @@ namespace Misa_TruongWeb03.BL.Service.Base
                 {
                     throw new NotFoundException();
                 }
-                return _mapper.Map<TEntityDto>(result);
+                var entityDto = _mapper.Map<TEntityDto>(result);
+                await GetDetailEntity(id, entityDto);
+
+                return entityDto;
             }
             catch (Exception ex)
             {
                 throw new InternalException(ex);
             }
         }
+
+
         /// <summary>
         /// BASE Post call to BASE Repository
         /// </summary>
@@ -124,7 +134,7 @@ namespace Misa_TruongWeb03.BL.Service.Base
             {
                 var entity = _mapper.Map<TEntity>(model);
                 var result = await _baseRepository.Put(id, entity);
-                return result;
+                return id;
             }
             catch (Exception ex)
             {
@@ -170,6 +180,12 @@ namespace Misa_TruongWeb03.BL.Service.Base
             {
                 throw new InternalException(ex);
             }
+        }
+
+
+        protected virtual async Task GetDetailEntity(Guid id, TEntityDto entityDto)
+        {
+            await Task.Delay(0);
         }
         #endregion
     }

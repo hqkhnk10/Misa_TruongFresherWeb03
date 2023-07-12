@@ -107,7 +107,7 @@ namespace Misa_TruongWeb03.BL.Service.EmisStudy.QuestionService
                     {
                         return;
                     }
-                    instance.Answers.Add(new AnswerPostModel
+                    instance.Answers.Add(new AnswerPostDTO
                     {
                         AnswerContent = value.ToString()
                     });

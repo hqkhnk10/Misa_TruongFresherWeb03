@@ -4,7 +4,7 @@ using Misa_TruongWeb03.Common.Entity.EmisStudy.Supject;
 
 namespace Misa_TruongWeb03.BL.Service.EmisStudy.SubjectService
 {
-    public interface ISubjectService : IBaseService<Subject, SubjectGetDTO,SubjectPostDTO,SubjectPutDTO>
+    public interface ISubjectService : IBaseService<Subject, Subject, SubjectGetDTO, SubjectPostDTO, SubjectPutDTO>
     {
     }
 }

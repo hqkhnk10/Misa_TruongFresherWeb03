@@ -210,3 +210,5 @@ D:\MISA2023\NewBE\Misa_TruongFresherWeb03\Misa_TruongWeb03_Files\obj\Debug\net6.
 D:\MISA2023\NewBE\Misa_TruongFresherWeb03\Misa_TruongWeb03_Files\obj\Debug\net6.0\Misa_TruongWeb03.Files.pdb
 D:\MISA2023\NewBE\Misa_TruongFresherWeb03\Misa_TruongWeb03_Files\obj\Debug\net6.0\Misa_TruongWeb03.Files.genruntimeconfig.cache
 D:\MISA2023\NewBE\Misa_TruongFresherWeb03\Misa_TruongWeb03_Files\obj\Debug\net6.0\ref\Misa_TruongWeb03.Files.dll
+C:\Users\mr_tr\WorkPlace\MISA\New Backend\Misa_TruongFresherWeb03\Misa_TruongWeb03_Files\bin\Debug\net6.0\Dapper.Transaction.dll
+D:\MISA2023\NewBE\Misa_TruongFresherWeb03\Misa_TruongWeb03_Files\bin\Debug\net6.0\Dapper.Transaction.dll

@@ -66,7 +66,7 @@ namespace Misa_TruongWeb03.Controller.Base
         {
 
             var result = await _baseService.Post(model);
-            return CreatedAtAction(result);
+            return CreatedAtAction(nameof(this.Post),result);
 
         }
         /// <summary>

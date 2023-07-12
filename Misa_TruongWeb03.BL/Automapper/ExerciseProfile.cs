@@ -10,8 +10,9 @@ namespace Misa_TruongWeb03.BL.Automapper
         public ExerciseProfile()
         {
             CreateMap<ExerciseGetDTO, Exercise>();
-            CreateMap<ExerciseGetDTO, FilterModel>();
             CreateMap<ExercisePostDTO, Exercise>();
+            CreateMap<Exercise, ExerciseDTO>();
+
         }
     }
 }

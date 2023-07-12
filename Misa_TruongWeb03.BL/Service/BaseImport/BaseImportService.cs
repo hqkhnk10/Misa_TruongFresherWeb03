@@ -87,6 +87,7 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
             var findConfigs = new List<ExcelMapping>();
             var lastIndex = -1;
 
+            //map column name to index
             foreach (var config in configs)
             {
                 for (int i = lastIndex + 1; i < maxRow; i++)
@@ -121,20 +122,20 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
                     if (config.IsRequired && (cellValue == null || string.IsNullOrEmpty(cellValue.ToString())))
                     {
                         isValid = false;
-                        errorMessage += cells[header - 1, columnIndex].Value + " Không được để trống.";
+                        errorMessage += cells[header -1, columnIndex].Value + " Không được để trống.";
                     }
                     object formatValue = FormatCell(cellValue, config.FormatFunc);
                     //check trùng
                     if (config.IsDuplicateCheckEnabled && (IsDuplicateValue(formatValue, cells, columnIndex, row) || await IsDuplicateRecord(formatValue)))
                     {
                         isValid = false;
-                        errorMessage += cells[header - 1, columnIndex].Value + " Trùng dữ liệu.";
+                        errorMessage += cells[header -1 , columnIndex].Value + " Trùng dữ liệu.";
                     }
                     ////check format dữ liệu
                     //if (formatValue == null && cellValue != null)
                     //{
                     //    isValid = false;
-                    //    errorMessage += cells[header - 1, columnIndex].Value + " Không đúng định dạng";
+                    //    errorMessage += cells[header, columnIndex].Value + " Không đúng định dạng";
                     //}
                     //check theo hàm
                     if (config.ValidatorFunc != null && !ValidateCell(formatValue, propertyName, config.ValidatorFunc))

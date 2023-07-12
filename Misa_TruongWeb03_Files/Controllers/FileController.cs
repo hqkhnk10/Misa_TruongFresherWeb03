@@ -33,19 +33,10 @@ namespace Misa_TruongWeb03_File.Controller
         [HttpPost("PostSingleFile")]
         public async Task<IActionResult> PostSingleFile(IFormFile file)
         {
-            if (file == null)
-            {
-                return StatusCode(StatusCodes.Status404NotFound, new NotFoundError()); ;
-            }
-            try
-            {
-                var res = await _fileService.Upload(file);
-                return Ok(res);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new ExceptionError(ex));
-            }
+
+            var res = await _fileService.Upload(file);
+            return Ok(res);
+
         }
         /// <summary>
         /// Tải faile dựa trên tên file
@@ -56,15 +47,10 @@ namespace Misa_TruongWeb03_File.Controller
         [HttpGet("download")]
         public IActionResult Download(string fileName)
         {
-            try
-            {
-                var fileData = _fileService.Download(fileName);
-                return File(fileData, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new ExceptionError(ex));
-            }
+
+            var fileData = _fileService.Download(fileName);
+            return File(fileData, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
+
         }
         /// <summary>
         /// Xác thực dữ liệu file
@@ -76,19 +62,11 @@ namespace Misa_TruongWeb03_File.Controller
         public async Task<IActionResult> ValidateFile([FromForm] ValidateFileDTO model)
         {
             var service = GetImportService(model.Key);
-            if (service == null)
-            {
-                return StatusCode(StatusCodes.Status404NotFound, new NotFoundError()); ;
-            }
-            try
-            {
-                var res = await service.Validate(model.File, model.SheetIndex, model.Header);
-                return Ok(res);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new ExceptionError(ex));
-            }
+
+
+            var res = await service.Validate(model.File, model.SheetIndex, model.Header);
+            return Ok(res);
+
         }
         /// <summary>
         /// Lấy file nhập khẩu mẫu
@@ -100,27 +78,22 @@ namespace Misa_TruongWeb03_File.Controller
         [Route("SampleFile")]
         public IActionResult GetSampleFile(string key)
         {
-            try
+
+            var name = new GetTableTitle().GetTableName(key);
+            var service = GetExportService(key);
+            if (service == null)
             {
-                var name = new GetTableTitle().GetTableName(key);
-                var service = GetExportService(key);
-                if (service == null)
-                {
-                    return NotFound();
-                }
-                var fileData = service.GetSampleFile(name);
-                if (fileData == null)
-                {
-                    return NotFound();
-                }
-                // Return the file
-                HttpContext.Response.Headers.Add("Access-Control-Expose-Headers", "Content-Disposition");
-                return File(fileData, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "example.xlsx");
+                return NotFound();
             }
-            catch (Exception ex)
+            var fileData = service.GetSampleFile(name);
+            if (fileData == null)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, new ExceptionError(ex));
+                return NotFound();
             }
+            // Return the file
+            HttpContext.Response.Headers.Add("Access-Control-Expose-Headers", "Content-Disposition");
+            return File(fileData, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "example.xlsx");
+
         }
         /// <summary>
         /// Xuất file excel
@@ -132,27 +105,15 @@ namespace Misa_TruongWeb03_File.Controller
         [Route("ExportFile")]
         public async Task<IActionResult> ExportFile([FromBody] ExportModel model)
         {
-            try
-            {
-                var name = new GetTableTitle().GetTableName(model.Key);
-                var service = GetImportService(model.Key);
-                if (service == null)
-                {
-                    return NotFound(new NotFoundError());
-                }
-                var fileData = await service.ExportFile(name, model);
-                if (fileData == null)
-                {
-                    return NotFound(new NotFoundError());
-                }
-                // Return the file
-                return File(fileData, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{name}.xlsx");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new ExceptionError(ex));
 
-            }
+            var name = new GetTableTitle().GetTableName(model.Key);
+            var service = GetImportService(model.Key);
+
+            var fileData = await service.ExportFile(name, model);
+
+            // Return the file
+            return File(fileData, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{name}.xlsx");
+
         }
         /// <summary>
         /// Lấy import service dựa theo key

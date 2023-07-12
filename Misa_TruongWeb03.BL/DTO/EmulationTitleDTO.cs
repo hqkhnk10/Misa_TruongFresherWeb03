@@ -1,5 +1,6 @@
 ﻿using Misa_TruongWeb03.Common.Entity.Base;
 using Misa_TruongWeb03.Common.Resource;
+using Misa_TruongWeb03.DL.Entity.Base;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using static Misa_TruongWeb03.Common.Enum.EmulationTitleEnum;

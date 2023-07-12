@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Misa_TruongWeb03.BL.Service.EmisStudy.SubjectService
 {
-    public class SubjectService : BaseService<Subject, SubjectGetDTO, SubjectPostDTO, SubjectPutDTO>, ISubjectService
+    public class SubjectService : BaseService<Subject, Subject, SubjectGetDTO, SubjectPostDTO, SubjectPutDTO>, ISubjectService
     {
         #region Constructor
         public SubjectService(ISubjectRepository subjectRepository, IMapper mapper) : base(subjectRepository, mapper)

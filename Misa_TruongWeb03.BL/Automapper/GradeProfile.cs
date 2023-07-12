@@ -10,7 +10,6 @@ namespace Misa_TruongWeb03.BL.Automapper
         public GradeProfile()
         {
             CreateMap<GradeGetDTO, Grade>();
-            CreateMap<GradeGetDTO, FilterModel>();
         }
     }
 }

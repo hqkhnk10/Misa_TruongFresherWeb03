@@ -10,7 +10,7 @@ namespace Misa_TruongWeb03.Emis.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AnswerController : BaseController<Answer,AnswerGetDTO,AnswerPostDTO,AnswerPutDTO>
+    public class AnswerController : BaseController<Answer,AnswerDTO, AnswerGetDTO,AnswerPostDTO,AnswerPutDTO>
     {
         #region Constructor
         public AnswerController(IAnswerService answerService) : base(answerService)

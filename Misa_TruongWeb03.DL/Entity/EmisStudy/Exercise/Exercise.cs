@@ -18,8 +18,4 @@ namespace Misa_TruongWeb03.Common.Entity.EmisStudy.Exercise
         public Guid? TopicId { get; set; } = null;
         public ExerciseStatus? ExerciseStatus { get; set; }
     }
-    public class DetailExerciseModel : Exercise
-    {
-        public List<QuestionDetailModel> Questions { get; set; } = new List<QuestionDetailModel>();
-    }
 }

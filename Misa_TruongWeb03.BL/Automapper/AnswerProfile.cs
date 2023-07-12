@@ -9,7 +9,8 @@ namespace Misa_TruongWeb03.BL.Automapper
     {
         public AnswerProfile()
         {
-            CreateMap<AnswerPostModel, Answer>();
+            CreateMap<Answer, AnswerDTO>();
+            CreateMap<AnswerPostDTO, Answer>();
         }
     }
 }

@@ -10,7 +10,6 @@ namespace Misa_TruongWeb03.BL.Automapper
         public SubjectProfile()
         {
             CreateMap<SubjectGetDTO, Subject>();
-            CreateMap<SubjectGetDTO, FilterModel>();
         }
     }
 }

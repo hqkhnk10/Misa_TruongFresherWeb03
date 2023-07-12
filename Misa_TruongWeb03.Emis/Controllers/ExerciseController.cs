@@ -9,7 +9,7 @@ namespace Misa_TruongWeb03.Emis.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ExerciseController : BaseController<Exercise, ExerciseGetDTO, ExercisePostDTO, ExercisePutDTO>
+    public class ExerciseController : BaseController<Exercise, ExerciseDTO, ExerciseGetDTO, ExercisePostDTO, ExercisePutDTO>
     {
         #region Constructor
         public ExerciseController(IExerciseService exerciseService) : base(exerciseService)

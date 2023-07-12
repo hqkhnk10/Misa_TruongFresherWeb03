@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Misa_TruongWeb03.BL.Service.EmisStudy.TopicService
 {
-    public class TopicService : BaseService<Topic,TopicGetDTO,TopicPostDTO,TopicPutDTO>, ITopicService
+    public class TopicService : BaseService<Topic, Topic, TopicGetDTO, TopicPostDTO, TopicPutDTO>, ITopicService
     {
         #region Constructor
         public TopicService(ITopicRepository topicRepository, IMapper mapper) : base(topicRepository, mapper)

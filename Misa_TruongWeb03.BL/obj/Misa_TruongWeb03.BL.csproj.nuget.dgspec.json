@@ -56,6 +56,10 @@
               "target": "Package",
               "version": "[12.0.1, )"
             },
+            "Dapper.Transaction": {
+              "target": "Package",
+              "version": "[2.0.123, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
@@ -130,6 +134,10 @@
               "version": "[12.0.1, )"
             },
             "Dapper": {
+              "target": "Package",
+              "version": "[2.0.123, )"
+            },
+            "Dapper.Transaction": {
               "target": "Package",
               "version": "[2.0.123, )"
             },
@@ -219,6 +227,10 @@
               "version": "[12.0.1, )"
             },
             "Dapper": {
+              "target": "Package",
+              "version": "[2.0.123, )"
+            },
+            "Dapper.Transaction": {
               "target": "Package",
               "version": "[2.0.123, )"
             },

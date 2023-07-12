@@ -9,7 +9,7 @@ namespace Misa_TruongWeb03.Emis.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SubjectController : BaseController<Subject, SubjectGetDTO, SubjectPostDTO, SubjectPutDTO>
+    public class SubjectController : BaseController<Subject, Subject, SubjectGetDTO, SubjectPostDTO, SubjectPutDTO>
     {
         #region Constructor
         public SubjectController(ISubjectService subjectService) : base(subjectService)

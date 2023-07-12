@@ -9,9 +9,8 @@ namespace Misa_TruongWeb03.BL.Automapper
     {
         public QuestionProfile()
         {
-            CreateMap<QuestionGetDTO, Question>();
-            CreateMap<QuestionGetDTO, FilterModel>();
             CreateMap<QuestionPostDTO, Question>();
+            CreateMap<Question, QuestionDTO>();
         }
     }
 }
