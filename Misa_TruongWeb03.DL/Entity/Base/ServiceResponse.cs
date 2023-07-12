@@ -29,21 +29,6 @@ namespace Misa_TruongWeb03.Common.Entity.Base
         /// CreatedBy: NQTruong (24/05/2023)
         public string UserMsg { get; set; } = VN.Error200;
         /// <summary>
-        /// Thông tin cụ thể về lỗi
-        /// </summary>
-        /// CreatedBy: NQTruong (24/05/2023)
-        public string MoreInfo { get; set; } = string.Empty;
-        /// <summary>
-        /// Nã để tra cứu thông tin
-        /// </summary>
-        /// CreatedBy: NQTruong (24/05/2023)
-        public System.Diagnostics.ActivityTraceId TraceId { get; set; }
-        /// <summary>
-        /// Bản ghi bị thay đổi
-        /// </summary>
-        /// CreatedBy: NQTruong (24/05/2023)
-        public int Rows { get; set; } = 0;
-        /// <summary>
         /// Phân trang
         /// </summary>
         /// CreatedBy: NQTruong (24/05/2023)

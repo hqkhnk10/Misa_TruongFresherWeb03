@@ -38,19 +38,12 @@ namespace Misa_TruongWeb03.DL.Repository.FileRepository
         public async Task<List<ExcelConfigEntity>> MappingConfig(string key)
         {
             using var connection = this.GetConnection();
-            try
-            {
-                // Fetch columnMapping from database
-                    connection.Open();
-                    var query = $"SELECT * FROM ExcelMapping where TableKey = '{key}'";
-                    var res = await connection.QueryAsync<ExcelConfigEntity>(query);
-                    return res.ToList();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            // Fetch columnMapping from database
+            connection.Open();
+            var query = $"SELECT * FROM ExcelMapping where TableKey = '{key}'";
+            var res = await connection.QueryAsync<ExcelConfigEntity>(query);
+            connection.Close();
+            return res.ToList();
         }
         #endregion
     }

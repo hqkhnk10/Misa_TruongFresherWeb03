@@ -84,6 +84,22 @@
           }
         }
       },
+      "Dapper.Transaction/2.0.123": {
+        "type": "package",
+        "dependencies": {
+          "Dapper": "2.0.123"
+        },
+        "compile": {
+          "lib/net5.0/Dapper.Transaction.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net5.0/Dapper.Transaction.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.AspNet.Cors/5.2.9": {
         "type": "package",
         "compile": {
@@ -959,6 +975,7 @@
           "AutoMapper": "12.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
           "Dapper": "2.0.123",
+          "Dapper.Transaction": "2.0.123",
           "Microsoft.AspNet.WebApi.Cors": "5.2.9",
           "Misa_TruongWeb03.BL": "1.0.0",
           "MySqlConnector": "2.2.6",
@@ -982,6 +999,7 @@
           "Aspose.Cells": "23.5.0",
           "AutoMapper": "12.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
+          "Dapper.Transaction": "2.0.123",
           "Misa_TruongWeb03.DL": "1.0.0",
           "Newtonsoft.Json": "13.0.3"
         },
@@ -1000,6 +1018,7 @@
           "AutoMapper": "12.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
           "Dapper": "2.0.123",
+          "Dapper.Transaction": "2.0.123",
           "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
           "Microsoft.AspNetCore.Http.Features": "5.0.17",
           "Newtonsoft.Json": "13.0.3"
@@ -1019,6 +1038,7 @@
           "AutoMapper": "12.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
           "Dapper": "2.0.123",
+          "Dapper.Transaction": "2.0.123",
           "Microsoft.Extensions.Configuration.Abstractions": "7.0.0",
           "Misa_TruongWeb03.Common": "1.0.0",
           "MySqlConnector": "2.2.6",
@@ -1187,6 +1207,23 @@
         "lib/net5.0/Dapper.xml",
         "lib/netstandard2.0/Dapper.dll",
         "lib/netstandard2.0/Dapper.xml"
+      ]
+    },
+    "Dapper.Transaction/2.0.123": {
+      "sha512": "1ccKEA1LWE+MaR382gatuMS4GqecFm8GDipZ2AEtdUcbj9dM6wT8mTGZ7cvjxUJL1Bacz/5OQuwSwoKYNX62YA==",
+      "type": "package",
+      "path": "dapper.transaction/2.0.123",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "dapper.transaction.2.0.123.nupkg.sha512",
+        "dapper.transaction.nuspec",
+        "lib/net461/Dapper.Transaction.dll",
+        "lib/net461/Dapper.Transaction.xml",
+        "lib/net5.0/Dapper.Transaction.dll",
+        "lib/net5.0/Dapper.Transaction.xml",
+        "lib/netstandard2.0/Dapper.Transaction.dll",
+        "lib/netstandard2.0/Dapper.Transaction.xml"
       ]
     },
     "Microsoft.AspNet.Cors/5.2.9": {
@@ -2549,6 +2586,7 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "Aspose.Cells >= 23.5.0",
+      "Dapper.Transaction >= 2.0.123",
       "Microsoft.NET.Test.Sdk >= 17.5.0",
       "Misa_TruongWeb03 >= 1.0.0",
       "NSubstitute >= 5.0.0",
@@ -2561,19 +2599,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Tngo\\.nuget\\packages\\": {}
+    "C:\\Users\\mr_tr\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\MISA2023\\NewBE\\Misa_TruongFresherWeb03\\Misa_TruongWeb03.UnitTests\\Misa_TruongWeb03.UnitTests.csproj",
+      "projectUniqueName": "C:\\Users\\mr_tr\\WorkPlace\\MISA\\New Backend\\Misa_TruongFresherWeb03\\Misa_TruongWeb03.UnitTests\\Misa_TruongWeb03.UnitTests.csproj",
       "projectName": "Misa_TruongWeb03.UnitTests",
-      "projectPath": "D:\\MISA2023\\NewBE\\Misa_TruongFresherWeb03\\Misa_TruongWeb03.UnitTests\\Misa_TruongWeb03.UnitTests.csproj",
-      "packagesPath": "C:\\Users\\Tngo\\.nuget\\packages\\",
-      "outputPath": "D:\\MISA2023\\NewBE\\Misa_TruongFresherWeb03\\Misa_TruongWeb03.UnitTests\\obj\\",
+      "projectPath": "C:\\Users\\mr_tr\\WorkPlace\\MISA\\New Backend\\Misa_TruongFresherWeb03\\Misa_TruongWeb03.UnitTests\\Misa_TruongWeb03.UnitTests.csproj",
+      "packagesPath": "C:\\Users\\mr_tr\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\mr_tr\\WorkPlace\\MISA\\New Backend\\Misa_TruongFresherWeb03\\Misa_TruongWeb03.UnitTests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Tngo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\mr_tr\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2587,8 +2625,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\MISA2023\\NewBE\\Misa_TruongFresherWeb03\\Backend_web03\\Misa_TruongWeb03.csproj": {
-              "projectPath": "D:\\MISA2023\\NewBE\\Misa_TruongFresherWeb03\\Backend_web03\\Misa_TruongWeb03.csproj"
+            "C:\\Users\\mr_tr\\WorkPlace\\MISA\\New Backend\\Misa_TruongFresherWeb03\\Backend_web03\\Misa_TruongWeb03.csproj": {
+              "projectPath": "C:\\Users\\mr_tr\\WorkPlace\\MISA\\New Backend\\Misa_TruongFresherWeb03\\Backend_web03\\Misa_TruongWeb03.csproj"
             }
           }
         }
@@ -2606,6 +2644,10 @@
           "Aspose.Cells": {
             "target": "Package",
             "version": "[23.5.0, )"
+          },
+          "Dapper.Transaction": {
+            "target": "Package",
+            "version": "[2.0.123, )"
           },
           "Microsoft.NET.Test.Sdk": {
             "target": "Package",
@@ -2658,7 +2700,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   },

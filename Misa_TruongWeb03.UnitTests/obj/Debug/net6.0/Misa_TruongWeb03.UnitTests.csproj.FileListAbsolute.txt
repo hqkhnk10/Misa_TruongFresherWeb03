@@ -542,3 +542,4 @@ D:\MISA2023\NewBE\Misa_TruongFresherWeb03\Misa_TruongWeb03.UnitTests\obj\Debug\n
 D:\MISA2023\NewBE\Misa_TruongFresherWeb03\Misa_TruongWeb03.UnitTests\obj\Debug\net6.0\Misa_TruongWeb03.UnitTests.pdb
 D:\MISA2023\NewBE\Misa_TruongFresherWeb03\Misa_TruongWeb03.UnitTests\obj\Debug\net6.0\Misa_TruongWeb03.UnitTests.genruntimeconfig.cache
 D:\MISA2023\NewBE\Misa_TruongFresherWeb03\Misa_TruongWeb03.UnitTests\obj\Debug\net6.0\ref\Misa_TruongWeb03.UnitTests.dll
+C:\Users\mr_tr\WorkPlace\MISA\New Backend\Misa_TruongFresherWeb03\Misa_TruongWeb03.UnitTests\bin\Debug\net6.0\Dapper.Transaction.dll

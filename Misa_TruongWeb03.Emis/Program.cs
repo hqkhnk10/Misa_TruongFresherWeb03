@@ -13,6 +13,7 @@ using Misa_TruongWeb03.DL.Repository.EmisStudy.GradeReposiotry;
 using Misa_TruongWeb03.DL.Repository.EmisStudy.QuestionRepo;
 using Misa_TruongWeb03.DL.Repository.EmisStudy.SubjectRepo;
 using Misa_TruongWeb03.DL.Repository.EmisStudy.TopicRepo;
+using Misa_TruongWeb03.Emis.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -54,6 +55,7 @@ app.UseCors(x => x
                .AllowAnyOrigin()
                .AllowAnyMethod()
                .AllowAnyHeader());
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

@@ -19,6 +19,7 @@ namespace Misa_TruongWeb03.Common.Helper
             Dictionary<string, string> classToTableMapping = new Dictionary<string, string>
     {
         { "emulationtitle", "Danh hiệu thi đua" },
+        { "emisquestion", "Mau_nhap_khau_cau_hoi_loai_1" },
         // Add more mappings as needed
     };
 

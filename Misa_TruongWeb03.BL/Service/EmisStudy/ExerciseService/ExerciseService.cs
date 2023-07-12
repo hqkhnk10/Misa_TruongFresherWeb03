@@ -4,6 +4,7 @@ using Misa_TruongWeb03.Common.DTO.EmisStudy;
 using Misa_TruongWeb03.Common.Entity.Base;
 using Misa_TruongWeb03.Common.Entity.EmisStudy.Exercise;
 using Misa_TruongWeb03.DL.Repository.EmisStudy.ExerciseRepo;
+using System.Data.Common;
 using System.Text.Json;
 
 namespace Misa_TruongWeb03.BL.Service.EmisStudy.ExerciseService
@@ -42,16 +43,16 @@ namespace Misa_TruongWeb03.BL.Service.EmisStudy.ExerciseService
                 return new ExceptionError(ex);
             }
         }
-        public async Task<Guid> AddOrUpdate(ExercisePostDTO model)
+        public async Task<Guid> AddOrUpdate(ExercisePostDTO model, DbTransaction transaction)
         {
             var entity = _mapper.Map<Exercise>(model);
             if (model.ExerciseId is null)
             {
-                return await _exerciseRepository.Post(entity);
+                return await _exerciseRepository.Post(entity, transaction);
             }
             else
             {
-                await _exerciseRepository.Put((Guid)model.ExerciseId, entity);
+                await _exerciseRepository.Put((Guid)model.ExerciseId, entity, transaction);
                 return (Guid)model.ExerciseId;
             }
         }

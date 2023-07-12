@@ -1,19 +1,14 @@
 ﻿using Dapper;
-using Microsoft.AspNetCore.Http;
+using Dapper.Transaction;
 using Microsoft.Extensions.Configuration;
-using Misa_TruongWeb03.Common.DTO.EmisStudy;
-using Misa_TruongWeb03.Common.Entity.Base;
 using Misa_TruongWeb03.Common.Entity.EmisStudy.Answer;
 using Misa_TruongWeb03.Common.Entity.EmisStudy.Exercise;
 using Misa_TruongWeb03.Common.Entity.EmisStudy.Question;
-using Misa_TruongWeb03.Common.Resource;
+using Misa_TruongWeb03.Common.Helper;
 using Misa_TruongWeb03.DL.Repository.Base;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.Common;
+using static Dapper.SqlMapper;
 
 namespace Misa_TruongWeb03.DL.Repository.EmisStudy.ExerciseRepo
 {
@@ -34,40 +29,34 @@ namespace Misa_TruongWeb03.DL.Repository.EmisStudy.ExerciseRepo
         public async Task<IEnumerable<DetailExerciseModel>> GetDetail(Guid Id)
         {
             using var connection = this.GetConnection();
-            try
+
+            connection.Open();
+            var store = "proc_exercise_getdetail";
+
+            var multipleResult = await connection.QueryMultipleAsync(store, new { Id }, commandType: CommandType.StoredProcedure);
+
+
+            var exerciseData = await multipleResult.ReadAsync<DetailExerciseModel>();
+            var questionData = await multipleResult.ReadAsync<QuestionDetailModel>();
+            var answerData = await multipleResult.ReadAsync<AnswerModel>();
+
+
+            answerData = answerData.ToList();
+            questionData = questionData.Select(q =>
             {
-                connection.Open();
-                var store = "proc_exercise_getdetail";
-
-                var multipleResult = await connection.QueryMultipleAsync(store, new { Id }, commandType: CommandType.StoredProcedure);
-                
-                
-                var exerciseData = await multipleResult.ReadAsync<DetailExerciseModel>();
-                var questionData = await multipleResult.ReadAsync<QuestionDetailModel>();
-                var answerData = await multipleResult.ReadAsync<AnswerModel>();
-
-
-                answerData = answerData.ToList();
-                questionData = questionData.Select(q =>
-                {
-                    q.Answers.AddRange(answerData.Where(a=>a.QuestionId == q.QuestionId));
-                    return q;
-                });
-                questionData = questionData.ToList();
-                exerciseData = exerciseData.Select(exercise =>
-                {
-                    exercise.Questions.AddRange(questionData);
-                    return exercise;
-                }
-                    );
-
-                return exerciseData;
-            }
-            catch (Exception ex)
+                q.Answers.AddRange(answerData.Where(a => a.QuestionId == q.QuestionId));
+                return q;
+            });
+            questionData = questionData.ToList();
+            exerciseData = exerciseData.Select(exercise =>
             {
-                throw;
+                exercise.Questions.AddRange(questionData);
+                return exercise;
             }
-            finally { connection.Close(); }
+                );
+
+            connection.Close();
+            return exerciseData;
         }
         /// <summary>
         /// Thêm bài tập
@@ -75,36 +64,24 @@ namespace Misa_TruongWeb03.DL.Repository.EmisStudy.ExerciseRepo
         /// <param name="jsonModel"></param>
         /// CreatedBy: NQTruong (20/06/2023)
         /// <returns></returns>
-        public async Task<ServiceResponse> Post(string jsonModel)
+        public async Task<Guid> Post(Exercise model, DbTransaction transaction)
         {
-            using var connection = this.GetConnection();
-            try
-            {
-                connection.Open();
-                // Generate the SQL query to check for duplicates
-                var store = "proc_exercise_insert";
-
-                // Execute the query with the list of values as a parameter
-                var result = await connection.QueryAsync<int?>(store, new { json_data = jsonModel }, commandType: CommandType.StoredProcedure);
-                // If the count is greater than 0, duplicates exist
-                return new ServiceResponse
-                {
-                    ErrorCode = StatusCodes.Status200OK,
-                    Data = result
-                };
-            }
-            catch (Exception ex)
-            {
-                var exception = new ServiceResponse
-                {
-                    ErrorCode = StatusCodes.Status500InternalServerError,
-                    Data = null,
-                    DevMsg = ex.Message,
-                    UserMsg = VN.Error500
-                };
-                return exception;
-            }
-            finally { connection.Close(); }
+            var storedProcedureName = GenerateProcName.Generate<Exercise>("Post");
+            Guid newGuid = Guid.NewGuid();
+            var parameters = DynamicParametersAdd.CreateParameterDynamic(model);
+            parameters.Add("Id", newGuid);
+            var result = await transaction.ExecuteAsync(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
+            return newGuid;
+        }
+        public async Task<Guid> Put(Guid exerciseId, Exercise model, DbTransaction transaction)
+        {
+            var storedProcedureName = GenerateProcName.Generate<Exercise>("Put");
+            Guid newGuid = Guid.NewGuid();
+            var parameters = DynamicParametersAdd.CreateParameterDynamic(model);
+            parameters.Add("Id", newGuid);
+            parameters.Add("ExerciseId", exerciseId);
+            var result = await transaction.ExecuteAsync(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
+            return newGuid;
         }
         #endregion
     }

@@ -16,9 +16,9 @@ namespace Misa_TruongWeb03.Common.Entity.EmisStudy.Question
         {
             get; set;
         }
-        public string QuestionContent { get; set; }
-        public string QuestionNote { get; set; }
-        public string QuestionImage { get; set; }
+        public string? QuestionContent { get; set; }
+        public string? QuestionNote { get; set; }
+        public string? QuestionImage { get; set; }
         public Guid ExerciseId { get; set; }
 
     }
