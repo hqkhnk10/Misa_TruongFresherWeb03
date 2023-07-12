@@ -13,11 +13,6 @@ namespace Misa_TruongWeb03.Common.Entity.Base
     public abstract class BaseModel
     {
         /// <summary>
-        /// Tổng bản ghi
-        /// </summary>
-        /// Created By: NQTruong (22/05/2023)
-        public int Count { get; set; }
-        /// <summary>
         /// Ngày tạo
         /// </summary>
         /// Created By: NQTruong (22/05/2023)

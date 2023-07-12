@@ -44,42 +44,33 @@ namespace Misa_TruongWeb03.DL.Repository.Base
         /// <param name="model"></param>
         /// <returns>Base Entity</returns>
         /// CreatedBy: NQTruong (24/05/2023)
-        public async Task<BaseGet<IEnumerable<TEntity>>> Get(TEntity model, FilterModel getModel)
+        public async Task<(IEnumerable<TEntity>, int totalCount)> Get(Dictionary<string, object> dictionary, FilterModel filters)
         {
             using var connection = GetConnection();
-            try
-            {
-                connection.Open();
-                var storedProcedureName = GenerateProcName.Generate<TEntity>("Get");
 
-                var parameters = DynamicParametersAdd.CreateParameterDynamic(model);
-                foreach (var property in typeof(FilterModel).GetProperties())
+            connection.Open();
+            var storedProcedureName = GenerateProcName.Generate<TEntity>("Get");
+
+            var parameters = new DynamicParameters();
+            var whereClause = "";
+            if (dictionary != null && dictionary.Any())
+            {
+                foreach (var dict in dictionary)
                 {
-                    var value = property.GetValue(getModel);
-                    parameters.Add(property.Name, value);
+                    var columnName = dict.Key;
+                    var filterValue = dict.Value;
+
+                    whereClause += $" AND {columnName} = @{columnName}";
+                    parameters.Add(columnName, filterValue);
                 }
-
-                var result = await connection.QueryMultipleAsync(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
-                var listModel = await result.ReadAsync<TEntity>();
-                var totalCount = await result.ReadSingleAsync<int>();
-
-                var returnModel = new BaseGet<IEnumerable<TEntity>>
-                {
-                    Data = listModel,
-                    Pagination = new Pagination
-                    {
-                        Count = totalCount,
-                        PageIndex = getModel.PageIndex,
-                        PageSize = getModel.PageSize,
-                    }
-                };
-                return returnModel;
             }
-            catch (Exception ex)
-            {
-                throw;
-            }
-            finally { connection.Close(); }
+
+            var result = await connection.QueryMultipleAsync(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
+            var listModel = await result.ReadAsync<TEntity>();
+            var totalCount = await result.ReadSingleAsync<int>();
+
+            connection.Close();
+            return (listModel, totalCount);
         }
         /// <summary>
         /// Base GET by Id
@@ -95,16 +86,10 @@ namespace Misa_TruongWeb03.DL.Repository.Base
             parameters.AddDynamicParams(new { id });
 
             using var connection = GetConnection();
-            try
-            {
+     
                 connection.Open();
                 return await connection.QueryFirstOrDefaultAsync<TEntity>(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-            finally { connection.Close(); }
+            connection.Close(); 
         }
         /// <summary>
         /// Base POST 
@@ -176,7 +161,7 @@ namespace Misa_TruongWeb03.DL.Repository.Base
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.AddDynamicParams(new { id });
-                
+
                 return await connection.ExecuteAsync(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
             }
             catch (Exception ex)
@@ -201,15 +186,15 @@ namespace Misa_TruongWeb03.DL.Repository.Base
                 var parameters = ParameterObjectBuilder.CreateParameterObject(model);
                 var storedProcedureName = $"proc_{typeof(TEntity).Name.ToLower()}_checkDuplicate";
 
-                return  await connection.QueryFirstOrDefaultAsync<bool>(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
-                
+                return await connection.QueryFirstOrDefaultAsync<bool>(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
+
             }
             catch (Exception ex)
             {
                 throw;
             }
             finally { connection.Close(); }
-        } 
+        }
         #endregion
     }
 }

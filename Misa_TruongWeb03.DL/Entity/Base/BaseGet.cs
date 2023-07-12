@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Misa_TruongWeb03.DL.Entity.Base
 {
-    public class BaseGet<T>
+    public class BaseGet
     {
-        public T Data { get; set; }
+        public object Data { get; set; }
         public Pagination Pagination { get; set; }
     }
 }

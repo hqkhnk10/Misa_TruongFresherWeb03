@@ -16,7 +16,7 @@ namespace Misa_TruongWeb03.DL.Repository.Base
     {
         #region Method
         DbConnection GetConnection();
-        Task<BaseGet<IEnumerable<T>>> Get(T model, FilterModel getModel);
+        Task<IEnumerable<T>> Get(Dictionary<string, object> dictionary, FilterModel filter);
         Task<T> GetById(Guid id);
         Task<Guid> Post(T model);
         Task<int> Put(Guid id, T model);

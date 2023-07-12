@@ -17,15 +17,15 @@ namespace Misa_TruongWeb03.BL.Service.Base
     /// <typeparam name="TEntityPostDto">Generic Post DTO model</typeparam>
     /// <typeparam name="TEntityPutDto">Generic Put DTO model</typeparam>
     /// CreatedBy: NQTruong (24/05/2023)
-    public interface IBaseService<TEntity, TEntityGetDto, TEntityPostDto, TEntityPutDto>
+    public interface IBaseService<TEntity,TEntityDto, TEntityGetDto, TEntityPostDto, TEntityPutDto>
     {
         #region Method
-        Task<ServiceResponse> Get(TEntityGetDto model);
-        Task<ServiceResponse> GetDetail(Guid id);
-        Task<ServiceResponse> Post(TEntityPostDto model);
-        Task<ServiceResponse> Put(Guid id, TEntityPutDto model);
-        Task<ServiceResponse> Delete(Guid id);
-        Task<ServiceResponse> CheckDuplicate(TEntity model); 
+        Task<GetResponse> Get(TEntityGetDto model, FilterModel filter);
+        Task<TEntityDto> GetDetail(Guid id);
+        Task<Guid> Post(TEntityPostDto model);
+        Task<Guid> Put(Guid id, TEntityPutDto model);
+        Task<bool> Delete(Guid id);
+        Task<bool> CheckDuplicate(TEntity model); 
         #endregion
     }
 }

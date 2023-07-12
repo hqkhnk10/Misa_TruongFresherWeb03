@@ -7,6 +7,7 @@ using Misa_TruongWeb03.DL.Repository.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,7 +21,7 @@ namespace Misa_TruongWeb03.BL.Service.Base
     /// <typeparam name="TEntityPostDto">Generic Post DTO model</typeparam>
     /// <typeparam name="TEntityPutDto">Generic Put DTO model</typeparam>
     /// CreatedBy: NQTruong (24/05/2023)
-    public abstract class BaseService<TEntity, TEntityGetDto, TEntityPostDto, TEntityPutDto> : IBaseService<TEntity, TEntityGetDto, TEntityPostDto, TEntityPutDto>
+    public abstract class BaseService<TEntity,TEntityDto, TEntityGetDto, TEntityPostDto, TEntityPutDto> : IBaseService<TEntity, TEntityGetDto, TEntityPostDto, TEntityPutDto>
     {
         #region Property
         protected readonly IBaseRepository<TEntity> _baseRepository;
@@ -40,14 +41,26 @@ namespace Misa_TruongWeb03.BL.Service.Base
         /// <param name="model"></param>
         /// <returns>BaseEntity</returns>
         /// CreatedBy: NQTruong (24/05/2023)
-        public virtual async Task<ServiceResponse> Get(TEntityGetDto model)
+        public virtual async Task<GetResponse> Get(TEntityGetDto model, FilterModel filter)
         {
             try
             {
-                var entity = _mapper.Map<TEntity>(model);
-                var getModel = _mapper.Map<FilterModel>(model);
-                var result = await _baseRepository.Get(entity, getModel);
-                return new ServiceResponse
+                var dictionary = new Dictionary<string, object>();
+
+                // Iterate over the properties using reflection
+                foreach (var property in model.GetType().GetProperties())
+                {
+                    // Get the property name and value
+                    string propertyName = property.Name;
+                    object propertyValue = property.GetValue(model);
+
+                    // Add the mapping to the dictionary
+                    dictionary.Add(propertyName, propertyValue);
+                }
+
+                var result = await _baseRepository.Get(dictionary, filter);
+                
+                return new GetResponse
                 {
                     Data = result.Data,
                     Pagination = result.Pagination,
@@ -55,7 +68,7 @@ namespace Misa_TruongWeb03.BL.Service.Base
             }
             catch (Exception ex)
             {
-                return new ExceptionError(ex);
+                throw new InternalException(ex);
             }
         }
         /// <summary>
@@ -64,23 +77,20 @@ namespace Misa_TruongWeb03.BL.Service.Base
         /// <param name="model"></param>
         /// <returns>BaseEntity</returns>
         /// CreatedBy: NQTruong (24/05/2023)
-        public virtual async Task<ServiceResponse> GetDetail(Guid id)
+        public virtual async Task<TEntityDto> GetDetail(Guid id)
         {
             try
             {
                 var result = await _baseRepository.GetById(id);
                 if (result == null)
                 {
-                    return new NotFoundError();
+                    throw new NotFoundException();
                 }
-                return new ServiceResponse
-                {
-                    Data = result,
-                };
+                return _mapper.Map<TEntityDto>(result);
             }
             catch (Exception ex)
             {
-                return new ExceptionError(ex);
+                throw new InternalException(ex);
             }
         }
         /// <summary>
@@ -89,20 +99,17 @@ namespace Misa_TruongWeb03.BL.Service.Base
         /// <param name="model"></param>
         /// <returns>BaseEntity</returns>
         /// CreatedBy: NQTruong (24/05/2023)
-        public virtual async Task<ServiceResponse> Post(TEntityPostDto model)
+        public virtual async Task<Guid> Post(TEntityPostDto model)
         {
             try
             {
                 var entity = _mapper.Map<TEntity>(model);
                 var result = await _baseRepository.Post(entity);
-                return new ServiceResponse
-                {
-                    Data = result,
-                };
+                return result;
             }
             catch (Exception ex)
             {
-                return new ExceptionError(ex);
+                throw new InternalException(ex);
             }
         }
         /// <summary>
@@ -111,20 +118,17 @@ namespace Misa_TruongWeb03.BL.Service.Base
         /// <param name="model"></param>
         /// <returns>BaseEntity</returns>
         /// CreatedBy: NQTruong (24/05/2023)
-        public virtual async Task<ServiceResponse> Put(Guid id, TEntityPutDto model)
+        public virtual async Task<Guid> Put(Guid id, TEntityPutDto model)
         {
             try
             {
                 var entity = _mapper.Map<TEntity>(model);
                 var result = await _baseRepository.Put(id, entity);
-                return new ServiceResponse
-                {
-                    Data = result,
-                };
+                return result;
             }
             catch (Exception ex)
             {
-                return new ExceptionError(ex);
+                throw new InternalException(ex);
             }
         }
         /// <summary>
@@ -133,19 +137,16 @@ namespace Misa_TruongWeb03.BL.Service.Base
         /// <param name="model"></param>
         /// <returns>BaseEntity</returns>
         /// CreatedBy: NQTruong (24/05/2023)
-        public async Task<ServiceResponse> Delete(Guid id)
+        public async Task<bool> Delete(Guid id)
         {
             try
             {
                 var result = await _baseRepository.Delete(id);
-                return new ServiceResponse
-                {
-                    Data = result,
-                };
+                return result > 0;
             }
             catch (Exception ex)
             {
-                return new ExceptionError(ex);
+                throw new InternalException(ex);
             }
         }
         /// <summary>
@@ -154,23 +155,20 @@ namespace Misa_TruongWeb03.BL.Service.Base
         /// <param name="model"></param>
         /// <returns>BaseEntity</returns>
         /// CreatedBy: NQTruong (24/05/2023)
-        public async Task<ServiceResponse> CheckDuplicate(TEntity model)
+        public async Task<bool> CheckDuplicate(TEntity model)
         {
             try
             {
                 var result = await _baseRepository.CheckDuplicate(model);
                 if (result)
                 {
-                    return new DuplicateError();
+                    throw new DuplicateException();
                 }
-                return new ServiceResponse
-                {
-                    Data = result,
-                };
+                return false;
             }
             catch (Exception ex)
             {
-                return new ExceptionError(ex);
+                throw new InternalException(ex);
             }
         }
         #endregion

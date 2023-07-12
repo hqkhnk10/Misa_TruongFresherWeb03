@@ -3,6 +3,7 @@ using Misa_TruongWeb03.BL.Service.Base;
 using Misa_TruongWeb03.Common.Entity;
 using Misa_TruongWeb03.Common.Entity.Base;
 using Misa_TruongWeb03.Common.Resource;
+using Misa_TruongWeb03.DL.Entity.Base;
 
 namespace Misa_TruongWeb03.Controller.Base
 {
@@ -15,13 +16,13 @@ namespace Misa_TruongWeb03.Controller.Base
     /// <typeparam name="TEntityPutDto">Generic Put DTO model</typeparam>
     /// CreatedBy: NQTruong (24/05/2023)
     [Route("api/v1/[controller]")]
-    public abstract class BaseController<TEntity, TEntityGetDto, TEntityPostDto, TEntityPutDto> : ControllerBase
+    public abstract class BaseController<TEntity, TEntityDto, TEntityGetDto, TEntityPostDto, TEntityPutDto> : ControllerBase
     {
         #region Property
-        protected readonly IBaseService<TEntity, TEntityGetDto, TEntityPostDto, TEntityPutDto> _baseService;
+        protected readonly IBaseService<TEntity, TEntityDto, TEntityGetDto, TEntityPostDto, TEntityPutDto> _baseService;
         #endregion
         #region Constructor
-        public BaseController(IBaseService<TEntity, TEntityGetDto, TEntityPostDto, TEntityPutDto> baseService)
+        public BaseController(IBaseService<TEntity, TEntityDto, TEntityGetDto, TEntityPostDto, TEntityPutDto> baseService)
         {
             _baseService = baseService;
         }
@@ -33,21 +34,12 @@ namespace Misa_TruongWeb03.Controller.Base
         /// <param name="model"></param>
         /// <returns>IActionResult</returns>
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] TEntityGetDto model)
+        public async Task<IActionResult> Get([FromQuery] TEntityGetDto model, [FromQuery] FilterModel filter)
         {
-            if (!ModelState.IsValid)
-            {
-                return HandleValidationErrors();
-            }
-            try
-            {
-                var result = await _baseService.Get(model);
-                return StatusCode(result.ErrorCode, result);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new ExceptionError(ex));
-            }
+
+            var result = await _baseService.Get(model, filter);
+            return Ok(result);
+
 
         }
         /// <summary>
@@ -58,15 +50,10 @@ namespace Misa_TruongWeb03.Controller.Base
         [HttpGet("{id}")]
         public async Task<IActionResult> GetDetail(Guid id)
         {
-            try
-            {
-                var result = await _baseService.GetDetail(id);
-                return StatusCode(result.ErrorCode, result);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new ExceptionError(ex));
-            }
+
+            var result = await _baseService.GetDetail(id);
+            return Ok(result);
+
         }
         /// <summary>
         /// BASE POST
@@ -77,19 +64,10 @@ namespace Misa_TruongWeb03.Controller.Base
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] TEntityPostDto model)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return HandleValidationErrors();
-            //}
-            try
-            {
-                var result = await _baseService.Post(model);
-                return StatusCode(result.ErrorCode, result);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new ExceptionError(ex));
-            }
+
+            var result = await _baseService.Post(model);
+            return CreatedAtAction(result);
+
         }
         /// <summary>
         /// BASE PUT
@@ -100,19 +78,10 @@ namespace Misa_TruongWeb03.Controller.Base
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(Guid id, [FromBody] TEntityPutDto model)
         {
-            if (!ModelState.IsValid)
-            {
-                return HandleValidationErrors();
-            }
-            try
-            {
-                var result = await _baseService.Put(id, model);
-                return StatusCode(result.ErrorCode, result);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new ExceptionError(ex));
-            }
+
+            var result = await _baseService.Put(id, model);
+            return Ok(result);
+
         }
         /// <summary>
         /// BASE DELETE
@@ -122,15 +91,10 @@ namespace Misa_TruongWeb03.Controller.Base
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
-            try
-            {
-                var result = await _baseService.Delete(id);
-                return StatusCode(result.ErrorCode, result);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-            }
+
+            var result = await _baseService.Delete(id);
+            return Ok(result);
+
         }
         /// <summary>
         /// Trả về lỗi validate
@@ -142,7 +106,7 @@ namespace Misa_TruongWeb03.Controller.Base
                 .Select(e => e.ErrorMessage)
                 .ToList();
 
-            var response = new ServiceResponse
+            var response = new
             {
                 ErrorCode = StatusCodes.Status400BadRequest,
                 UserMsg = string.Join(",", errors) ?? VN.ValidationError,
