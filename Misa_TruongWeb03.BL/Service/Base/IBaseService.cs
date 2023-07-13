@@ -25,7 +25,6 @@ namespace Misa_TruongWeb03.BL.Service.Base
         Task<Guid> Post(TEntityPostDto model);
         Task<Guid> Put(Guid id, TEntityPutDto model);
         Task<bool> Delete(Guid id);
-        Task<bool> CheckDuplicate(TEntity model); 
         #endregion
     }
 }

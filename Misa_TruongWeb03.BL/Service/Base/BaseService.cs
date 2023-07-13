@@ -6,10 +6,12 @@ using Misa_TruongWeb03.DL.Entity.Base;
 using Misa_TruongWeb03.DL.Repository.Base;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using static Dapper.SqlMapper;
 
 namespace Misa_TruongWeb03.BL.Service.Base
 {
@@ -34,7 +36,7 @@ namespace Misa_TruongWeb03.BL.Service.Base
             _mapper = mapper;
         }
         #endregion
-        #region MyRegion
+        #region Method
         /// <summary>
         /// BASE GET call to BASE Repository
         /// </summary>
@@ -99,8 +101,14 @@ namespace Misa_TruongWeb03.BL.Service.Base
         /// CreatedBy: NQTruong (24/05/2023)
         public virtual async Task<Guid> Post(TEntityPostDto model)
         {
-
             var entity = _mapper.Map<TEntity>(model);
+
+            var isValid = Validate(entity);
+            if (!isValid)
+            {
+                throw new ValidateException();
+            }
+
             var result = await _baseRepository.Post(entity);
             return result;
 
@@ -113,12 +121,19 @@ namespace Misa_TruongWeb03.BL.Service.Base
         /// CreatedBy: NQTruong (24/05/2023)
         public virtual async Task<Guid> Put(Guid id, TEntityPutDto model)
         {
-            var exist = _baseRepository.GetById(id);
+            var entity = _mapper.Map<TEntity>(model);
+
+            var isValid = Validate(entity);
+            if (!isValid)
+            {
+                throw new ValidateException();
+            }
+
+            var exist = await _baseRepository.GetById(id);
             if (exist == null)
             {
                 throw new NotFoundException();
             }
-            var entity = _mapper.Map<TEntity>(model);
             var result = await _baseRepository.Put(id, entity);
             if(result <= 0)
             {
@@ -154,16 +169,9 @@ namespace Misa_TruongWeb03.BL.Service.Base
         /// <param name="model"></param>
         /// <returns>BaseEntity</returns>
         /// CreatedBy: NQTruong (24/05/2023)
-        public async Task<bool> CheckDuplicate(TEntity model)
+        protected virtual bool Validate(TEntity model)
         {
-
-            var result = await _baseRepository.CheckDuplicate(model);
-            if (result)
-            {
-                throw new DuplicateException();
-            }
-            return false;
-
+            return true;
         }
 
         /// <summary>
