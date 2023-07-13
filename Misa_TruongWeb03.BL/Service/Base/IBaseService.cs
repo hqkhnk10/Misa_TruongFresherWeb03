@@ -20,7 +20,7 @@ namespace Misa_TruongWeb03.BL.Service.Base
     public interface IBaseService<TEntity,TEntityDto, TEntityGetDto, TEntityPostDto, TEntityPutDto>
     {
         #region Method
-        Task<GetResponse> Get(TEntityGetDto model, FilterModel filter);
+        Task<GetResponse> Get(TEntityGetDto model, FilterModel filter, string sort);
         Task<TEntityDto> GetDetail(Guid id);
         Task<Guid> Post(TEntityPostDto model);
         Task<Guid> Put(Guid id, TEntityPutDto model);

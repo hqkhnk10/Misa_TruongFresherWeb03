@@ -38,8 +38,8 @@ namespace Misa_TruongWeb03.BL.Service.EmisStudy.ExerciseService
             {
                 { "ExerciseId", id }
             };
-            var (questionData,quesiontCount) = await _questionRepository.Get(dict, new FilterModel());
-            var (answerData,answerCount) =  await _answerRepository.Get(dict, new FilterModel());
+            var (questionData,quesiontCount) = await _questionRepository.Get(dict, new FilterModel(), "ModifiedAt ASC");
+            var (answerData,answerCount) =  await _answerRepository.Get(dict, new FilterModel(), "ModifiedAt asc");
 
             var answerDto = _mapper.Map<List<AnswerDTO>>(answerData);
             var questionDto = _mapper.Map<List<QuestionDTO>>(questionData);
@@ -49,41 +49,22 @@ namespace Misa_TruongWeb03.BL.Service.EmisStudy.ExerciseService
                 q.Answers.AddRange(answerDto.Where(a => a.QuestionId == q.QuestionId));
             });
 
-            entityDto.Questions.AddRange(questionDto);
+            entityDto.Questions.AddRange(questionDto.OrderBy(q=>q.ModifiedAt));
         }
 
-        //public override async Task<ExerciseDTO> GetDetail(Guid id)
-        //{
-        //    try
-        //    {
-        //        var result = await _exerciseRepository.GetDetail(id);
-        //        if (result == null)
-        //        {
-        //            return new NotFoundError();
-        //        }
-        //        return new ServiceResponse
-        //        {
-        //            Data = result,
-        //        };
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return new ExceptionError(ex);
-        //    }
-        //}
-        //public async Task<Guid> AddOrUpdate(ExercisePostDTO model, DbTransaction transaction)
-        //{
-        //    var entity = _mapper.Map<Exercise>(model);
-        //    if (model.ExerciseId is null)
-        //    {
-        //        return await _exerciseRepository.Post(entity, transaction);
-        //    }
-        //    else
-        //    {
-        //        await _exerciseRepository.Put((Guid)model.ExerciseId, entity, transaction);
-        //        return (Guid)model.ExerciseId;
-        //    }
-        //}
+        public async Task<Guid> AddOrUpdate(ExercisePostDTO model, DbTransaction transaction)
+        {
+            var entity = _mapper.Map<Exercise>(model);
+            if (model.ExerciseId is null)
+            {
+                return await _exerciseRepository.Post(entity, transaction);
+            }
+            else
+            {
+                await _exerciseRepository.Put((Guid)model.ExerciseId, entity, transaction);
+                return (Guid)model.ExerciseId;
+            }
+        }
         #endregion
     }
 }

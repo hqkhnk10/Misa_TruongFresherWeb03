@@ -30,7 +30,7 @@ namespace Misa_TruongWeb03.Common.DTO.EmisStudy
     }
     public class ExercisePostDTO
     {
-        [Required]
+        public Guid? ExerciseId { get; set; }
         [MaxLength(255)]
         public string ExerciseName { get; set; }
         [Required]
@@ -41,24 +41,9 @@ namespace Misa_TruongWeb03.Common.DTO.EmisStudy
         [Required]
         public Guid GradeId { get; set; }
         public Guid? TopicId { get; set; } = null;
-        public List<QuestionPostDTO>? Questions { get; set; } = new List<QuestionPostDTO>();
     }
     public class ExercisePutDTO : ExercisePostDTO
     {
-    }
-
-    public class QuestionPostModel
-    {
-        [Required]
-        [EnumDataType(typeof(QuestionType))]
-        public QuestionType QuestionType { get; set; }
-        [Required]
-        [MaxLength(255)]
-        public string QuestionContent { get; set; }
-        [MaxLength(255)]
-        public string? QuestionNote { get; set; }
-        public IFormFile? QuestionImage { get; set; } = null;
-        public List<AnswerPostDTO> Answers { get; set; }
     }
 
 }

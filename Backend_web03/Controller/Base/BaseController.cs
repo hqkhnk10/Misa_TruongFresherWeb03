@@ -34,10 +34,10 @@ namespace Misa_TruongWeb03.Controller.Base
         /// <param name="model"></param>
         /// <returns>IActionResult</returns>
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] TEntityGetDto model, [FromQuery] FilterModel filter)
+        public async Task<IActionResult> Get([FromQuery] TEntityGetDto model, [FromQuery] FilterModel filter, [FromQuery] string? Sort)
         {
 
-            var result = await _baseService.Get(model, filter);
+            var result = await _baseService.Get(model, filter, Sort);
             return Ok(result);
 
 

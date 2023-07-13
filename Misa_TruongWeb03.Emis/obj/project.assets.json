@@ -6069,19 +6069,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Tngo\\.nuget\\packages\\": {}
+    "C:\\Users\\mr_tr\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\MISA2023\\NewBE\\Misa_TruongFresherWeb03\\Misa_TruongWeb03.Emis\\Misa_TruongWeb03.Emis.csproj",
+      "projectUniqueName": "C:\\Users\\mr_tr\\WorkPlace\\MISA\\New Backend\\Misa_TruongFresherWeb03\\Misa_TruongWeb03.Emis\\Misa_TruongWeb03.Emis.csproj",
       "projectName": "Misa_TruongWeb03.Emis",
-      "projectPath": "D:\\MISA2023\\NewBE\\Misa_TruongFresherWeb03\\Misa_TruongWeb03.Emis\\Misa_TruongWeb03.Emis.csproj",
-      "packagesPath": "C:\\Users\\Tngo\\.nuget\\packages\\",
-      "outputPath": "D:\\MISA2023\\NewBE\\Misa_TruongFresherWeb03\\Misa_TruongWeb03.Emis\\obj\\",
+      "projectPath": "C:\\Users\\mr_tr\\WorkPlace\\MISA\\New Backend\\Misa_TruongFresherWeb03\\Misa_TruongWeb03.Emis\\Misa_TruongWeb03.Emis.csproj",
+      "packagesPath": "C:\\Users\\mr_tr\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\mr_tr\\WorkPlace\\MISA\\New Backend\\Misa_TruongFresherWeb03\\Misa_TruongWeb03.Emis\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Tngo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\mr_tr\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6089,18 +6089,17 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\MISA2023\\NewBE\\Misa_TruongFresherWeb03\\Backend_web03\\Misa_TruongWeb03.csproj": {
-              "projectPath": "D:\\MISA2023\\NewBE\\Misa_TruongFresherWeb03\\Backend_web03\\Misa_TruongWeb03.csproj"
+            "C:\\Users\\mr_tr\\WorkPlace\\MISA\\New Backend\\Misa_TruongFresherWeb03\\Backend_web03\\Misa_TruongWeb03.csproj": {
+              "projectPath": "C:\\Users\\mr_tr\\WorkPlace\\MISA\\New Backend\\Misa_TruongFresherWeb03\\Backend_web03\\Misa_TruongWeb03.csproj"
             },
-            "D:\\MISA2023\\NewBE\\Misa_TruongFresherWeb03\\Misa_TruongWeb03.Common\\Misa_TruongWeb03.Common.csproj": {
-              "projectPath": "D:\\MISA2023\\NewBE\\Misa_TruongFresherWeb03\\Misa_TruongWeb03.Common\\Misa_TruongWeb03.Common.csproj"
+            "C:\\Users\\mr_tr\\WorkPlace\\MISA\\New Backend\\Misa_TruongFresherWeb03\\Misa_TruongWeb03.Common\\Misa_TruongWeb03.Common.csproj": {
+              "projectPath": "C:\\Users\\mr_tr\\WorkPlace\\MISA\\New Backend\\Misa_TruongFresherWeb03\\Misa_TruongWeb03.Common\\Misa_TruongWeb03.Common.csproj"
             }
           }
         }
@@ -6167,7 +6166,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   },

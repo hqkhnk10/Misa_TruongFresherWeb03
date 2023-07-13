@@ -121,6 +121,10 @@ namespace Misa_TruongWeb03.BL.Service.EmisStudy.QuestionService
                     var answerResult = value.ToString().Split("||");
                     foreach (var answer in answerResult)
                     {
+                        if(instance.Answers.Count < Int32.Parse(answer) - 1)
+                        {
+                            return;
+                        }
                         instance.Answers[Int32.Parse(answer) - 1].AnswerStatus = true;
                     }
                     

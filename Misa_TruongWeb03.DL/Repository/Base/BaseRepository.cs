@@ -47,15 +47,15 @@ namespace Misa_TruongWeb03.DL.Repository.Base
         /// <param name="model"></param>
         /// <returns>Base Entity</returns>
         /// CreatedBy: NQTruong (24/05/2023)
-        public async Task<(IEnumerable<TEntity>,int)> Get(Dictionary<string, object> dictionary, FilterModel filter)
+        public async Task<(IEnumerable<TEntity>,int)> Get(Dictionary<string, object> dictionary, FilterModel filter, string? sort)
         {
             using var connection = GetConnection();
             try
             {
                 var tableName = typeof(TEntity).Name;
                 await connection.OpenAsync();
-                var query = $"SELECT * FROM {tableName} WHERE 1=1";
-
+                var query = $"SELECT * FROM {tableName} WHERE";
+                var where = " 1=1";
                 var parameters = new DynamicParameters();
 
                 if (dictionary != null && dictionary.Any())
@@ -66,14 +66,15 @@ namespace Misa_TruongWeb03.DL.Repository.Base
                         var dictValue = dict.Value;
                         if(dictValue != null)
                         {
-                            query += $" AND {columnName} = @{columnName}";
+                            where += $" AND {columnName} = @{columnName}";
                             parameters.Add(columnName, dictValue);
                         }
                     }
                 }
-
+                query += where;
                 // Retrieve total count before applying pagination
-                var countQuery = $"SELECT COUNT(*) FROM {tableName} WHERE 1=1";
+                var countQuery = $"SELECT COUNT(*) FROM {tableName} WHERE";
+                countQuery += where;
                 var totalCount = await connection.ExecuteScalarAsync<int>(countQuery, parameters);
 
                 var offset = (filter.PageIndex - 1) * filter.PageSize;

@@ -122,14 +122,14 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
                     if (config.IsRequired && (cellValue == null || string.IsNullOrEmpty(cellValue.ToString())))
                     {
                         isValid = false;
-                        errorMessage += cells[header -1, columnIndex].Value + " Không được để trống.";
+                        errorMessage += cells[header, columnIndex].Value + " Không được để trống.";
                     }
                     object formatValue = FormatCell(cellValue, config.FormatFunc);
                     //check trùng
                     if (config.IsDuplicateCheckEnabled && (IsDuplicateValue(formatValue, cells, columnIndex, row) || await IsDuplicateRecord(formatValue)))
                     {
                         isValid = false;
-                        errorMessage += cells[header -1 , columnIndex].Value + " Trùng dữ liệu.";
+                        errorMessage += cells[header, columnIndex].Value + " Trùng dữ liệu.";
                     }
                     ////check format dữ liệu
                     //if (formatValue == null && cellValue != null)
@@ -141,7 +141,7 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
                     if (config.ValidatorFunc != null && !ValidateCell(formatValue, propertyName, config.ValidatorFunc))
                     {
                         isValid = false;
-                        errorMessage += cells[header - 1, columnIndex].Value + " Không hợp lệ.";
+                        errorMessage += cells[header, columnIndex].Value + " Không hợp lệ.";
                     }
                     SetProperty(instance, propertyName, formatValue);
                 }
@@ -165,7 +165,7 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
             RemoveRowsFromExcel(filePath, invalidFileName, validIndex);
             validData = FormatReturnData(validData);
 
-            return new FileValidateModel { ValidData = validData, InValidData = invalidData, Count = maxRow - header, InvalidFilePath = $"{invalidFileName}.xlsx" };
+            return new FileValidateModel { ValidData = validData, InValidData = invalidData, Count = maxRow - header - 1, InvalidFilePath = $"{invalidFileName}.xlsx" };
         }
         /// <summary>
         /// Viết dữ liệu vào file để xuất ra
@@ -237,10 +237,9 @@ namespace Misa_TruongWeb03.BL.Service.BaseImport
             var destinationWorksheet = destinationWorkbook.Worksheets[0];
 
             // Copy rows from source to destination worksheet based on the specified row indices
-            foreach (int rowIndex in rowIndices)
+            for(var i = rowIndices.Count - 1; i >= 0; i--)
             {
-                // Get the source row
-                destinationWorksheet.Cells.DeleteRow(rowIndex);
+                destinationWorksheet.Cells.DeleteRow(rowIndices[i]);
             }
             var filePath = Path.Combine(_env.ContentRootPath, "FileStorage", $"{destinationFilePath}.xlsx");
             // Save the destination workbook to a new Excel file

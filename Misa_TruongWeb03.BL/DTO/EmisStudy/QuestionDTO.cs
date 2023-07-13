@@ -16,6 +16,7 @@ namespace Misa_TruongWeb03.Common.DTO.EmisStudy
     }
     public class QuestionPostDTO
     {
+        public ExercisePostDTO Exercise { get; set; }
         [Required]
         [EnumDataType(typeof(QuestionType))]
         public QuestionType QuestionType { get; set; }
@@ -40,12 +41,5 @@ namespace Misa_TruongWeb03.Common.DTO.EmisStudy
         public string? AnswerContent { get; set; } = null;
         public string? Result { get; set; } = null;
         public List<AnswerPostDTO> Answers { get; set; } = new List<AnswerPostDTO>();
-    }
-    public class QuestionInserDTO
-    {
-        public string QuestionContent { get; set; }
-        public string? QuestionNote { get; set; } = null;
-        public QuestionType QuestionType { get; set; }
-
     }
 }
