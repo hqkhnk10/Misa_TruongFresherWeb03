@@ -113,9 +113,17 @@ namespace Misa_TruongWeb03.BL.Service.Base
         /// CreatedBy: NQTruong (24/05/2023)
         public virtual async Task<Guid> Put(Guid id, TEntityPutDto model)
         {
-
+            var exist = _baseRepository.GetById(id);
+            if (exist == null)
+            {
+                throw new NotFoundException();
+            }
             var entity = _mapper.Map<TEntity>(model);
             var result = await _baseRepository.Put(id, entity);
+            if(result <= 0)
+            {
+                throw new DatabaseExeception();
+            }
             return id;
 
         }
@@ -127,9 +135,17 @@ namespace Misa_TruongWeb03.BL.Service.Base
         /// CreatedBy: NQTruong (24/05/2023)
         public async Task<bool> Delete(Guid id)
         {
-
+            var exist = _baseRepository.GetById(id);
+            if (exist == null)
+            {
+                throw new NotFoundException();
+            }
             var result = await _baseRepository.Delete(id);
-            return result > 0;
+            if(result <= 0)
+            {
+                throw new DatabaseExeception();
+            }
+            return true;
 
         }
         /// <summary>
@@ -150,7 +166,12 @@ namespace Misa_TruongWeb03.BL.Service.Base
 
         }
 
-
+        /// <summary>
+        /// Override this to return more entity
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="entityDto"></param>
+        /// <returns></returns>
         protected virtual async Task GetDetailEntity(Guid id, TEntityDto entityDto)
         {
             await Task.Delay(0);

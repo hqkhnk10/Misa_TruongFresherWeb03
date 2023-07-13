@@ -53,7 +53,7 @@ namespace Misa_TruongWeb03.DL.Entity.Base
         public DatabaseExeception()
         {
             ErrorCode = StatusCodes.Status500InternalServerError;
-            ErrorMsg = VN.DatabaseError;
+            ErrorMsg = VN.NoAffectedRows;
         }
     }
 }
