@@ -24,6 +24,14 @@ namespace Misa_TruongWeb03.DL.Entity.Base
             ErrorMsg = e.Message;
         }
     }
+    public class ValidateException : BaseException
+    {
+        public ValidateException()
+        {
+            ErrorCode = StatusCodes.Status400BadRequest;
+            ErrorMsg = VN.ValidationError;
+        }
+    }
     public class NotFoundException : BaseException
     {
         public NotFoundException()

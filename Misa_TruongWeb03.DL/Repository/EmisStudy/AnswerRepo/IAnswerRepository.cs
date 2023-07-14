@@ -4,9 +4,9 @@ using System.Data.Common;
 
 namespace Misa_TruongWeb03.DL.Repository.EmisStudy.AnswerRepo
 {
-    public interface IAnswerRepository : IBaseRepository<Answer>
+    public interface IAnswerRepository : IBaseRepository<Answer,Answer>
     {
-        Task<int> PostMultiple(Guid questionId, Guid exerciseId, List<Answer> answerList, DbTransaction transaction);
-        Task<int> DeleteMultiple(Guid questionId, DbTransaction transaction);
+        Task<int> PostMultiple(Guid questionId, Guid exerciseId, List<Answer> answerList);
+        Task<int> DeleteMultiple(Guid questionId);
     }
 }

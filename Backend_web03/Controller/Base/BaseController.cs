@@ -19,10 +19,10 @@ namespace Misa_TruongWeb03.Controller.Base
     public abstract class BaseController<TEntity, TEntityDto, TEntityGetDto, TEntityPostDto, TEntityPutDto> : ControllerBase
     {
         #region Property
-        protected readonly IBaseService<TEntity, TEntityDto, TEntityGetDto, TEntityPostDto, TEntityPutDto> _baseService;
+        protected readonly IBaseService<TEntityDto, TEntityGetDto, TEntityPostDto, TEntityPutDto> _baseService;
         #endregion
         #region Constructor
-        public BaseController(IBaseService<TEntity, TEntityDto, TEntityGetDto, TEntityPostDto, TEntityPutDto> baseService)
+        public BaseController(IBaseService<TEntityDto, TEntityGetDto, TEntityPostDto, TEntityPutDto> baseService)
         {
             _baseService = baseService;
         }

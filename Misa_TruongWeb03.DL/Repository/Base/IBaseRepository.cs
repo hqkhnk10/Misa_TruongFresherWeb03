@@ -12,14 +12,11 @@ namespace Misa_TruongWeb03.DL.Repository.Base
     /// <typeparam name="TPostDTO">Generic Post DTO model</typeparam>
     /// <typeparam name="TPutDTO">Generic Put DTO model</typeparam>
     /// CreatedBy: NQTruong (24/05/2023)
-    public interface IBaseRepository<T>
+    public interface IBaseRepository<T, TGetModel>
     {
         #region Method
-        DbConnection GetConnection();
-        DbConnection OpenConnection();
-        void CloseConnection();
-        Task<(IEnumerable<T>,int)> Get(Dictionary<string, object> dictionary, FilterModel filter, string? sort);
-        Task<T> GetById(Guid id);
+        Task<(IEnumerable<TGetModel>,int)> Get(Dictionary<string, object> dictionary, FilterModel filter, string? sort);
+        Task<TGetModel> GetById(Guid id);
         Task<Guid> Post(T model);
         Task<int> Put(Guid id, T model);
         Task<int> Delete(Guid id);

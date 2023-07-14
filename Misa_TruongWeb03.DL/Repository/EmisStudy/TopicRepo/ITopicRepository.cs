@@ -3,7 +3,7 @@ using Misa_TruongWeb03.DL.Repository.Base;
 
 namespace Misa_TruongWeb03.DL.Repository.EmisStudy.TopicRepo
 {
-    public interface ITopicRepository : IBaseRepository<Topic>
+    public interface ITopicRepository : IBaseRepository<Topic, Topic>
     {
     }
 }

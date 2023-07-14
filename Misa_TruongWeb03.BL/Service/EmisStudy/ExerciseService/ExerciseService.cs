@@ -4,15 +4,17 @@ using Misa_TruongWeb03.Common.DTO.EmisStudy;
 using Misa_TruongWeb03.Common.Entity.Base;
 using Misa_TruongWeb03.Common.Entity.EmisStudy.Exercise;
 using Misa_TruongWeb03.DL.Entity.Base;
+using Misa_TruongWeb03.DL.Model;
 using Misa_TruongWeb03.DL.Repository.EmisStudy.AnswerRepo;
 using Misa_TruongWeb03.DL.Repository.EmisStudy.ExerciseRepo;
 using Misa_TruongWeb03.DL.Repository.EmisStudy.QuestionRepo;
+using Misa_TruongWeb03.DL.Repository.UnitOfWorkk;
 using System.Data.Common;
 using System.Text.Json;
 
 namespace Misa_TruongWeb03.BL.Service.EmisStudy.ExerciseService
 {
-    public class ExerciseService : BaseService<Exercise,ExerciseDTO, ExerciseGetDTO, ExercisePostDTO, ExercisePutDTO>, IExerciseService
+    public class ExerciseService : BaseService<Exercise,ExerciseGetModel,ExerciseDTO, ExerciseGetDTO, ExercisePostDTO, ExercisePutDTO>, IExerciseService
     {
         #region Property
         private readonly IExerciseRepository _exerciseRepository;
@@ -22,7 +24,7 @@ namespace Misa_TruongWeb03.BL.Service.EmisStudy.ExerciseService
 
         #endregion
         #region Constructor
-        public ExerciseService(IExerciseRepository exerciseRepository,IQuestionRepository questionRepository, IAnswerRepository answerRepository, IMapper mapper) : base(exerciseRepository, mapper)
+        public ExerciseService(IExerciseRepository exerciseRepository,IQuestionRepository questionRepository, IAnswerRepository answerRepository, IMapper mapper, IUnitOfWork unitOfWork) : base(exerciseRepository, mapper, unitOfWork)
         {
             _exerciseRepository = exerciseRepository;
             _questionRepository = questionRepository;
@@ -52,16 +54,16 @@ namespace Misa_TruongWeb03.BL.Service.EmisStudy.ExerciseService
             entityDto.Questions.AddRange(questionDto.OrderBy(q=>q.ModifiedAt));
         }
 
-        public async Task<Guid> AddOrUpdate(ExercisePostDTO model, DbTransaction transaction)
+        public async Task<Guid> AddOrUpdate(ExercisePostDTO model)
         {
             var entity = _mapper.Map<Exercise>(model);
             if (model.ExerciseId is null)
             {
-                return await _exerciseRepository.Post(entity, transaction);
+                return await _exerciseRepository.Post(entity);
             }
             else
             {
-                await _exerciseRepository.Put((Guid)model.ExerciseId, entity, transaction);
+                await _exerciseRepository.Put((Guid)model.ExerciseId, entity);
                 return (Guid)model.ExerciseId;
             }
         }

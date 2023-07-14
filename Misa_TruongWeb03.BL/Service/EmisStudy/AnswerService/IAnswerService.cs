@@ -4,7 +4,7 @@ using Misa_TruongWeb03.Common.Entity.EmisStudy.Answer;
 
 namespace Misa_TruongWeb03.BL.Service.EmisStudy.AnswerService
 {
-    public interface IAnswerService : IBaseService<Answer, AnswerDTO, AnswerGetDTO, AnswerPostDTO, AnswerPutDTO>
+    public interface IAnswerService : IBaseService<AnswerDTO, AnswerGetDTO, AnswerPostDTO, AnswerPutDTO>
     {
     }
 }

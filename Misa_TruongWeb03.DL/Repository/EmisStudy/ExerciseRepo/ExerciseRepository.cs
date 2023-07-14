@@ -6,52 +6,29 @@ using Misa_TruongWeb03.Common.Entity.EmisStudy.Exercise;
 using Misa_TruongWeb03.Common.Entity.EmisStudy.Question;
 using Misa_TruongWeb03.Common.Helper;
 using Misa_TruongWeb03.DL.Entity.Base;
+using Misa_TruongWeb03.DL.Model;
 using Misa_TruongWeb03.DL.Repository.Base;
+using Misa_TruongWeb03.DL.Repository.UnitOfWorkk;
 using System.Data;
 using System.Data.Common;
 using static Dapper.SqlMapper;
 
 namespace Misa_TruongWeb03.DL.Repository.EmisStudy.ExerciseRepo
 {
-    public class ExerciseRepository : BaseRepository<Exercise>, IExerciseRepository
+    public class ExerciseRepository : BaseRepository<Exercise, ExerciseGetModel>, IExerciseRepository
     {
         #region Constructor
-        public ExerciseRepository(IConfiguration configuration) : base(configuration)
+        public ExerciseRepository(IConfiguration configuration, IUnitOfWork unitOfWork) : base(configuration, unitOfWork)
         {
         }
         #endregion
         #region Method
-        /// <summary>
-        /// Thêm bài tập
-        /// </summary>
-        /// <param name="jsonModel"></param>
-        /// CreatedBy: NQTruong (20/06/2023)
-        /// <returns></returns>
-        public async Task<Guid> Post(Exercise model, DbTransaction transaction)
+        protected override string BuildQuery(string select, string where, string limit)
         {
-            var storedProcedureName = GenerateProcName.Generate<Exercise>("Post");
-            Guid newGuid = Guid.NewGuid();
-            var parameters = DynamicParametersAdd.CreateParameterDynamic(model);
-            parameters.Add("Id", newGuid);
-            var result = await transaction.ExecuteAsync(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
-            return newGuid;
-        }
-        /// <summary>
-        /// Sửa bài tập
-        /// </summary>
-        /// <param name="exerciseId"></param>
-        /// <param name="model"></param>
-        /// <param name="transaction"></param>
-        /// <returns></returns>
-        public async Task<Guid> Put(Guid exerciseId, Exercise model, DbTransaction transaction)
-        {
-            var storedProcedureName = GenerateProcName.Generate<Exercise>("Put");
-            Guid newGuid = Guid.NewGuid();
-            var parameters = DynamicParametersAdd.CreateParameterDynamic(model);
-            parameters.Add("Id", newGuid);
-            parameters.Add("ExerciseId", exerciseId);
-            var result = await transaction.ExecuteAsync(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
-            return newGuid;
+            var customSelect = "SELECT e.*,g.gradeName,s.subjectName,Count(q.QuestionId) as Question FROM exercise e" +
+                " Left join Grade g on g.GradeId = e.GradeId Left join Subject s on s.SubjectId = e.ExerciseId Left join Question q on q.ExerciseId = e.ExerciseId";
+            var groupby = "Group by e.exerciseId ";
+            return customSelect + where + groupby + limit;
         }
         #endregion
     }

@@ -11,6 +11,7 @@ using Misa_TruongWeb03.DL.Entity.Base;
 using Misa_TruongWeb03.DL.Repository.EmisStudy.AnswerRepo;
 using Misa_TruongWeb03.DL.Repository.EmisStudy.ExerciseRepo;
 using Misa_TruongWeb03.DL.Repository.EmisStudy.QuestionRepo;
+using Misa_TruongWeb03.DL.Repository.UnitOfWorkk;
 using MySqlConnector;
 using System;
 using System.Collections.Generic;
@@ -23,21 +24,23 @@ using static Misa_TruongWeb03.Common.Enum.EmisStudy.EmisStudyEnum;
 
 namespace Misa_TruongWeb03.BL.Service.EmisStudy.QuestionService
 {
-    public class QuestionService : BaseService<Question,QuestionDTO, QuestionPostDTO, QuestionPostDTO, QuestionPutDTO>, IQuestionService
+    public class QuestionService : BaseService<Question, Question, QuestionDTO, QuestionPostDTO, QuestionPostDTO, QuestionPutDTO>, IQuestionService
     {
         #region Property
         private readonly IExerciseService _exerciseService;
         private readonly IQuestionRepository _questionRepository;
         private readonly IAnswerRepository _answerRepository;
-        private readonly IMapper _mapper; 
+        private readonly IMapper _mapper;
+        private readonly IUnitOfWork _unitOfWork;
         #endregion
         #region Constructor
-        public QuestionService(IExerciseService exerciseService, IQuestionRepository questionRepository, IAnswerRepository answerRepository, IMapper mapper) : base(questionRepository, mapper)
+        public QuestionService(IExerciseService exerciseService, IQuestionRepository questionRepository, IAnswerRepository answerRepository, IMapper mapper, IUnitOfWork unitOfWork) : base(questionRepository, mapper, unitOfWork)
         {
             _exerciseService = exerciseService;
             _questionRepository = questionRepository;
             _answerRepository = answerRepository;
             _mapper = mapper;
+            _unitOfWork = unitOfWork;
         }
         #endregion
         #region Method
@@ -49,8 +52,6 @@ namespace Misa_TruongWeb03.BL.Service.EmisStudy.QuestionService
         /// CreatedBy: NQTruong (01/07/2023)
         public override async Task<Guid> Post(QuestionPostDTO model)
         {
-            var questionEntity = _mapper.Map<Question>(model);
-            var answerEntity = _mapper.Map<List<Answer>>(model.Answers);
 
             var valid = ValidateQuestion(model.QuestionType, model.Answers);
             if (valid.Data == false)
@@ -61,29 +62,26 @@ namespace Misa_TruongWeb03.BL.Service.EmisStudy.QuestionService
                     ErrorMsg = valid.Message
                 };
             }
-            using (var connection = _baseRepository.OpenConnection())
+            var questionEntity = _mapper.Map<Question>(model);
+            var answerEntity = _mapper.Map<List<Answer>>(model.Answers);
+
+            _unitOfWork.BeginTransaction();
+            try
             {
-                using var tran = connection.BeginTransaction();
-                try
+                var exerciseId = await _exerciseService.AddOrUpdate(model.Exercise);
+                questionEntity.ExerciseId = exerciseId;
+                var questionId = await _questionRepository.Post(questionEntity);
+                if (answerEntity.Count > 0)
                 {
-                    var exerciseId = await _exerciseService.AddOrUpdate(model.Exercise, tran);
-                    var questionId = await _questionRepository.Post(questionEntity, exerciseId, tran);
-                    if (answerEntity.Count > 0)
-                    {
-                        var result = await _answerRepository.PostMultiple(questionId, exerciseId, answerEntity, tran);
-                    }
-                    tran.Commit();
-                    return exerciseId;
+                    var result = await _answerRepository.PostMultiple(questionId, exerciseId, answerEntity);
                 }
-                catch (Exception ex)
-                {
-                    tran.Rollback();
-                    throw new InternalException(ex);
-                }
-                finally
-                {
-                    _baseRepository.CloseConnection();
-                }
+                _unitOfWork.Commit();
+                return exerciseId;
+            }
+            catch (Exception ex)
+            {
+                _unitOfWork.Rollback();
+                throw new InternalException(ex);
             }
 
         }
@@ -96,48 +94,37 @@ namespace Misa_TruongWeb03.BL.Service.EmisStudy.QuestionService
         public override async Task<Guid> Put(Guid id, QuestionPutDTO model)
         {
 
+            var valid = ValidateQuestion(model.QuestionType, model.Answers);
+            if (valid.Data == false)
+            {
+                throw new BaseException
+                {
+                    ErrorCode = StatusCodes.Status400BadRequest,
+                    ErrorMsg = valid.Message
+                };
+            }
+
+            var questionEntity = _mapper.Map<Question>(model);
+            var answerEntity = _mapper.Map<List<Answer>>(model.Answers);
+            _unitOfWork.BeginTransaction();
             try
             {
-                var questionEntity = _mapper.Map<Question>(model);
-                var answerEntity = _mapper.Map<List<Answer>>(model.Answers);
-
-                var valid = ValidateQuestion(model.QuestionType, model.Answers);
-                if (valid.Data == false)
-                {
-                    throw new BaseException
-                    {
-                        ErrorCode = StatusCodes.Status400BadRequest,
-                        ErrorMsg = valid.Message
-                    };
-                }
-                using (var connection = _baseRepository.OpenConnection())
-                {
-                    using var tran = connection.BeginTransaction();
-                    try
-                    {
-                        var exerciseId = await _exerciseService.AddOrUpdate(model.Exercise, tran);
-                        await _answerRepository.DeleteMultiple(id, tran);
-                        await _questionRepository.Put(id, exerciseId, questionEntity, tran);
-                        var result = await _answerRepository.PostMultiple(id, exerciseId, answerEntity, tran);
-                        tran.Commit();
-                        return id;
-                    }
-                    catch (Exception ex)
-                    {
-                        tran.Rollback();
-                        throw new InternalException(ex);
-                    }
-                    finally
-                    {
-                        _baseRepository.CloseConnection();
-                    }
-                }
+                var exerciseId = await _exerciseService.AddOrUpdate(model.Exercise);
+                await _answerRepository.DeleteMultiple(id);
+                questionEntity.ExerciseId = exerciseId;
+                await _questionRepository.Put(id, questionEntity);
+                var result = await _answerRepository.PostMultiple(id, exerciseId, answerEntity);
+                _unitOfWork.Commit();
+                return id;
             }
             catch (Exception ex)
             {
+                _unitOfWork.Rollback();
                 throw new InternalException(ex);
             }
+
         }
+
 
         /// <summary>
         /// Validate dữ liệu câu hỏi theo từng loại

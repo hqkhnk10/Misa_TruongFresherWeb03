@@ -13,6 +13,7 @@ using Misa_TruongWeb03.DL.Repository.EmisStudy.GradeReposiotry;
 using Misa_TruongWeb03.DL.Repository.EmisStudy.QuestionRepo;
 using Misa_TruongWeb03.DL.Repository.EmisStudy.SubjectRepo;
 using Misa_TruongWeb03.DL.Repository.EmisStudy.TopicRepo;
+using Misa_TruongWeb03.DL.Repository.UnitOfWorkk;
 using Misa_TruongWeb03.Emis.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,6 +36,9 @@ builder.Services.AddScoped<ISubjectService, SubjectService>();
 
 builder.Services.AddScoped<ITopicRepository, TopicRepository>();
 builder.Services.AddScoped<ITopicService, TopicService>();
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>(sp =>
+    new UnitOfWork(builder.Configuration.GetSection("ConnectionString").Value));
 
 
 builder.Services.AddControllers();

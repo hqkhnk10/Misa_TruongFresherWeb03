@@ -3,7 +3,7 @@ using Misa_TruongWeb03.DL.Repository.Base;
 
 namespace Misa_TruongWeb03.DL.Repository.EmisStudy.SubjectRepo
 {
-    public interface ISubjectRepository : IBaseRepository<Subject>
+    public interface ISubjectRepository : IBaseRepository<Subject, Subject>
     {
     }
 }

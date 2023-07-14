@@ -4,12 +4,15 @@ using Misa_TruongWeb03.Common.Entity.Base;
 using Misa_TruongWeb03.Common.Resource;
 using Misa_TruongWeb03.DL.Entity.Base;
 using Misa_TruongWeb03.DL.Repository.Base;
+using Misa_TruongWeb03.DL.Repository.UnitOfWorkk;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using static Dapper.SqlMapper;
 
 namespace Misa_TruongWeb03.BL.Service.Base
 {
@@ -21,20 +24,22 @@ namespace Misa_TruongWeb03.BL.Service.Base
     /// <typeparam name="TEntityPostDto">Generic Post DTO model</typeparam>
     /// <typeparam name="TEntityPutDto">Generic Put DTO model</typeparam>
     /// CreatedBy: NQTruong (24/05/2023)
-    public abstract class BaseService<TEntity, TEntityDto, TEntityGetDto, TEntityPostDto, TEntityPutDto> : IBaseService<TEntity, TEntityDto, TEntityGetDto, TEntityPostDto, TEntityPutDto>
+    public abstract class BaseService<TEntity, TGetModel, TEntityDto, TEntityGetDto, TEntityPostDto, TEntityPutDto> : IBaseService<TEntityDto, TEntityGetDto, TEntityPostDto, TEntityPutDto>
     {
         #region Property
-        protected readonly IBaseRepository<TEntity> _baseRepository;
+        protected readonly IBaseRepository<TEntity, TGetModel> _baseRepository;
         protected readonly IMapper _mapper;
+        protected readonly IUnitOfWork _unitOfWork;
         #endregion
         #region Constructor
-        public BaseService(IBaseRepository<TEntity> baseRepository, IMapper mapper)
+        public BaseService(IBaseRepository<TEntity, TGetModel> baseRepository, IMapper mapper, IUnitOfWork unitOfWork)
         {
             _baseRepository = baseRepository;
             _mapper = mapper;
+            _unitOfWork = unitOfWork;
         }
         #endregion
-        #region MyRegion
+        #region Method
         /// <summary>
         /// BASE GET call to BASE Repository
         /// </summary>
@@ -57,6 +62,8 @@ namespace Misa_TruongWeb03.BL.Service.Base
             }
 
             var (result, totalCount) = await _baseRepository.Get(dictionary, filter, sort);
+
+            _unitOfWork.CloseConnection();
 
             return new GetResponse
             {
@@ -86,6 +93,8 @@ namespace Misa_TruongWeb03.BL.Service.Base
             var entityDto = _mapper.Map<TEntityDto>(result);
             await GetDetailEntity(id, entityDto);
 
+            _unitOfWork.CloseConnection();
+
             return entityDto;
 
         }
@@ -99,9 +108,18 @@ namespace Misa_TruongWeb03.BL.Service.Base
         /// CreatedBy: NQTruong (24/05/2023)
         public virtual async Task<Guid> Post(TEntityPostDto model)
         {
-
             var entity = _mapper.Map<TEntity>(model);
+
+            var isValid = Validate(entity);
+            if (!isValid)
+            {
+                throw new ValidateException();
+            }
+
             var result = await _baseRepository.Post(entity);
+
+            _unitOfWork.CloseConnection();
+
             return result;
 
         }
@@ -113,14 +131,22 @@ namespace Misa_TruongWeb03.BL.Service.Base
         /// CreatedBy: NQTruong (24/05/2023)
         public virtual async Task<Guid> Put(Guid id, TEntityPutDto model)
         {
-            var exist = _baseRepository.GetById(id);
+            var entity = _mapper.Map<TEntity>(model);
+
+            var isValid = Validate(entity);
+            if (!isValid)
+            {
+                throw new ValidateException();
+            }
+
+            var exist = await _baseRepository.GetById(id);
             if (exist == null)
             {
                 throw new NotFoundException();
             }
-            var entity = _mapper.Map<TEntity>(model);
             var result = await _baseRepository.Put(id, entity);
-            if(result <= 0)
+            _unitOfWork.CloseConnection();
+            if (result <= 0)
             {
                 throw new DatabaseExeception();
             }
@@ -140,8 +166,11 @@ namespace Misa_TruongWeb03.BL.Service.Base
             {
                 throw new NotFoundException();
             }
+
             var result = await _baseRepository.Delete(id);
-            if(result <= 0)
+            _unitOfWork.CloseConnection();
+
+            if (result <= 0)
             {
                 throw new DatabaseExeception();
             }
@@ -154,16 +183,9 @@ namespace Misa_TruongWeb03.BL.Service.Base
         /// <param name="model"></param>
         /// <returns>BaseEntity</returns>
         /// CreatedBy: NQTruong (24/05/2023)
-        public async Task<bool> CheckDuplicate(TEntity model)
+        protected virtual bool Validate(TEntity model)
         {
-
-            var result = await _baseRepository.CheckDuplicate(model);
-            if (result)
-            {
-                throw new DuplicateException();
-            }
-            return false;
-
+            return true;
         }
 
         /// <summary>
